@@ -46,7 +46,7 @@ data/2022/ ecfps2022person_202410.dta ecfps2022child_202410.dta  ecfps2022famcon
 The suffix in each name is the CFPS release date. Other releases of the same wave may differ slightly.
 
 **2. County-to-prefecture crosswalk** `data/CFPS_cleaned/顺序码匹配.dta`. Maps each CFPS `countyid` to a prefecture code and name (162 counties → 127 prefectures).
-Source: purchased by the author from an online vendor. The vendor's terms do not allow redistribution, so the file is not included; its use for this subject project was approved by the subject coordinator (program director). Without it, prefecture-level geography cannot be attached to the CFPS records.
+Source: purchased by the author from an online vendor. The vendor's terms do not allow redistribution, so the file is not included; its use for this subject project was approved by the subject coordinator (program director). Markers who need it to replicate the results can contact the author. Without it, prefecture-level geography cannot be attached to the CFPS records.
 
 **3. Prefecture house prices** `data/Housing Price.xlsx`. Prefecture × month second-hand residential prices (CNY per m²), 626 prefectures, 2010–2025. Used only for Figure 1, Table 1 Panel B and the price columns of the distance checks; the exposure definition does not use prices.
 Source: collected by the author by web-scraping the second-hand listing-price pages of Anjuke (anjuke.com), a Chinese real-estate platform. The file is included in this package (`data/Housing Price.xlsx`). The prices are the averages Anjuke displays publicly; Anjuke's terms of use apply, and the file is shared only so that this report can be replicated.
