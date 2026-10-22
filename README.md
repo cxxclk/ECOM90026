@@ -74,7 +74,7 @@ Stages:
 
 Each script writes a plain-text table to `output/tables/<name>.txt`. The exception is `split_post_did.py`, which prints to the screen; `run_all.sh` saves that output to `output/tables/split_post_did.txt`. The paper tables were typed from these files. Table 1 is written as Markdown (`output/tables/table1_descriptives.md`).
 
-**Run time.** Several scripts run for more than ten minutes (the wild cluster bootstraps use 4,999 replications, and the machine-learning scripts use repeated cross-fitting). The machine-learning results depend on random splits. The scripts fix their seeds, but results may differ in the last digit across library versions or numbers of threads.
+**Run time.** Several scripts run for more than ten minutes (the wild cluster bootstraps use 999 or 4,999 replications, as stated in each table note, and the machine-learning scripts use repeated cross-fitting). The machine-learning results depend on random splits. The scripts fix their seeds, but results may differ in the last digit across library versions or numbers of threads.
 
 ## Checking results
 
@@ -86,4 +86,4 @@ The scripts are copies of the project code. The only edits are (i) the provenanc
 
 ## AI use
 
-The analysis code and this package were written with help from Claude (Anthropic) through Claude Code. The author designed the research, checked the results and is responsible for the content.
+Claude (Anthropic), through Claude Code, wrote and debugged the code in this package, ran the estimations and proposed and ran many of the exploratory analyses. The author chose the research question and the identification design, directed the analyses, decided which results to report, checked the results and is responsible for the content. See the paper's "Use of AI tools" section.
