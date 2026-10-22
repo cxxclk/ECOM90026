@@ -1,0 +1,61 @@
+RESPONSE-PROFILE TYPOLOGY — strata classified by multi-outcome DID vectors
+grid: son x norm-tercile x income-half x urban; 24 cells, 14 kept (>= 800 woman-years), 2,665 women
+wave panel: 9,045 parity-1 wave-obs; edu_exp match rate 2014+ = 98%
+
+raw stratum x outcome DID matrix (stratum = son|norm3|inchalf|urban; * = |t|>1.64, ** = |t|>1.96):
+  stratum          wy  prehaz          h2      h2_son      h2_dau        linc         edu
+  0|0|0|1       1,129   0.048    -0.031      -0.029*     -0.002      -0.023      +0.931  
+  0|0|1|1       2,556   0.027    -0.000      +0.006      -0.006      +0.037      +1.078  
+  0|1|0|1         822   0.123    -0.010      -0.024      +0.014      +0.468      +0.207  
+  0|1|1|1       1,076   0.074    -0.042      -0.010      -0.032      +0.226      -0.023  
+  1|0|0|0       1,072   0.043    +0.054      +0.009      +0.046      -0.196      -0.031  
+  1|0|0|1       1,369   0.027    +0.022      +0.034**    -0.012      +0.174      +0.145  
+  1|0|1|0         877   0.019    +0.030      +0.049*     -0.019      -0.147      -0.281  
+  1|0|1|1       2,900   0.012    +0.008      -0.005      +0.013      -0.087      +0.130  
+  1|1|0|0         962   0.092    -0.021      +0.017      -0.038      -0.107      -0.515  
+  1|1|0|1       1,147   0.098    +0.006      +0.020      -0.014      -0.211      +1.452  
+  1|1|1|1       1,929   0.046    -0.013      -0.018      +0.006      -0.046      +1.164* 
+  1|2|0|0       1,116   0.135    +0.008      -0.004      +0.012      -0.130      -0.110  
+  1|2|0|1         838   0.140    +0.009      -0.004      +0.013      -0.514      -0.678  
+  1|2|1|1         881   0.101    +0.023      +0.022      +0.001      -0.103      -1.426  
+
+EB shrinkage (tau2 = max(0, var(coef) - mean(se2))):
+  h2       tau=0.0000  mean|shrunk|/mean|raw| = 0.00
+  h2_son   tau=0.0000  mean|shrunk|/mean|raw| = 0.00
+  h2_dau   tau=0.0000  mean|shrunk|/mean|raw| = 0.00
+  linc     tau=0.1143  mean|shrunk|/mean|raw| = 0.26
+  edu      tau=0.0000  mean|shrunk|/mean|raw| = 0.00
+
+=== WARD K=3 response types (on shrunk-standardized vectors) ===
+
+[type 1] strata: 0|0|1|1, 0|1|0|1, 0|1|1|1, 1|0|0|1  (wy=5,823)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=+1.05  edu=+0.00
+  pooled h2 DID -0.0150 (p=0.271, pre-viol 0/5)   linc +0.205 (p=0.020)   edu +0.467 (p=0.233)
+
+[type 2] strata: 1|0|0|0, 1|0|1|0, 1|0|1|1, 1|1|0|0, 1|1|0|1, 1|2|0|1  (wy=7,796)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=-1.15  edu=+0.00
+  pooled h2 DID +0.0077 (p=0.455, pre-viol 0/5)   linc -0.116 (p=0.098)   edu +0.116 (p=0.729)
+
+[type 3] strata: 0|0|0|1, 1|1|1|1, 1|2|0|0, 1|2|1|1  (wy=5,055)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=-0.40  edu=+0.00
+  pooled h2 DID -0.0054 (p=0.706, pre-viol 0/5)   linc -0.149 (p=0.116)   edu +0.490 (p=0.269)
+
+=== WARD K=4 response types (on shrunk-standardized vectors) ===
+
+[type 1] strata: 0|0|1|1, 0|1|0|1, 1|0|0|1  (wy=4,747)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=+0.79  edu=+0.00
+  pooled h2 DID -0.0034 (p=0.823, pre-viol 0/5)   linc +0.205 (p=0.053)   edu +0.577 (p=0.203)
+
+[type 2] strata: 0|1|1|1  (wy=1,076)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=+1.83  edu=+0.00
+  pooled h2 DID -0.0420 (p=0.177, pre-viol 0/5)   linc +0.226 (p=0.102)   edu -0.023 (p=0.980)
+
+[type 3] strata: 1|0|0|0, 1|0|1|0, 1|0|1|1, 1|1|0|0, 1|1|0|1, 1|2|0|1  (wy=7,796)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=-1.15  edu=+0.00
+  pooled h2 DID +0.0077 (p=0.455, pre-viol 0/5)   linc -0.116 (p=0.098)   edu +0.116 (p=0.729)
+
+[type 4] strata: 0|0|0|1, 1|1|1|1, 1|2|0|0, 1|2|1|1  (wy=5,055)
+  mean shrunk-z profile: h2=+0.00  h2_son=+0.00  h2_dau=+0.00  linc=-0.40  edu=+0.00
+  pooled h2 DID -0.0054 (p=0.706, pre-viol 0/5)   linc -0.149 (p=0.116)   edu +0.490 (p=0.269)
+
+stratum table saved -> output/response_profile_strata.csv

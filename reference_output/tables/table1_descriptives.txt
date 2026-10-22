@@ -1,0 +1,36 @@
+TABLE 1 — Descriptive statistics
+==============================================================================
+Panel A. One-child sample, pre-shock woman-years 2009-2015
+                                     Unexposed     Exposed      Diff       p
+Age (years)                             33.384      32.598    -0.785   0.190
+Years since first birth                  9.453       8.421    -1.032   0.059
+Years of education                       8.700       9.034    +0.333   0.296
+Urban residence                          0.324       0.422    +0.099   0.206
+Log family income p.c.                   8.895       9.077    +0.182   0.019
+Homeowner                                0.870       0.894    +0.025   0.159
+First child is a daughter                0.426       0.419    -0.007   0.686
+Woman-years                             12,427      11,164
+Women                                    2,867       2,831
+Prefectures                                 53          60
+
+Panel B. Prefecture level
+                                     Unexposed     Exposed      Diff       p    n cities
+Lineage-norm index, 2014 (1–5)            3.30        3.59    +0.288   0.003    52/58   
+House-price growth 2012–15 (%)            -1.0         3.0    +4.041   0.535     8/10   
+House-price growth 2016–19 (%)            24.3        33.9    +9.658   0.011    38/57   
+  s.d. of son-norm index                 0.526       0.466
+
+Panel C. Raw annual second-birth rate (%), one-child families
+                                         2009–15     2016–17     2018–22        Change
+First child a daughter
+Unexposed                                    6.7         8.8         5.6          -1.1
+Exposed                                     10.6        14.8         7.3          -3.2
+Exposed − unexposed                          3.9         6.0         1.7          -2.2
+First child a son
+Unexposed                                    4.3         6.7         4.3          -0.0
+Exposed                                      6.6         9.1         6.0          -0.5
+Exposed − unexposed                          2.2         2.3         1.7          -0.5
+Daughter-first                        5,294/4,683    1,393/1,213    2,374/2,043  
+Son-first                             7,133/6,481    1,793/1,678    3,091/2,932  
+
+Figure 2 -> output/figures/fig2_raw_hazards.png

@@ -1,0 +1,39 @@
+TREATMENT-EFFECT SUBSET SCAN — annual second-birth hazard DID
+rule space: conjunctions of <=3 of 30 conditions; beam=8; constraints: >= 3000 woman-years, >= 15 cities per arm
+inference: 200 city-level treatment permutations of the FULL search (scan-statistic p)
+
+OBSERVED search: 264 admissible rules evaluated
+top-10 most-suppressed rules (screen t on residualized y):
+  rule                                              t      DID    rows T/C cities
+  daughter & hvburden_hi & urban                -3.54  -0.0608   3,227    35/30
+  cityinc_hi & cohort_hi & daughter             -3.39  -0.0687   3,060    30/22
+  cityinc_hi & daughter                         -3.29  -0.0361   9,278    32/23
+  housew_lo & ideal2plus & sonpref_lo           -3.19  -0.0393   5,796    41/42
+  agefb_lo & cohort_lo & rural                  -2.87  -0.0512   3,781    23/30
+  agefb_lo & cohort_lo & owninc_lo              -2.83  -0.0418   4,683    27/31
+  agefb_lo & cityinc_hi & cohort_lo             -2.81  -0.0305   5,882    24/21
+  cityinc_hi & daughter & urban                 -2.80  -0.0318   6,530    31/23
+  cityinc_hi & cohort_hi                        -2.61  -0.0468   6,732    32/23
+  daughter & urban                              -2.53  -0.0275  10,163    58/47
+
+scan-statistic inference: observed min t = -3.54; permutation p = 0.159
+permutation min-t distribution: 5th pct -4.07, median -2.88, mean -2.90
+
+WINNING RULE: daughter & hvburden_hi & urban
+  woman-years=3,227  women=506  treated share=0.46  hazard=0.0657
+  FE-regression DID: -0.0486 (SE 0.0200, p=0.015)
+  event study (base 2015):
+    T x 2010   +0.0489  (SE 0.0375, p=0.192) (pre)
+    T x 2011   +0.0202  (SE 0.0411, p=0.624) (pre)
+    T x 2012   -0.0142  (SE 0.0295, p=0.630) (pre)
+    T x 2013   -0.0159  (SE 0.0326, p=0.626) (pre)
+    T x 2014   +0.0249  (SE 0.0360, p=0.490) (pre)
+    T x 2016   +0.0204  (SE 0.0427, p=0.632)
+    T x 2017   +0.0114  (SE 0.0411, p=0.782)
+    T x 2018   -0.0077  (SE 0.0377, p=0.838)
+    T x 2019   -0.0340  (SE 0.0442, p=0.441)
+    T x 2020   -0.0344  (SE 0.0347, p=0.321)
+    T x 2021   -0.0610  (SE 0.0391, p=0.119)
+    T x 2022   -0.0844  (SE 0.0362, p=0.020)
+
+most POSITIVE rule (screen only): hvburden_lo & urban: t=1.56, DID=+0.0219

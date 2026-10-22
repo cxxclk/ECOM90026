@@ -1,0 +1,93 @@
+SEMI-SUPERVISED PRE-SHOCK TYPOLOGY (behavior-propensity clustering)
+  universe: ever-married women, unregulated prefectures, age 15-45 in 2014: N=9,230
+
+Stage 1 — supervised embedding (HistGBM, 5-fold OOF):
+  births_1015  observed=100%  OOF R2=0.726
+  ideal_kids   observed=61%  OOF R2=0.264
+  son_pref     observed=61%  OOF R2=0.206
+  housework    observed=66%  OOF R2=0.089
+  hv_inc       observed=54%  OOF R2=0.500
+  log_inc      observed=66%  OOF R2=0.181
+
+GMM model selection on the 6-dim behavior-propensity embedding:
+  K=2: BIC=137,342  silhouette=0.287
+  K=3: BIC=129,539  silhouette=0.110
+  K=4: BIC=127,278  silhouette=0.066
+  K=5: BIC=126,201  silhouette=0.098
+  K=6: BIC=125,386  silhouette=0.113
+  K=7: BIC=124,731  silhouette=0.077
+  K=8: BIC=124,409  silhouette=0.053
+  chosen K=6 (silhouette-best among K>=3); finer exploratory cut K=6 also reported
+
+========================================================================
+TYPOLOGY MAIN (silhouette-best): K=6
+
+Stage 2 — class structure (means; E_ = embedding/predicted, a_ = actual):
+cls                     0        1        2        3       4       5
+n                 1346.00  2525.00  1902.00  2381.00  391.00  685.00
+treated              0.58     0.46     0.48     0.51    0.51    0.45
+E_births_1015        0.62     0.00     0.11     0.92    1.08    0.48
+E_ideal_kids         1.82     1.74     2.08     1.88    2.97    1.96
+E_son_pref           2.48     2.74     3.78     3.06    4.11    3.18
+E_housework          1.83     2.15     2.87     2.28    2.60    2.94
+E_hv_inc             1.46     1.54     1.39     1.27    1.63    3.09
+E_log_inc            5.53     2.97     1.41     1.42    1.60    1.04
+a_births_1015        0.61     0.01     0.08     0.94    1.07    0.48
+a_ideal_kids         1.83     1.77     2.09     1.91    2.93    1.98
+a_son_pref           2.46     2.67     3.78     3.04    4.11    3.22
+a_housework          1.85     2.21     3.01     2.41    2.59    2.82
+a_hv_inc             1.48     1.54     1.43     1.28    1.74    3.14
+a_log_inc            5.30     3.64     1.70     1.75    1.69    1.06
+age14               29.11    34.60    37.26    27.02   31.18   33.04
+eduy                11.59     9.09     4.17     8.45    4.12    7.35
+urban                0.82     0.67     0.37     0.46    0.30    0.48
+parity14             1.03     0.86     1.81     1.30    2.73    1.56
+age_fb              25.15    23.99    22.87    23.40   22.35   23.59
+log_faminc_pc        9.65     9.37     8.81     8.96    8.16    6.73
+city_son_norm        3.36     3.28     3.76     3.60    4.09    3.57
+city_urban_share     0.30     0.30     0.16     0.18    0.24    0.10
+fb_dghtr             0.49     0.43     0.51     0.51    0.57    0.53
+cities             113.00   113.00   104.00   113.00   53.00  108.00
+
+assignments saved -> output/semisup_classes.csv
+
+Stage 3 — post-shock DID screen by class (Post=2018, city+year FE, cluster city)
+  pre_viol = # of pre-period (2010-14) T x year coefs with p<0.10
+  fdr10    = survives Benjamini-Hochberg at q=0.10 across all cells
+ cls        outcome    coef     p  base     N  pre_viol  fdr10   rel
+   4  log_faminc_pc -0.4442 0.000 8.169  1251         1   True -0.05
+   4 log_housevalue -0.3746 0.022 2.268  1101         1  False -0.17
+   1 log_housevalue  0.1515 0.054 2.776  6877         2  False  0.05
+   0        haz_1st  0.1446 0.116 0.214  3839         0  False  0.68
+   1        haz_any  0.0126 0.136 0.007 18735         1  False  1.75
+   3        haz_any -0.0111 0.138 0.159 25730         2  False -0.07
+   3        haz_2nd -0.0201 0.179 0.144 10719         1  False -0.14
+   1        haz_2nd -0.0075 0.185 0.008 12235         3  False -0.93
+   5  log_faminc_pc -0.1229 0.205 7.856  2754         1  False -0.02
+   2        haz_2nd -0.0287 0.215 0.088  3079         0  False -0.33
+   2 log_housevalue -0.0732 0.225 2.372  5379         1  False -0.03
+   1        haz_3rd  0.0037 0.246 0.001  4024         0  False  6.13
+   4      homeowner  0.0386 0.292 0.908  1307         1  False  0.04
+   3  log_faminc_pc  0.0623 0.331 8.977  6655         1  False  0.01
+   3        haz_1st -0.1331 0.348 0.290  5377         3  False -0.46
+   2      homeowner  0.0154 0.402 0.913  6347         1  False  0.02
+   1  log_faminc_pc  0.0398 0.442 9.281  7911         1  False  0.00
+   0        haz_3rd  0.0053 0.483 0.020  4286         0  False  0.27
+   0 log_housevalue  0.0563 0.487 3.070  4111         1  False  0.02
+   1      homeowner -0.0175 0.489 0.859  8204         1  False -0.02
+   3        haz_3rd -0.0053 0.508 0.035  9634         1  False -0.15
+   1        haz_1st  0.0224 0.563 0.015  2476         0  False  1.54
+   5 log_housevalue  0.0497 0.591 2.386  2430         1  False  0.02
+   0      homeowner  0.0171 0.604 0.849  4974         1  False  0.02
+   2        haz_3rd -0.0020 0.620 0.006 10878         0  False -0.35
+   0        haz_any -0.0034 0.662 0.114 15853         0  False -0.03
+   0  log_faminc_pc  0.0278 0.686 9.494  4880         1  False  0.00
+   5        haz_any -0.0030 0.708 0.091  6700         1  False -0.03
+   3      homeowner -0.0092 0.710 0.879  7061         1  False -0.01
+   2        haz_any -0.0020 0.811 0.031 15236         3  False -0.07
+   5      homeowner  0.0052 0.883 0.918  2824         1  False  0.01
+   0        haz_2nd -0.0011 0.930 0.079  7728         2  False -0.01
+   5        haz_3rd -0.0006 0.936 0.018  3558         1  False -0.03
+   5        haz_2nd  0.0024 0.936 0.116  2414         1  False  0.02
+   3 log_housevalue  0.0010 0.990 2.485  5795         1  False  0.00
+   2  log_faminc_pc  0.0006 0.993 8.745  6080         1  False  0.00

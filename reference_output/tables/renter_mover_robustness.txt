@@ -1,0 +1,59 @@
+====================================================================================
+RENTER AND MOVER ROBUSTNESS — annual second-birth rate, one-child sample
+city + year FE, age/dur quadratics, cluster by city, Post=2018
+====================================================================================
+
+[0] BASELINE (headline sample: all tenures, movers kept, ITT exposure)
+  DAUGHTER (headline)                      -2.38pp (SE 1.06, p=0.024)  N=17,000 women=3,176 mean=8.44%
+  SON (placebo)                            -0.57pp (SE 0.76, p=0.456)  N=23,108 women=3,816 mean=5.70%
+
+[A] COMPOSITION (women in the headline sample)
+  women=6,992  tenure observed=0.952  (from pre-2015 wave: 0.829)
+  DAUGHTER (headline)    renter share=0.110  (exposed 0.105 / unexposed 0.116)
+  SON (placebo)          renter share=0.120  (exposed 0.112 / unexposed 0.128)
+  ever observed in another prefecture: 0.020  (exposed 0.020 / unexposed 0.019)
+  ever observed outside the sampling frame (prefecture missing): 0.246
+  woman-years from women ever observed elsewhere: 0.018
+
+[B] TENURE
+ DAUGHTER (headline)
+  tenure observed (same as [0] sample)     -2.49pp (SE 1.09, p=0.022)  N=16,391 women=3,024 mean=8.60%
+  OWNERS ONLY (renters excluded)           -2.63pp (SE 1.27, p=0.038)  N=14,477 women=2,690 mean=8.86%
+  RENTERS ONLY                             +0.13pp (SE 2.64, p=0.961)  N=1,914 women=334 mean=6.64%
+  interaction: T x post (owners)           -2.68pp (SE 1.20, p=0.026)  N=16,391 women=3,024 mean=8.60%
+  interaction: T x post x renter           +2.32pp (SE 2.61, p=0.374)  N=16,391 women=3,024 mean=8.60%
+  owners only, pre-2015 tenure             -2.67pp (SE 1.38, p=0.052)  N=12,771 women=2,348 mean=8.89%
+  renters only, pre-2015 tenure            -1.17pp (SE 3.10, p=0.705)  N=1,544 women=253 mean=5.57%
+ SON (placebo)
+  tenure observed (same as [0] sample)     -0.53pp (SE 0.77, p=0.493)  N=22,316 women=3,634 mean=5.80%
+  OWNERS ONLY (renters excluded)           -0.08pp (SE 0.80, p=0.917)  N=19,615 women=3,198 mean=5.98%
+  RENTERS ONLY                             -1.72pp (SE 1.63, p=0.292)  N=2,701 women=436 mean=4.52%
+  interaction: T x post (owners)           -0.02pp (SE 0.80, p=0.984)  N=22,316 women=3,634 mean=5.80%
+  interaction: T x post x renter           -4.02pp (SE 1.48, p=0.006)  N=22,316 women=3,634 mean=5.80%
+  owners only, pre-2015 tenure             +0.65pp (SE 0.81, p=0.425)  N=17,849 women=2,847 mean=5.80%
+  renters only, pre-2015 tenure            +0.51pp (SE 1.63, p=0.755)  N=2,229 women=348 mean=4.08%
+
+[C] MOVERS (exposure is always the baseline prefecture)
+ DAUGHTER (headline)
+  drop women seen in another prefecture    -2.30pp (SE 1.08, p=0.033)  N=16,712 women=3,117 mean=8.40%
+  strict stayers (also never left frame)   -1.87pp (SE 1.18, p=0.113)  N=12,735 women=2,373 mean=8.26%
+  owners AND observed stayers              -2.60pp (SE 1.30, p=0.045)  N=14,247 women=2,639 mean=8.81%
+ SON (placebo)
+  drop women seen in another prefecture    -0.60pp (SE 0.77, p=0.437)  N=22,666 women=3,737 mean=5.66%
+  strict stayers (also never left frame)   -0.74pp (SE 0.93, p=0.422)  N=16,890 women=2,808 mean=5.54%
+  owners AND observed stayers              -0.14pp (SE 0.81, p=0.863)  N=19,185 women=3,124 mean=5.96%
+
+[D] WILD CLUSTER BOOTSTRAP (Rademacher, null imposed, B=999), daughter arm
+  owners only            -2.63pp  t=-2.09  WCB p=0.047  (G=113)
+  observed stayers       -2.30pp  t=-2.15  WCB p=0.034  (G=113)
+  strict stayers         -1.87pp  t=-1.59  WCB p=0.122  (G=113)
+
+[E] PROBE of the son-arm T x post x renter (-4.02pp p=0.006), in-session 2026-10-06
+  pre-2015 tenure only:      daughter +1.80pp p=0.526 | son -3.72pp p=0.023
+  fake Post=2013 (<=2015):   daughter -3.21pp p=0.190 | son -1.72pp p=0.274
+  treated-post renter cells: daughter 202 woman-yrs / 18 births | son 357 / 11 births
+  Read: son-arm renter term rests on 11 treated-post births and has a same-signed
+  pre-period placebo -> suggestive at most, not a finding.
+  'left frame' (prefecture missing in a later wave, 24.6% of women) mostly reflects
+  rows without a geocode rather than moves (observed moves are 2.0%); the strict-stayer
+  row is a power/sample cut, its point estimate is within 0.5 SE of the baseline.

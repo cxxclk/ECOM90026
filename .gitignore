@@ -1,0 +1,6 @@
+output/
+__pycache__/
+*.pyc
+data/20*/
+data/CFPS_cleaned/
+.venv/

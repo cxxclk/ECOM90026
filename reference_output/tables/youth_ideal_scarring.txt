@@ -1,0 +1,165 @@
+Ticket F1: youth (18-30, never-married) ideal number of kids, DID
+Ideal sources (label-verified):
+  2014: qm501 = 'Ideally, number of kids (person)'  raw N=31,597
+  2018: qka202 = 'Ideally, number of kids (person)'  raw N=33,097
+  2022: qka202 = 'Ideal number of child'  raw N=23,665
+
+========================================================================
+ANCHOR = baseline-city   (waves 2014 pre | 2018+2022 post)
+  T share=0.476  wave N: {2014: 2536, 2018: 1940, 2022: 2186}
+  mean ideal by year x T:
+T         0      1
+year              
+2014  1.718  1.814
+2018  1.609  1.672
+2022  1.519  1.514
+
+[ALL youth, ideal #kids]  N=6,662  people=4,906  cities=113  mean(y)=1.647
+  T:post       -0.0711  (SE 0.0456, p=0.119)
+
+[ALL youth, P(ideal>=2)]  N=6,662  people=4,906  cities=113  mean(y)=0.653
+  T:post       -0.0819  (SE 0.0282, p=0.004)
+
+[ALL youth, cohort-bin ctrl]  N=6,662  people=4,906  cities=113  mean(y)=1.647
+  T:post       -0.0678  (SE 0.0451, p=0.133)
+
+[ALL youth, 2014 vs 2018]  N=4,476  people=3,654  cities=113  mean(y)=1.710
+  T:post       -0.0265  (SE 0.0487, p=0.586)
+
+[ALL youth, 2014 vs 2022]  N=4,722  people=4,215  cities=113  mean(y)=1.651
+  T:post       -0.1229  (SE 0.0491, p=0.012)
+
+[FEMALE]  N=2,976  people=2,200  cities=113  mean(y)=1.572
+  T:post       -0.1107  (SE 0.0542, p=0.041)
+
+[MALE]  N=3,686  people=2,716  cities=113  mean(y)=1.707
+  T:post       -0.0207  (SE 0.0599, p=0.730)
+
+[URBAN]  N=3,422  people=2,560  cities=113  mean(y)=1.583
+  T:post       +0.0342  (SE 0.0455, p=0.451)
+
+[RURAL]  N=3,090  people=2,497  cities=103  mean(y)=1.716
+  T:post       -0.1635  (SE 0.0704, p=0.020)
+
+[HH OWNS HOME (parents' home proxy)]  N=4,827  people=3,919  cities=113  mean(y)=1.668
+  T:post       -0.0690  (SE 0.0536, p=0.197)
+
+[HH DOES NOT OWN]  N=1,668  people=1,342  cities=110  mean(y)=1.598
+  T:post       -0.0831  (SE 0.0778, p=0.285)
+
+[DDD gender]  N=6,662  people=4,906  cities=113  mean(y)=1.647
+  T:post       -0.0273  (SE 0.0583, p=0.640)
+  T:post:female -0.0947  (SE 0.0620, p=0.126)
+
+========================================================================
+ANCHOR = current-city   (waves 2014 pre | 2018+2022 post)
+  T share=0.473  wave N: {2014: 2244, 2018: 1474, 2022: 1526}
+  mean ideal by year x T:
+T         0      1
+year              
+2014  1.718  1.821
+2018  1.612  1.668
+2022  1.553  1.511
+
+[ALL youth, ideal #kids]  N=5,244  people=4,211  cities=111  mean(y)=1.663
+  T:post       -0.0804  (SE 0.0483, p=0.096)
+
+[ALL youth, P(ideal>=2)]  N=5,244  people=4,211  cities=111  mean(y)=0.663
+  T:post       -0.0817  (SE 0.0305, p=0.007)
+
+[ALL youth, cohort-bin ctrl]  N=5,244  people=4,211  cities=111  mean(y)=1.663
+  T:post       -0.0769  (SE 0.0480, p=0.109)
+
+[ALL youth, 2014 vs 2018]  N=3,718  people=3,212  cities=111  mean(y)=1.716
+  T:post       -0.0114  (SE 0.0528, p=0.829)
+
+[ALL youth, 2014 vs 2022]  N=3,770  people=3,525  cities=111  mean(y)=1.673
+  T:post       -0.1603  (SE 0.0555, p=0.004)
+
+[FEMALE]  N=2,397  people=1,920  cities=111  mean(y)=1.599
+  T:post       -0.1158  (SE 0.0566, p=0.041)
+
+[MALE]  N=2,847  people=2,300  cities=111  mean(y)=1.717
+  T:post       -0.0379  (SE 0.0654, p=0.562)
+
+[URBAN]  N=2,428  people=1,932  cities=108  mean(y)=1.592
+  T:post       +0.0541  (SE 0.0517, p=0.295)
+
+[RURAL]  N=2,773  people=2,307  cities=102  mean(y)=1.725
+  T:post       -0.1894  (SE 0.0717, p=0.008)
+
+[HH OWNS HOME (parents' home proxy)]  N=4,305  people=3,586  cities=111  mean(y)=1.676
+  T:post       -0.0730  (SE 0.0532, p=0.170)
+
+[HH DOES NOT OWN]  N=806  people=712  cities=106  mean(y)=1.614
+  T:post       -0.1231  (SE 0.1070, p=0.250)
+
+[DDD gender]  N=5,244  people=4,211  cities=111  mean(y)=1.663
+  T:post       -0.0422  (SE 0.0640, p=0.510)
+  T:post:female -0.0729  (SE 0.0705, p=0.301)
+
+########################################################################
+PART 2: CONFIRMATORY TESTS for P(ideal>=2)  (coordinator request)
+
+--- 1. Wild cluster bootstrap (Rademacher, B=999, cluster=city) ---
+  [baseline-city] T:post = -0.0819  t = -2.93  WCB p = 0.0040  (G=113)
+  [ current-city] T:post = -0.0817  t = -2.71  WCB p = 0.0190  (G=111)
+
+--- 2a. Placebo outcomes: trust (same sample, same design) ---
+  P(most people trustworthy) [qn1001]: N=6,635  T:post -0.0582 (cl.p=0.029, WCB p=0.027)
+  trust in strangers 0-10 [qn10024]: N=6,639  T:post -0.0449 (cl.p=0.700, WCB p=0.697)
+
+--- 2b. Coherence: REGULATED source cities vs unregulated controls ---
+  2014: qm501 = 'Ideally, number of kids (person)'  raw N=31,597
+  2018: qka202 = 'Ideally, number of kids (person)'  raw N=33,097
+  2022: qka202 = 'Ideal number of child'  raw N=23,665
+  regulated-as-treated: N=4,420 (reg youth=929)  T:post -0.1736 (p=0.000)   [prediction: negative too — coherence, not placebo]
+
+--- 2b'. Distance-band gradient (unregulated only, ref = >400km) ---
+  treated(<=250) x post: -0.1025 (p=0.001)
+  near(250-400) x post:  -0.0690 (p=0.131)  [near youths=755; prediction: weak/zero]
+
+--- 3a. Drop-one-province (baseline anchor, P(ideal>=2)) ---
+  31 drops: 31/31 negative;  range [-0.0978, -0.0593]
+  weakest: drop prov 62 -> -0.0593 (p=0.063);  strongest: drop prov 44 -> -0.0978 (p=0.001)
+
+--- 3b. Timing: P(ideal>=2) wave-by-wave (baseline anchor) ---
+  2014 vs 2018: T:post -0.0487 (p=0.131)
+  2014 vs 2022: T:post -0.1161 (p=0.000)
+
+--- 3c. MARRIED 18-30 comparison profile (baseline anchor) ---
+  2014: qm501 = 'Ideally, number of kids (person)'  raw N=31,597
+  2018: qka202 = 'Ideally, number of kids (person)'  raw N=33,097
+  2022: qka202 = 'Ideal number of child'  raw N=23,665
+  married youth, P(ideal>=2): N=5,764  T:post -0.0256 (p=0.284)
+  married youth, ideal #kids: N=5,764  T:post +0.0197 (p=0.625)
+
+########################################################################
+FINAL GRADE (F1, after confirmatory battery)
+
+PASS: WCB p=0.004 (baseline) / 0.019 (current anchor); drop-one-province
+  31/31 negative, tight range [-0.098,-0.059], weakest = dropping control-
+  mass Gansu (p=0.063, same pattern as norm-robustness); anchor-insensitive;
+  timing late-deepening (2018 -0.049 p=0.13 -> 2022 -0.116 p<0.001), sign
+  already present at 2018; regulated 22 cities (direct HPR) -0.174 p<0.001
+  (coherent, stronger under direct treatment); distance decay monotone
+  (treated -0.103 p=0.001 > near-250-400km -0.069 p=0.13 > far ref).
+KEY SPECIFICITY ANCHOR: MARRIED 18-30 show NOTHING (P(ideal>=2) -0.026
+  p=0.28; continuous +0.02) -- the decline is unmarried/formation-stage
+  specific, not corridor-wide preference drift.
+ONE BLEMISH: placebo outcome general trust qn1001 ALSO falls (-5.8pp,
+  WCB p=0.027); trust-in-strangers clean (p=0.70). Two readings:
+  (i) omnibus corridor attitude drift (confound risk), or (ii) a real
+  broad psychological footprint of the shock -- consistent with the
+  welfare line (confidence, satisfaction, CES-D all move in this
+  corridor). The married-null favors (ii): generic drift should hit
+  married youth attitudes too.
+
+GRADE: STRONG-SUGGESTIVE, conditionally headline-grade.
+  Write as: "the shock scars the fertility ideals of the unmarried young
+  (extensive margin, -8pp on 65%), with the married-youth null as the
+  specificity placebo" -- framed INSIDE the broader welfare/attitudes arc
+  (not as a stand-alone causal claim of ideal-specific response), and
+  report the trust result honestly next to it. Policy line it buys:
+  demand destruction in the next generation vs unmet demand in the
+  current one (mirror of Analysis C).

@@ -1,0 +1,71 @@
+HISTGBM HYPERPARAMETER GRID — hazard model for the threshold-density test
+one-child risk set rows=40,108; pre-2016 training rows=23,591; 5 city folds x 3 seeds; selection metric = OOF log-loss (pre rows only)
+
+== 1. Grid ranking (by OOF log-loss, pre-2016 rows) ==
+  config                      logloss     (sd)     AUC     ECE
+  lr=0.03 d=2 msl=100         0.20512  0.00061  0.8089  0.0046
+  lr=0.05 d=2 msl=100         0.20555  0.00061  0.8086  0.0060
+  lr=0.03 d=2 msl=50          0.20565  0.00076  0.8083  0.0063
+  lr=0.03 d=3 msl=100         0.20577  0.00088  0.8079  0.0061
+  lr=0.03 d=2 msl=20          0.20577  0.00066  0.8080  0.0062
+  lr=0.1 d=2 msl=100          0.20599  0.00077  0.8079  0.0070
+  lr=0.05 d=2 msl=50          0.20616  0.00109  0.8080  0.0072
+  lr=0.05 d=2 msl=20          0.20621  0.00081  0.8076  0.0068
+  lr=0.03 d=3 msl=50          0.20623  0.00143  0.8073  0.0069
+  lr=0.03 d=3 msl=20          0.20625  0.00132  0.8074  0.0066
+  lr=0.05 d=3 msl=100         0.20642  0.00111  0.8070  0.0069
+  lr=0.05 d=3 msl=20          0.20650  0.00146  0.8069  0.0075
+  lr=0.1 d=2 msl=20           0.20669  0.00052  0.8070  0.0078
+  lr=0.1 d=2 msl=50           0.20671  0.00121  0.8074  0.0075
+  lr=0.05 d=3 msl=50          0.20674  0.00150  0.8065  0.0073
+  lr=0.1 d=3 msl=100          0.20691  0.00115  0.8060  0.0077
+  lr=0.1 d=3 msl=50           0.20719  0.00172  0.8060  0.0079
+  lr=0.1 d=3 msl=20           0.20758  0.00100  0.8048  0.0090
+  DEFAULT(current)            0.20861  0.00071  0.8050  0.0107
+  lr=0.03 d=None msl=100      0.20897  0.00057  0.8006  0.0102
+  lr=0.03 d=None msl=50       0.20920  0.00026  0.8007  0.0106
+  lr=0.05 d=None msl=100      0.20939  0.00026  0.8001  0.0115
+  lr=0.05 d=None msl=50       0.20956  0.00033  0.8006  0.0119
+  lr=0.03 d=None msl=20       0.20975  0.00037  0.8004  0.0116
+  lr=0.05 d=None msl=20       0.21028  0.00099  0.7996  0.0128
+  lr=0.1 d=None msl=100       0.21134  0.00021  0.7974  0.0139
+  lr=0.1 d=None msl=50        0.21203  0.00046  0.7970  0.0148
+  lr=0.1 d=None msl=20        0.21323  0.00087  0.7958  0.0161
+
+  WINNER: lr=0.03 d=2 msl=100  (logloss 0.20512 vs default 0.20861, gain +0.00349; default rank 19/28)
+
+== 2. Winner config -> per-woman survival-curve Pc (10 seeds, median) ==
+  corr(Pc_gs, Pc_old)=0.911  mean=0.343  share>0.5=0.27  p10/p50/p90=[0.085, 0.298, 0.692]
+
+== 3. Structural test, annual hazard (Post=2018), TUNED score ==
+
+[TUNED: main structural (prediction dens<0, Pc~0)]  N=40,108
+  T:post             +0.0157  (SE 0.0141, p=0.265)
+  T:post:Pc_gs       +0.0300  (SE 0.0563, p=0.594)
+  T:post:dens_gs     -0.1688  (SE 0.1377, p=0.220)
+
+[TUNED: daughter arm]  N=17,000
+  T:post:Pc_gs       +0.1036  (SE 0.0833, p=0.213)
+  T:post:dens_gs     -0.4439  (SE 0.2414, p=0.066)
+
+[TUNED: son arm]  N=23,108
+  T:post:Pc_gs       -0.0689  (SE 0.0713, p=0.334)
+  T:post:dens_gs     +0.1561  (SE 0.1773, p=0.379)
+
+== 4. WCB on T:post:dens (4999 reps), TUNED ==
+  TUNED full       T:post:dens = -0.1688  t=-1.23  WCB p=0.2394  (G=113)
+  TUNED daughter   T:post:dens = -0.4439  t=-1.85  WCB p=0.0790  (G=113)
+  TUNED son        T:post:dens = +0.1561  t=0.88  WCB p=0.3900  (G=113)
+
+== 5. Cohort-K4 structural version, TUNED ==
+
+[TUNED: cohort structural K=4]  N=2,266
+  T:postc            +0.1246  (SE 0.1324, p=0.347)
+  T:postc:Pc4_gs     +0.8402  (SE 0.5009, p=0.093)
+  T:postc:dens4_gs   -2.6818  (SE 1.3220, p=0.042)
+
+== Reference (from calibrated_survival_density.txt) ==
+  RAW default annual full  T:post:dens −0.171 WCB p=0.222
+  RAW default daughter     −0.405 WCB p=0.072 | son +0.10 p=0.57
+  RAW default cohort K4    T:postc:dens4 −2.41 (p=0.029)
+  OLD crude  annual full   −0.261 WCB p=0.0524; cohort −1.88 (p=0.035)

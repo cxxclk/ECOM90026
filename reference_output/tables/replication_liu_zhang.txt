@@ -1,0 +1,10 @@
+Replication of Liu & Zhang (2025) Table 3
+Target: Treat x Post = -0.023 to -0.026 (se ~0.010), mean 0.061, N=80,177
+
+(0) women 15-44, 2009-2020, no trend (not in L&Z)     -0.0036 (0.0062) p=0.560  mean=0.076  N=94,746  women=10,644  cities=113
+(1)   + prefecture linear trends   [their col 1]      -0.0113 (0.0081) p=0.160  mean=0.076  N=94,746  women=10,644  cities=113
+(2)   + treatment-group linear trend [their col 2]    -0.0142 (0.0073) p=0.052  mean=0.076  N=94,746  women=10,644  cities=113
+(3) extended to 2022, group trend                     -0.0155 (0.0074) p=0.035  mean=0.073  N=102,914  women=10,644  cities=113
+(4) married 20-45 (our restriction), 2009-2020        -0.0156 (0.0062) p=0.011  mean=0.069  N=61,668  women=9,536  cities=113
+(5)   + treatment-group linear trend                  -0.0092 (0.0088) p=0.296  mean=0.069  N=61,668  women=9,536  cities=113
+(6) complement (unmarried or outside 20-45)            0.0032 (0.0244) p=0.895  mean=0.088  N=33,078  women=10,644  cities=113

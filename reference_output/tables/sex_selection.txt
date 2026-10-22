@@ -1,0 +1,39 @@
+SEX SELECTION — does the shock cut SON births more than DAUGHTER births?
+  one-child risk set: 40,108 woman-years, 6,992 women
+
+========================================================================
+FIRSTBORN-DAUGHTER families (son-chasing margin)
+  2nd births=1434 (sons=810, share male=0.565)
+
+[SON-birth hazard]  N=17,000  mean(y)=0.0476
+  T:post     -0.0174  (SE 0.0091, p=0.056)
+
+[DAUGHTER-birth hazard]  N=17,000  mean(y)=0.0367
+  T:post     -0.0064  (SE 0.0062, p=0.303)
+
+[ANY 2nd-birth hazard]  N=17,000  mean(y)=0.0844
+  T:post     -0.0238  (SE 0.0106, p=0.024)
+
+========================================================================
+FIRSTBORN-SON families (placebo)
+  2nd births=1317 (sons=663, share male=0.503)
+
+[SON-birth hazard]  N=23,108  mean(y)=0.0287
+  T:post     -0.0021  (SE 0.0046, p=0.655)
+
+[DAUGHTER-birth hazard]  N=23,108  mean(y)=0.0283
+  T:post     -0.0036  (SE 0.0055, p=0.510)
+
+[ANY 2nd-birth hazard]  N=23,108  mean(y)=0.0570
+  T:post     -0.0057  (SE 0.0076, p=0.456)
+
+========================================================================
+Sex ratio among 2nd births (share male | birth), daughter-first
+  2nd-birth events: 1434
+         mean  count
+post T              
+0    0  0.584    476
+     1  0.582    675
+1    0  0.519    133
+     1  0.467    150
+  DID T:post on share-male = -0.0480 (p=0.525)  [thin, descriptive]

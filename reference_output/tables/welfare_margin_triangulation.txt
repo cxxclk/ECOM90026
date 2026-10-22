@@ -1,0 +1,44 @@
+WELFARE x PROPENSITY-MARGIN TRIANGULATION
+parity-1 wave obs with confidence: 12,726  women=4,980  waves 2012-2022  conf mean=4.03
+
+--- validation vs the in-session welfare layer ---
+
+[one-child, ALL]  N=12,726  women=4,980
+  T:post               -0.1217  (SE 0.0458, p=0.008)
+
+[WANTS-2nd (ideal2014>=2) — expect ~ -0.135]  N=7,255  women=2,570
+  T:post               -0.1853  (SE 0.0497, p=0.000)
+
+[CONTENT (<2) — expect ~ 0]  N=3,578  women=1,258
+  T:post               -0.0695  (SE 0.0836, p=0.406)
+
+[P1 MAIN: confidence structural test (prediction: dens < 0)]  N=12,726  women=4,980
+  T:post               -0.0347  (SE 0.0636, p=0.586)
+  T:post:Pc            -0.3491  (SE 0.3379, p=0.302)
+  T:post:dens          +0.1236  (SE 0.7071, p=0.861)
+
+[P1 by firstborn: daughter arm]  N=5,126  women=2,160
+  T:post:Pc            -0.6935  (SE 0.4602, p=0.132)
+  T:post:dens          +1.4933  (SE 1.2202, p=0.221)
+
+[P1 by firstborn: son arm]  N=7,600  women=2,820
+  T:post:Pc            +0.0341  (SE 0.3788, p=0.928)
+  T:post:dens          -1.1243  (SE 0.7765, p=0.148)
+
+[P2 horse-race: margin density vs wants-2nd]  N=10,833  women=3,828
+  T:post               +0.0118  (SE 0.0889, p=0.895)
+  T:post:dens          -0.5287  (SE 0.4114, p=0.199)
+  T:post:w2            -0.1003  (SE 0.0830, p=0.227)
+
+[P3 persistence: 2018 vs 2020-22 (non-rebound => late dens < 0)]  N=12,726  women=4,980
+  T:p1819              +0.0129  (SE 0.0583, p=0.825)
+  T:p1819:dens         -0.9638  (SE 0.3934, p=0.014)
+  T:p2022              -0.0568  (SE 0.0862, p=0.510)
+  T:p2022:dens         -0.3142  (SE 0.4573, p=0.492)
+
+confidence DID by propensity quintile (echo of the U?):
+  G1: n=3,667  T:post=-0.0035 (p=0.958)
+  G2: n=3,152  T:post=-0.1104 (p=0.216)
+  G3: n=2,474  T:post=-0.1771 (p=0.034)
+  G4: n=1,849  T:post=-0.0859 (p=0.374)
+  G5: n=1,584  T:post=-0.2624 (p=0.036)

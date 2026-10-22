@@ -1,0 +1,86 @@
+Causal-forest DISCOVERY scan — DiD-CATE on pre->post 2nd-birth hazard change
+  women at risk in BOTH pre & post: 2,499 (daughter=1,065, son=1,434); treated share=0.469, cities=113
+  mean dY (post-pre hazard change): treated=+0.1383 control=+0.0978
+
+  Forest ATE on dY = -0.0083  95%CI [-0.0850,+0.0683]
+  CATE spread: p10=-0.0400 median=-0.0056 p90=+0.0182
+
+====================================================================
+(1) Forest variable importance (drivers of heterogeneity)
+    province               0.273
+    baseline city price    0.201
+    fam income pc          0.139
+    1st-birth cohort       0.097
+    house value            0.090
+    mother income          0.077
+    age at 1st birth       0.060
+    mother edu-yrs         0.034
+    firstborn son          0.018
+    urban                  0.009
+    homeowner              0.002
+
+====================================================================
+(2) Best linear projection: CATE ~ z(moderators), cluster-robust by city
+    1st-birth cohort       slope=-0.0129  (p=0.000) ***
+    mother edu-yrs         slope=-0.0026  (p=0.000) ***
+    firstborn son          slope=-0.0023  (p=0.000) ***
+    baseline city price    slope=-0.0019  (p=0.003) ***
+    age at 1st birth       slope=-0.0017  (p=0.220) 
+    fam income pc          slope=-0.0016  (p=0.003) ***
+    province               slope=-0.0012  (p=0.150) 
+    house value            slope=+0.0002  (p=0.562) 
+    homeowner              slope=+0.0004  (p=0.218) 
+    urban                  slope=+0.0007  (p=0.057) *
+    mother income          slope=+0.0022  (p=0.000) ***
+    [slope<0 = MORE suppression (more negative dY) as the moderator rises]
+
+====================================================================
+(3) Most- vs least-suppressed profile (bottom vs top CATE quartile)
+    moderator               most-suppr  least-suppr
+    mother income                6.482        5.130
+    house value                 12.073       11.363
+    mother edu-yrs              11.757        8.382
+    urban                        0.251        0.302
+    homeowner                    0.812        0.871
+    age at 1st birth            25.550       22.651
+    1st-birth cohort          2014.356     2003.818
+    firstborn son                0.543        0.469
+
+====================================================================
+(4) Does the gender split survive? CATE by firstborn gender
+    daughter-first mean CATE = -0.0071
+    son-first      mean CATE = -0.0093
+    son importance rank = 9 of 11; BLP z_son p = 0.000
+
+====================================================================
+(5) Re-test forest hits in a CLEAN person-year DiD (T x post x moderator)
+    daughter-first sample, city+year FE, cluster city; the honest test.
+    mother edu-yrs       T:post:zmod = -0.0126 (SE 0.0106, p=0.236), base T:post=-0.0176
+    1st-birth cohort     T:post:zmod = -0.0034 (SE 0.0093, p=0.715), base T:post=-0.0274
+
+====================================================================
+CAVEAT: forest ATE/CATE inherit the DR-DiD overlap+~113-cluster limits; absolute CIs are wide. Read (1)-(4) as DISCOVERY signals; the clean DiD re-tests in (5) are the actual evidence.
+
+====================================================================
+INTERPRETATION (causal-forest scan)
+  - Forest ATE on dY = -0.008, 95%CI [-0.085,+0.068]: uninformative on the
+    LEVEL (same overlap+~113-cluster wall as the DR-DiD). Expected.
+  - Heterogeneity is dominated by GEOGRAPHY (province 0.27, baseline city price
+    0.20) + income/wealth + 1st-birth COHORT (0.10). firstborn_son ranks 9/11
+    -> the forest again does NOT recover the daughter/son split (consistent with
+    the earlier shelved causal_forest_het.py). This does NOT refute the headline:
+    the clean design's son PLACEBO (son T:post ~ 0 vs daughter -0.024) is the
+    real evidence; the collapsed-dY CATE cannot see it through the noise.
+  - The forest's top "discoveries" are ARTIFACTS of the pre/post collapse:
+    most-suppressed quartile = later 1st-birth cohort (2014 vs 2004), higher edu
+    & income -> this is cohort x DURATION (recent-first-birth women have almost
+    no pre-2018 at-risk years; dY is mechanically dominated by the natural
+    duration rise in 2nd-birth hazard), NOT a real affordability reversal.
+  - RE-TEST DISCIPLINE WORKS: the two testable forest hits DIE in the clean
+    city-clustered person-year DiD -- mother edu T:post:z = -0.013 (p=0.24),
+    1st-birth cohort -0.003 (p=0.72). No unanticipated moderator survives.
+  VERDICT: causal forest yields NO new moderator here and does not cleanly
+  characterize the affordability surface (collapse artifact). Its honest value
+  was as a NEGATIVE SCREEN -- it proposed education/cohort/geography, and the
+  pre-specified re-tests correctly rejected them. The direct interaction cuts
+  (#1 income/wealth) and the clean son/2+ placebos remain the real evidence.

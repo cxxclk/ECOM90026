@@ -1,0 +1,163 @@
+CDDF SPINE — generic-ML heterogeneity on the annual second-birth hazard DID
+one-child risk set, unregulated prefectures, 2009-2022, Post=2018, city+year FE, cluster city; 20 splits x 5 city folds
+  rows=40,108  women=6,992  cities=113  treated=0.474  hazard=0.0686
+feature coverage (woman level): son=100%  birthy=100%  age_fb=86%  eduy=58%  urban=86%  log_faminc_pc=55%  log_inc=56%  hv_inc=46%  homeowner=60%  ideal_kids=51%  son_pref=51%  housework=56%  city_son_norm=85%  trad_pc1=98%  city_urban_share=85%  city_linc=98%
+reference pooled DID (gender-pooled layer 2): -0.0140 (p=0.052)
+
+==========================================================================
+VERSION A FULL: features = son, birthy, age_fb, eduy, urban, log_faminc_pc, log_inc, hv_inc, homeowner, ideal_kids, son_pref, housework, city_son_norm, trad_pc1, city_urban_share, city_linc
+
+--- A FULL: median over 20 city-fold splits (CDDF adjusted p = min(1, 2 x median p)) ---
+BLP  T:post:sz      -0.0153   median p=0.056   adj p=0.111
+GATES group-specific DID (G1 = ML-most-suppressed):
+  G1  gamma=+0.0043   median p=0.637
+  G2  gamma=-0.0051   median p=0.486
+  G3  gamma=-0.0173   median p=0.157
+  G4  gamma=-0.0205   median p=0.073
+  G5  gamma=-0.0330   median p=0.069
+G1 - G5 difference  +0.0387   median p=0.072   adj p=0.144
+
+==========================================================================
+VERSION B RESIDUAL (known moderators excluded): features = birthy, age_fb, eduy, urban, housework, city_urban_share
+
+--- B RESIDUAL (known moderators excluded): median over 20 city-fold splits (CDDF adjusted p = min(1, 2 x median p)) ---
+BLP  T:post:sz      -0.0029   median p=0.673   adj p=1.000
+GATES group-specific DID (G1 = ML-most-suppressed):
+  G1  gamma=-0.0176   median p=0.336
+  G2  gamma=-0.0117   median p=0.251
+  G3  gamma=-0.0094   median p=0.332
+  G4  gamma=-0.0135   median p=0.212
+  G5  gamma=-0.0254   median p=0.172
+G1 - G5 difference  +0.0039   median p=0.696   adj p=1.000
+
+--- A FULL: CONSENSUS diagnostics (median-s groups; each seed's s is OOF) ---
+consensus s: mean=-0.0072  sd=0.0510  share<0 = 0.62
+consensus BLP -0.0197 (p=0.018); GATES G1 +0.0050(p=0.696)  G2 -0.0047(p=0.694)  G3 -0.0062(p=0.565)  G4 -0.0288(p=0.022)  G5 -0.0371(p=0.044);  G1-G5 +0.0421 (p=0.037)
+pre-trend gate (# of 2010-14 T x year p<.10, by group): G1:0  G2:1  G3:2  G4:1  G5:1
+
+[event study: A FULL G1 most-affected]  N=7,228  women=1,399  mean(y)=0.0865
+  T x 2010   -0.0266  (SE 0.0320, p=0.406) (pre)
+  T x 2011   -0.0117  (SE 0.0341, p=0.731) (pre)
+  T x 2012   -0.0357  (SE 0.0259, p=0.169) (pre)
+  T x 2013   -0.0002  (SE 0.0268, p=0.993) (pre)
+  T x 2014   -0.0043  (SE 0.0227, p=0.851) (pre)
+  T x 2016   +0.0096  (SE 0.0310, p=0.756)
+  T x 2017   -0.0487  (SE 0.0333, p=0.143)
+  T x 2018   -0.0138  (SE 0.0273, p=0.614)
+  T x 2019   +0.0074  (SE 0.0295, p=0.802)
+  T x 2020   -0.0031  (SE 0.0300, p=0.917)
+  T x 2021   -0.0363  (SE 0.0281, p=0.197)
+  T x 2022   -0.0221  (SE 0.0264, p=0.404)
+
+[event study: A FULL G5 least-affected]  N=7,435  women=1,399  mean(y)=0.1112
+  T x 2010   -0.0026  (SE 0.0354, p=0.941) (pre)
+  T x 2011   +0.0080  (SE 0.0335, p=0.810) (pre)
+  T x 2012   -0.0026  (SE 0.0310, p=0.933) (pre)
+  T x 2013   -0.0579  (SE 0.0273, p=0.034) (pre)
+  T x 2014   +0.0045  (SE 0.0285, p=0.876) (pre)
+  T x 2016   -0.0030  (SE 0.0343, p=0.930)
+  T x 2017   +0.0153  (SE 0.0375, p=0.683)
+  T x 2018   -0.0479  (SE 0.0383, p=0.211)
+  T x 2019   -0.0069  (SE 0.0403, p=0.865)
+  T x 2020   -0.0500  (SE 0.0293, p=0.088)
+  T x 2021   -0.0666  (SE 0.0445, p=0.135)
+  T x 2022   -0.0428  (SE 0.0364, p=0.241)
+
+CLAN — most-affected G1 (n=1,399) vs least-affected G5 (n=1,399), clustered-by-city t-tests:
+  covariate            G1 mean   G5 mean     diff       p
+  son                    0.378     0.612   -0.234   0.000
+  birthy              1984.500  1985.956   -1.456   0.005
+  age_fb                24.623    23.067   +1.556   0.000
+  eduy                   8.766     9.228   -0.463   0.105
+  urban                  0.628     0.501   +0.127   0.000
+  log_faminc_pc          9.002     8.687   +0.315   0.003
+  log_inc                2.817     3.542   -0.725   0.023
+  hv_inc                 1.673     1.739   -0.066   0.415
+  homeowner              0.866     0.876   -0.010   0.550
+  ideal_kids             1.908     1.878   +0.030   0.589
+  son_pref               2.418     3.318   -0.900   0.000
+  housework              2.363     2.231   +0.132   0.164
+  city_son_norm          3.615     3.598   +0.017   0.736
+  trad_pc1               0.225     0.154   +0.071   0.198
+  city_urban_share       0.404     0.362   +0.042   0.170
+  city_linc              8.894     8.733   +0.161   0.005
+  T                      0.546     0.478   +0.068   0.258
+  pre_haz                0.191     0.267   -0.076   0.000
+
+corr(s, feature) at woman level (negative = feature predicts MORE suppression):
+  son               +0.133
+  birthy            +0.068
+  age_fb            -0.162
+  eduy              -0.007
+  urban             -0.109
+  log_faminc_pc     -0.162
+  log_inc           +0.031
+  hv_inc            +0.058
+  homeowner         +0.028
+  ideal_kids        +0.045
+  son_pref          +0.256
+  housework         -0.003
+  city_son_norm     +0.012
+  trad_pc1          -0.034
+  city_urban_share  -0.064
+  city_linc         -0.128
+
+overlap with theory group (daughter-first x top-norm-tercile):
+  P(theory | G1) = 0.26   P(G1 | theory) = 0.36   base P(theory) = 0.14
+
+--- B RESIDUAL: CONSENSUS diagnostics (median-s groups; each seed's s is OOF) ---
+consensus s: mean=-0.0178  sd=0.0502  share<0 = 0.69
+consensus BLP -0.0041 (p=0.722); GATES G1 -0.0204(p=0.277)  G2 -0.0126(p=0.223)  G3 -0.0148(p=0.149)  G4 -0.0089(p=0.361)  G5 -0.0266(p=0.101);  G1-G5 +0.0061 (p=0.794)
+pre-trend gate (# of 2010-14 T x year p<.10, by group): G1:0  G2:1  G3:1  G4:0  G5:1
+
+[event study: B RESIDUAL G1 most-affected]  N=6,826  women=1,399  mean(y)=0.0967
+  T x 2010   -0.0499  (SE 0.0401, p=0.213) (pre)
+  T x 2011   +0.0542  (SE 0.0375, p=0.148) (pre)
+  T x 2012   -0.0049  (SE 0.0354, p=0.891) (pre)
+  T x 2013   +0.0213  (SE 0.0322, p=0.507) (pre)
+  T x 2014   -0.0082  (SE 0.0333, p=0.806) (pre)
+  T x 2016   -0.0120  (SE 0.0324, p=0.710)
+  T x 2017   +0.0181  (SE 0.0355, p=0.609)
+  T x 2018   -0.0041  (SE 0.0337, p=0.903)
+  T x 2019   -0.0202  (SE 0.0370, p=0.586)
+  T x 2020   -0.0041  (SE 0.0307, p=0.893)
+  T x 2021   -0.0180  (SE 0.0362, p=0.620)
+  T x 2022   -0.0185  (SE 0.0320, p=0.564)
+
+[event study: B RESIDUAL G5 least-affected]  N=7,288  women=1,398  mean(y)=0.1110
+  T x 2010   -0.0325  (SE 0.0349, p=0.352) (pre)
+  T x 2011   -0.0434  (SE 0.0322, p=0.178) (pre)
+  T x 2012   -0.0037  (SE 0.0376, p=0.921) (pre)
+  T x 2013   -0.0543  (SE 0.0300, p=0.070) (pre)
+  T x 2014   -0.0249  (SE 0.0260, p=0.337) (pre)
+  T x 2016   -0.0035  (SE 0.0308, p=0.910)
+  T x 2017   -0.0106  (SE 0.0414, p=0.799)
+  T x 2018   -0.0676  (SE 0.0361, p=0.061)
+  T x 2019   +0.0106  (SE 0.0386, p=0.784)
+  T x 2020   -0.0088  (SE 0.0349, p=0.802)
+  T x 2021   -0.0637  (SE 0.0418, p=0.127)
+  T x 2022   -0.0636  (SE 0.0307, p=0.038)
+
+CLAN — most-affected G1 (n=1,399) vs least-affected G5 (n=1,398), clustered-by-city t-tests:
+  covariate            G1 mean   G5 mean     diff       p
+  birthy              1986.538  1985.874   +0.664   0.173
+  age_fb                24.489    23.102   +1.387   0.000
+  eduy                   8.821     9.032   -0.211   0.521
+  urban                  0.613     0.508   +0.105   0.002
+  housework              2.408     2.356   +0.052   0.702
+  city_urban_share       0.376     0.367   +0.009   0.798
+  T                      0.480     0.491   -0.011   0.869
+  pre_haz                0.195     0.267   -0.072   0.001
+
+corr(s, feature) at woman level (negative = feature predicts MORE suppression):
+  birthy            -0.051
+  age_fb            -0.140
+  eduy              -0.005
+  urban             -0.073
+  housework         -0.011
+  city_urban_share  +0.018
+
+overlap with theory group (daughter-first x top-norm-tercile):
+  P(theory | G1) = 0.19   P(G1 | theory) = 0.27   base P(theory) = 0.14
+
+scores saved -> output/cddf_scores.csv

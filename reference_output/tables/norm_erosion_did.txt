@@ -1,0 +1,52 @@
+qm1004 valid: 2014 N=31,510  2022 N=7,092 (2022 battery = subsample)
+
+2014 respondents in frame: 26,245; re-observed in 2022 battery: 0.152
+  attrition gate (in22 ~ T + norm14 + T:norm14):
+    T                +0.0061  (p=0.621)
+    qm1004_2014      -0.0085  (p=0.000)
+    T:qm1004_2014    -0.0007  (p=0.836)
+
+Analysis panel (age 18-60 in 2014, unregulated): N=3,377  T share=0.495
+  qm1004 2014 mean 3.276 -> 2022 3.245  (Delta mean -0.031)
+  floor gate: share at qm1004_2014==1 (cannot fall further): 0.198
+
+========================================================================
+D1: Delta norm on T  (province FE, cluster city — single-diff x within-person)
+
+[SON NORM qm1004]  N=3,371  cities=113
+  T                -0.0916  (SE 0.1121, p=0.414)
+
+[placebo qm1001 respect-parents]  N=3,368  cities=113
+  T                -0.1138  (SE 0.1107, p=0.304)
+
+[placebo qm1006 visit-parents]  N=3,370  cities=113
+  T                -0.0795  (SE 0.1090, p=0.466)
+
+[SON NORM + 2014-level control]  N=3,371  cities=113
+  T                -0.1390  (SE 0.0870, p=0.110)
+  qm1004_2014      -0.7354  (SE 0.0238, p=0.000)
+
+========================================================================
+D2: daughter leverage among parents (firstborn by 2014, quasi-random gender)
+  parents panel N=2,886  daughter share=0.476
+
+[ALL parents]  N=2,881  cities=113
+  dghtr            +0.1075  (SE 0.0905, p=0.235)
+  T                +0.0197  (SE 0.1231, p=0.873)
+  T:dghtr          -0.0765  (SE 0.1319, p=0.562)
+  one-child-at-2014 subset N=1,136
+
+[ONE-CHILD parents]  N=1,135  cities=109
+  dghtr            -0.0368  (SE 0.1301, p=0.777)
+  T                +0.2788  (SE 0.3717, p=0.453)
+  T:dghtr          +0.0088  (SE 0.2164, p=0.967)
+
+[placebo qm1001, all parents]  N=2,879  cities=113
+  dghtr            -0.0700  (SE 0.0492, p=0.155)
+  T                -0.1206  (SE 0.1524, p=0.429)
+  T:dghtr          +0.1298  (SE 0.0809, p=0.109)
+
+========================================================================
+City norm-index stability 2014 vs 2022 (A4 open item; cells n>=15)
+  cities with n>=15 both waves: 112  corr(city mean 2014, 2022) = 0.748
+  mean city-level change: -0.355

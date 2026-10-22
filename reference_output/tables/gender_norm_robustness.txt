@@ -1,0 +1,94 @@
+
+========================================================================
+TOP TERCILE by son_norm — daughter arm
+
+Province composition (woman-years; treated/control cities):
+            wy  cities_T  cities_C  treated_share
+provname                                         
+河南        1081         8         0       1.000000
+甘肃         849         0         4       0.000000
+广东         658         7         0       1.000000
+山西         320         2         1       0.784375
+江西         292         2         1       0.434932
+广西         193         0         2       0.000000
+辽宁         182         0         2       0.000000
+四川         174         0         2       0.000000
+贵州         174         0         1       0.000000
+河北         126         1         0       1.000000
+陕西         115         0         1       0.000000
+山东         102         1         0       1.000000
+福建          83         1         0       1.000000
+湖南          74         0         1       0.000000
+
+Full top-tercile estimate:
+  ALL provinces                T:post -0.0491 (p=0.026)  N=4,423 cities=37
+
+Drop-one-province:
+  drop 河南 (1081 wy)            T:post -0.0635 (p=0.006)  N=3,342 cities=29
+  drop 甘肃 (849 wy)             T:post -0.0351 (p=0.142)  N=3,574 cities=33
+  drop 广东 (658 wy)             T:post -0.0422 (p=0.093)  N=3,765 cities=30
+  drop 山西 (320 wy)             T:post -0.0586 (p=0.012)  N=4,103 cities=34
+  drop 江西 (292 wy)             T:post -0.0411 (p=0.073)  N=4,131 cities=34
+  drop 广西 (193 wy)             T:post -0.0519 (p=0.021)  N=4,230 cities=35
+  drop 辽宁 (182 wy)             T:post -0.0469 (p=0.041)  N=4,241 cities=35
+  drop 四川 (174 wy)             T:post -0.0552 (p=0.009)  N=4,249 cities=35
+  drop 贵州 (174 wy)             T:post -0.0494 (p=0.030)  N=4,249 cities=36
+  drop 河北 (126 wy)             T:post -0.0499 (p=0.029)  N=4,297 cities=36
+  drop 陕西 (115 wy)             T:post -0.0507 (p=0.024)  N=4,308 cities=36
+  drop 山东 (102 wy)             T:post -0.0509 (p=0.023)  N=4,321 cities=36
+  drop 福建 (83 wy)              T:post -0.0442 (p=0.040)  N=4,340 cities=36
+  drop 湖南 (74 wy)              T:post -0.0465 (p=0.036)  N=4,349 cities=36
+
+Wild cluster bootstrap (Rademacher, null imposed, 4999 reps):
+  T:post = -0.0491  t = -2.24  WCB p = 0.041  (clusters G=37)
+
+========================================================================
+TOP TERCILE by trad_pc1 — daughter arm
+
+Province composition (woman-years; treated/control cities):
+           wy  cities_T  cities_C  treated_share
+provname                                        
+河南        766         6         0       1.000000
+甘肃        716         0         3       0.000000
+广东        536         6         0       1.000000
+辽宁        448         0         3       0.000000
+山西        320         2         1       0.784375
+吉林        289         0         2       0.000000
+江苏        246         1         0       1.000000
+黑龙江       238         0         1       0.000000
+河北        216         2         0       1.000000
+云南        185         0         1       0.000000
+贵州        174         0         1       0.000000
+江西        127         2         0       1.000000
+陕西        115         0         1       0.000000
+山东        102         1         0       1.000000
+广西         89         0         1       0.000000
+福建         83         1         0       1.000000
+湖南         74         0         1       0.000000
+四川         64         0         1       0.000000
+
+Full top-tercile estimate:
+  ALL provinces                T:post -0.0556 (p=0.018)  N=4,788 cities=37
+
+Drop-one-province:
+  drop 河南 (766 wy)             T:post -0.0552 (p=0.019)  N=4,022 cities=31
+  drop 甘肃 (716 wy)             T:post -0.0708 (p=0.001)  N=4,072 cities=34
+  drop 广东 (536 wy)             T:post -0.0493 (p=0.063)  N=4,252 cities=31
+  drop 辽宁 (448 wy)             T:post -0.0471 (p=0.055)  N=4,340 cities=34
+  drop 山西 (320 wy)             T:post -0.0636 (p=0.012)  N=4,468 cities=34
+  drop 吉林 (289 wy)             T:post -0.0491 (p=0.042)  N=4,499 cities=35
+  drop 江苏 (246 wy)             T:post -0.0627 (p=0.011)  N=4,542 cities=36
+  drop 黑龙江 (238 wy)            T:post -0.0539 (p=0.025)  N=4,550 cities=36
+  drop 河北 (216 wy)             T:post -0.0594 (p=0.018)  N=4,572 cities=35
+  drop 云南 (185 wy)             T:post -0.0546 (p=0.024)  N=4,603 cities=36
+  drop 贵州 (174 wy)             T:post -0.0565 (p=0.018)  N=4,614 cities=36
+  drop 江西 (127 wy)             T:post -0.0491 (p=0.035)  N=4,661 cities=35
+  drop 陕西 (115 wy)             T:post -0.0572 (p=0.016)  N=4,673 cities=36
+  drop 山东 (102 wy)             T:post -0.0578 (p=0.016)  N=4,686 cities=36
+  drop 广西 (89 wy)              T:post -0.0566 (p=0.016)  N=4,699 cities=36
+  drop 福建 (83 wy)              T:post -0.0514 (p=0.025)  N=4,705 cities=36
+  drop 湖南 (74 wy)              T:post -0.0535 (p=0.023)  N=4,714 cities=36
+  drop 四川 (64 wy)              T:post -0.0548 (p=0.020)  N=4,724 cities=36
+
+Wild cluster bootstrap (Rademacher, null imposed, 4999 reps):
+  T:post = -0.0556  t = -2.39  WCB p = 0.028  (clusters G=37)

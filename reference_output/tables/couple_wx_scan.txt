@@ -1,0 +1,95 @@
+Couple decision-weight w(x) scan -- 2014 cohort DID-in-weight
+  couple-years=18,024  couples=2,523  cities=110
+
+(a) baseline T:post:diff = +0.0265 (SE 0.0138, p=0.055)  N=18,024
+    baseline T:post:avg  = +0.0011 (SE 0.0141, p=0.938)
+
+(b) univariate scan: T:post:diff:xz  (BH-FDR across the scan)
+  moderator          coef      SE       p       N
+  age             -0.0230  0.0156   0.141  18,024
+  eduy_w          +0.0348  0.0170   0.041  18,024
+  eduy_h          +0.0400  0.0172   0.020  17,134
+  log_inc_w       +0.0155  0.0138   0.263  18,024
+  log_inc_h       -0.0019  0.0138   0.891  16,949
+  inc_share_w     +0.0191  0.0202   0.345  10,227
+  log_faminc_pc   +0.0014  0.0175   0.937  17,149
+  urban           +0.0269  0.0101   0.008  18,024
+  parity14        -0.0222  0.0124   0.073  18,024
+  homeowner       +0.0274  0.0101   0.007  17,964
+  hv_inc          -0.0078  0.0098   0.425  14,407
+  age_gap         -0.0047  0.0106   0.657  18,024
+  son_norm        +0.0008  0.0091   0.928  18,024
+  hw_share_w      -0.0083  0.0102   0.415  17,754
+  propensity      +0.0423  0.0250   0.090  10,016
+
+  ranked by p, with BH-FDR q-values:
+    homeowner      p=0.007  q=0.056
+    urban          p=0.008  q=0.056
+    eduy_h         p=0.020  q=0.099
+    eduy_w         p=0.041  q=0.154
+    parity14       p=0.073  q=0.220
+    propensity     p=0.090  q=0.226
+    age            p=0.141  q=0.302
+    log_inc_w      p=0.263  q=0.494
+    inc_share_w    p=0.345  q=0.575
+    hw_share_w     p=0.415  q=0.579
+    hv_inc         p=0.425  q=0.579
+    age_gap        p=0.657  q=0.821
+    log_inc_h      p=0.891  q=0.937
+    son_norm       p=0.928  q=0.937
+    log_faminc_pc  p=0.937  q=0.937
+
+(c) honest 50/50 city-split (10 draws): winner-on-train -> holdout
+  split 0: train winner=eduy_h        t=+2.03 | holdout b=+0.0424 p=0.061 HOLD
+  split 1: train winner=homeowner     t=+2.52 | holdout b=+0.0253 p=0.026 HOLD
+  split 2: train winner=urban         t=+2.47 | holdout b=+0.0242 p=0.060 HOLD
+  split 3: train winner=son_norm      t=-2.27 | holdout b=+0.0250 p=0.028 fail
+  split 4: train winner=propensity    t=+2.39 | holdout b=+0.0183 p=0.584 fail
+  split 5: train winner=age           t=-3.13 | holdout b=-0.0025 p=0.894 fail
+  split 6: train winner=urban         t=+3.17 | holdout b=+0.0385 p=0.030 HOLD
+  split 7: train winner=propensity    t=+3.38 | holdout b=+0.0339 p=0.393 fail
+  split 8: train winner=eduy_h        t=+2.48 | holdout b=+0.0096 p=0.485 fail
+  split 9: train winner=urban         t=+2.86 | holdout b=+0.0304 p=0.090 HOLD
+  holdout success: 5/10 (need ~>5/10 to believe)
+
+(d) LASSO-psi honest check (couple-level influence signal)
+  complete-case couples=718 (rows=4,823)
+  split 0: LASSO selected NOTHING
+  split 1: LASSO selected NOTHING
+  split 2: selected= 1  holdout corr(pred,psi)=+0.070
+  split 3: selected= 1  holdout corr(pred,psi)=+0.122
+  split 4: selected= 2  holdout corr(pred,psi)=+0.032
+  split 5: LASSO selected NOTHING
+  split 6: selected= 1  holdout corr(pred,psi)=+0.023
+  split 7: selected= 9  holdout corr(pred,psi)=-0.011
+  split 8: LASSO selected NOTHING
+  split 9: selected= 2  holdout corr(pred,psi)=+0.065
+  mean holdout corr = +0.050 over 6 splits
+
+(e) horse-race of scan winners (all 4-ways jointly) + composite
+  urban       +0.0222 (SE 0.0094, p=0.018)
+  homeowner   +0.0301 (SE 0.0110, p=0.006)
+  eduy_h      +0.0329 (SE 0.0143, p=0.021)
+  eduy_w      +0.0103 (SE 0.0131, p=0.431)
+  pairwise corr:
+                  xz_urban  xz_homeowner  xz_eduy_h  xz_eduy_w
+    xz_urban          1.00         -0.08       0.11       0.13
+    xz_homeowner     -0.08          1.00      -0.10      -0.12
+    xz_eduy_h         0.11         -0.10       1.00       0.63
+    xz_eduy_w         0.13         -0.12       0.63       1.00
+  urban-SES composite: +0.0513 (SE 0.0139, p=0.000)  N=18,024
+  T:post:diff | hi SES (>=med)  +0.0603 (SE 0.0224, p=0.007) N=9,123
+  T:post:diff | lo SES (<med)   -0.0113 (SE 0.0061, p=0.062) N=8,901
+
+(f) honest composite: train-ranked top-4 -> composite on holdout
+  split 0: top4=['eduy_h', 'urban', 'inc_share_w', 'age_gap'] | holdout b=+0.0248 p=0.244 fail
+  split 1: top4=['homeowner', 'eduy_h', 'log_inc_w', 'parity14'] | holdout b=+0.0180 p=0.030 HOLD
+  split 2: top4=['urban', 'homeowner', 'eduy_w', 'son_norm'] | holdout b=+0.0383 p=0.036 HOLD
+  split 3: top4=['son_norm', 'log_inc_w', 'homeowner', 'eduy_h'] | holdout b=+0.0379 p=0.096 HOLD
+  split 4: top4=['propensity', 'urban', 'log_inc_h', 'eduy_w'] | holdout b=+0.0238 p=0.095 HOLD
+  split 5: top4=['age', 'eduy_w', 'parity14', 'eduy_h'] | holdout b=+0.0134 p=0.426 fail
+  split 6: top4=['urban', 'homeowner', 'log_inc_h', 'parity14'] | holdout b=+0.0293 p=0.069 HOLD
+  split 7: top4=['propensity', 'urban', 'parity14', 'age'] | holdout b=+0.0168 p=0.318 fail
+  split 8: top4=['eduy_h', 'propensity', 'parity14', 'homeowner'] | holdout b=+0.0220 p=0.149 fail
+  split 9: top4=['urban', 'homeowner', 'age_gap', 'log_inc_h'] | holdout b=+0.0017 p=0.869 fail
+  honest composite holdout: 5/10

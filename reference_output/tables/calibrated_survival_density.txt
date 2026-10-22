@@ -1,0 +1,85 @@
+CALIBRATED SURVIVAL DENSITY — threshold-density test with isotonic-calibrated per-woman survival curves
+one-child risk set: rows=40,108  women=6,992; 5 city folds x 10 seeds, median consensus; hazard clip 0.6
+
+== 1. Calibration diagnostics ==
+
+  reliability, UNCALIBRATED GBM (pre-2016 OOF rows; ECE=0.0035):
+    0.001 0.004 0.009 0.017 0.029 0.046 0.069 0.103 0.152 0.261   <- predicted
+    0.001 0.003 0.011 0.018 0.025 0.044 0.073 0.104 0.149 0.244   <- observed
+
+  reliability, isotonic-calibrated (pre-2016 OOF rows; ECE=0.0252):
+    0.002 0.011 0.026 0.042 0.059 0.077 0.095 0.111 0.126 0.146   <- predicted
+    0.000 0.004 0.008 0.018 0.032 0.038 0.074 0.121 0.155 0.221   <- observed
+
+== 2. New vs old Pc (woman level) ==
+  corr(Pc_cal, Pc_old)=0.862   corr(Pc_raw, Pc_old)=0.921   corr(dens_cal, dens_old)=0.784   corr(dens_raw, dens_old)=0.843
+  Pc_cal : mean=0.359  share>0.5=0.16  p10/p50/p90=[0.169, 0.38, 0.519]
+  Pc_raw : mean=0.341  share>0.5=0.28  p10/p50/p90=[0.071, 0.291, 0.705]
+  Pc_old : mean=0.311  share>0.5=0.25  p10/p50/p90=[0.006, 0.283, 0.664]
+
+== 3. Structural test, annual hazard (Post=2018) ==
+
+[RAW-GBM curve: main structural (prediction dens<0, Pc~0)]  N=40,108
+  T:post             +0.0158  (SE 0.0131, p=0.228)
+  T:post:Pc_raw      +0.0280  (SE 0.0530, p=0.597)
+  T:post:dens_raw    -0.1710  (SE 0.1304, p=0.190)
+
+[RAW-GBM curve: daughter arm]  N=17,000
+  T:post:Pc_raw      +0.0822  (SE 0.0751, p=0.274)
+  T:post:dens_raw    -0.4052  (SE 0.2147, p=0.059)
+
+[RAW-GBM curve: son arm]  N=23,108
+  T:post:Pc_raw      -0.0461  (SE 0.0690, p=0.504)
+  T:post:dens_raw    +0.0964  (SE 0.1642, p=0.557)
+
+[CALIBRATED: main structural (prediction dens<0, Pc~0)]  N=40,108
+  T:post             +0.0035  (SE 0.0313, p=0.911)
+  T:post:Pc_cal      -0.0319  (SE 0.1484, p=0.830)
+  T:post:dens_cal    +0.0072  (SE 0.3479, p=0.984)
+
+[CALIBRATED: daughter arm]  N=17,000
+  T:post:Pc_cal      +0.0825  (SE 0.2444, p=0.736)
+  T:post:dens_cal    -0.3005  (SE 0.6293, p=0.633)
+
+[CALIBRATED: son arm]  N=23,108
+  T:post:Pc_cal      -0.0557  (SE 0.1628, p=0.732)
+  T:post:dens_cal    +0.0960  (SE 0.3649, p=0.792)
+
+[OLD (crude): main structural (prediction dens<0, Pc~0)]  N=40,108
+  T:post             +0.0171  (SE 0.0107, p=0.111)
+  T:post:Pc_old      +0.0566  (SE 0.0509, p=0.266)
+  T:post:dens_old    -0.2607  (SE 0.1145, p=0.023)
+
+[OLD (crude): daughter arm]  N=17,000
+  T:post:Pc_old      +0.1044  (SE 0.0752, p=0.165)
+  T:post:dens_old    -0.4853  (SE 0.1823, p=0.008)
+
+[OLD (crude): son arm]  N=23,108
+  T:post:Pc_old      +0.0122  (SE 0.0670, p=0.856)
+  T:post:dens_old    -0.0717  (SE 0.1548, p=0.643)
+
+== 4. Wild cluster bootstrap on T:post:dens (4999 reps) ==
+  RAW full               T:post:dens = -0.1710  t=-1.31  WCB p=0.2218  (G=113)
+  RAW daughter           T:post:dens = -0.4052  t=-1.89  WCB p=0.0716  (G=113)
+  RAW son                T:post:dens = +0.0964  t=0.59  WCB p=0.5744  (G=113)
+  CALIBRATED full        T:post:dens = +0.0072  t=0.02  WCB p=0.9830  (G=113)
+  CALIBRATED daughter    T:post:dens = -0.3005  t=-0.48  WCB p=0.6408  (G=113)
+  CALIBRATED son         T:post:dens = +0.0960  t=0.26  WCB p=0.7946  (G=113)
+  OLD full               T:post:dens = -0.2607  t=-2.28  WCB p=0.0524  (G=113)
+
+== 5. Cohort-K4 structural version (depletion-proof frame) ==
+
+[RAW-GBM curve: cohort structural K=4]  N=2,266
+  T:postc            +0.1153  (SE 0.1219, p=0.345)
+  T:postc:Pc4_raw    +0.6905  (SE 0.4109, p=0.093)
+  T:postc:dens4_raw  -2.4131  (SE 1.1044, p=0.029)
+
+[CALIBRATED: cohort structural K=4]  N=2,266
+  T:postc            +0.1954  (SE 0.2839, p=0.491)
+  T:postc:Pc4_cal    +1.1075  (SE 1.6758, p=0.509)
+  T:postc:dens4      -3.1828  (SE 3.7540, p=0.397)
+
+[OLD (crude): cohort structural K=4]  N=2,266
+  T:postc            +0.1664  (SE 0.1248, p=0.182)
+  T:postc:Pc4_old    +0.2565  (SE 0.2892, p=0.375)
+  T:postc:dens4_old  -1.8829  (SE 0.8933, p=0.035)

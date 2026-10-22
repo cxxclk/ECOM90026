@@ -1,0 +1,172 @@
+Child-file reconnaissance / load:
+  loaded 2010 child      rows=  8990  vars=['cby', 'chn', 'exp', 'math', 'mth', 'pid_m', 'wd2', 'word']
+  loaded 2012 child      rows=  9918  vars=['cby', 'chn', 'exp', 'mth', 'pid_m', 'wd2']
+  loaded 2014 child      rows=  9872  vars=['cby', 'chn', 'exp', 'math', 'mth', 'pid_m', 'wd2', 'word']
+  loaded 2016 child      rows=  8427  vars=['cby', 'chn', 'exp', 'mth', 'pid_m', 'wd2']
+  loaded 2018 childproxy rows=  8735  vars=['cage', 'cby', 'chn', 'exp', 'mth', 'pid_m', 'wd2']
+  loaded 2018 person     rows= 37354  vars=['cage', 'cby', 'math', 'pid_m', 'word']
+  loaded 2020 child      rows=  6985  vars=['cage', 'cby', 'chn', 'exp', 'mth', 'pid_m', 'wd2']
+  loaded 2022 child      rows=  6228  vars=['cage', 'cby', 'chn', 'exp', 'mth', 'pid_m', 'wd2']
+  loaded 2022 person     rows= 27001  vars=['cage', 'cby', 'math', 'pid_m', 'word']
+
+Linked firstborn panel: rows=23,485 kids=7,531 mothers=7,263 cities=113
+  daughter share=0.494  one-child-at-wave share=0.500
+
+========================================================================
+FRAME: ALL firstborns (ITT)   (Post=2018, FE city+year+child-age, cl. city)
+
+--- outcome: cognitive z (word+math) ---
+
+Cell sizes (cognitive z (word+math), firstborn-daughter frame):
+T       0    1
+year          
+2010  360  346
+2014  298  268
+2018  263  259
+2022   10    4
+
+[cog_z | firstborn DAUGHTER]  N=1,808  kids=1,466  cities=113
+  T:post           -0.0545  (SE 0.0819, p=0.506)
+
+[cog_z | firstborn SON]  N=1,731  kids=1,394  cities=112
+  T:post           -0.0063  (SE 0.0629, p=0.921)
+
+[cog_z | DDD]  N=3,539  kids=2,860  cities=113
+  T:post           -0.0504  (SE 0.0791, p=0.524)
+  T:post:son       +0.0404  (SE 0.0952, p=0.671)
+
+--- outcome: expected years of education (wd2) ---
+
+[exp_yrs | firstborn DAUGHTER]  N=9,389  kids=3,308  cities=113
+  T:post           -0.1070  (SE 0.1593, p=0.502)
+
+[exp_yrs | firstborn SON]  N=9,698  kids=3,347  cities=113
+  T:post           -0.4124  (SE 0.1622, p=0.011)
+
+[exp_yrs | DDD]  N=19,087  kids=6,655  cities=113
+  T:post           -0.0856  (SE 0.1598, p=0.592)
+  T:post:son       -0.3430  (SE 0.1704, p=0.044)
+
+--- outcome: parent-rated grades z (chn+math) ---
+
+[grade_z | firstborn DAUGHTER]  N=6,237  kids=2,717  cities=113
+  T:post           -0.0886  (SE 0.0580, p=0.127)
+
+[grade_z | firstborn SON]  N=6,246  kids=2,682  cities=113
+  T:post           -0.1519  (SE 0.0627, p=0.015)
+
+[grade_z | DDD]  N=12,483  kids=5,399  cities=113
+  T:post           -0.0840  (SE 0.0577, p=0.146)
+  T:post:son       -0.0888  (SE 0.0878, p=0.311)
+
+--- outcome: ihs child edu expenditure ---
+
+[ihs_exp | firstborn DAUGHTER]  N=10,099  kids=3,570  cities=113
+  T:post           -0.0375  (SE 0.1141, p=0.743)
+
+[ihs_exp | firstborn SON]  N=10,358  kids=3,595  cities=113
+  T:post           -0.0176  (SE 0.1220, p=0.885)
+
+[ihs_exp | DDD]  N=20,457  kids=7,165  cities=113
+  T:post           -0.0095  (SE 0.1136, p=0.933)
+  T:post:son       -0.0232  (SE 0.1391, p=0.867)
+
+========================================================================
+FRAME: one-child-at-wave   (Post=2018, FE city+year+child-age, cl. city)
+
+--- outcome: cognitive z (word+math) ---
+
+Cell sizes (cognitive z (word+math), firstborn-daughter frame):
+T       0    1
+year          
+2010  122  101
+2014  111   64
+2018   72   51
+2022    1    0
+
+[cog_z | firstborn DAUGHTER]  N=522  kids=423  cities=98
+  T:post           +0.0859  (SE 0.1458, p=0.556)
+
+[cog_z | firstborn SON]  N=814  kids=658  cities=110
+  T:post           +0.1092  (SE 0.1190, p=0.359)
+
+[cog_z | DDD]  N=1,336  kids=1,081  cities=111
+  T:post           +0.0243  (SE 0.1364, p=0.859)
+  T:post:son       +0.0582  (SE 0.1640, p=0.723)
+
+--- outcome: expected years of education (wd2) ---
+
+[exp_yrs | firstborn DAUGHTER]  N=3,906  kids=1,844  cities=113
+  T:post           +0.2740  (SE 0.1829, p=0.134)
+
+[exp_yrs | firstborn SON]  N=5,447  kids=2,284  cities=113
+  T:post           -0.0456  (SE 0.1731, p=0.792)
+
+[exp_yrs | DDD]  N=9,353  kids=4,128  cities=113
+  T:post           +0.3149  (SE 0.1804, p=0.081)
+  T:post:son       -0.3763  (SE 0.2206, p=0.088)
+
+--- outcome: parent-rated grades z (chn+math) ---
+
+[grade_z | firstborn DAUGHTER]  N=1,779  kids=871  cities=109
+  T:post           +0.1846  (SE 0.1169, p=0.114)
+
+[grade_z | firstborn SON]  N=2,821  kids=1,285  cities=113
+  T:post           -0.1878  (SE 0.1015, p=0.064)
+
+[grade_z | DDD]  N=4,600  kids=2,156  cities=113
+  T:post           +0.1777  (SE 0.1111, p=0.110)
+  T:post:son       -0.3835  (SE 0.1436, p=0.008)
+
+--- outcome: ihs child edu expenditure ---
+
+[ihs_exp | firstborn DAUGHTER]  N=4,000  kids=1,903  cities=113
+  T:post           +0.3633  (SE 0.1924, p=0.059)
+
+[ihs_exp | firstborn SON]  N=5,700  kids=2,414  cities=113
+  T:post           +0.2327  (SE 0.1611, p=0.149)
+
+[ihs_exp | DDD]  N=9,700  kids=4,317  cities=113
+  T:post           +0.3742  (SE 0.1850, p=0.043)
+  T:post:son       -0.1260  (SE 0.2237, p=0.573)
+
+========================================================================
+Event studies (T x wave, base 2014):
+
+[grade_z | daughter, ITT]  N=6,237
+  T x 2010   +0.0199  (SE 0.0901, p=0.826)
+  T x 2012   +0.0225  (SE 0.0789, p=0.775)
+  T x 2016   -0.1071  (SE 0.0950, p=0.259)
+  T x 2018   -0.0495  (SE 0.0915, p=0.589)
+  T x 2020   -0.1446  (SE 0.0916, p=0.114)
+  T x 2022   -0.1257  (SE 0.0981, p=0.200)
+
+[grade_z | son, ITT]  N=6,246
+  T x 2010   -0.0353  (SE 0.0809, p=0.663)
+  T x 2012   +0.0217  (SE 0.0708, p=0.759)
+  T x 2016   -0.0180  (SE 0.0800, p=0.822)
+  T x 2018   -0.1727  (SE 0.0797, p=0.030)
+  T x 2020   -0.1713  (SE 0.0960, p=0.074)
+  T x 2022   -0.1322  (SE 0.0836, p=0.114)
+
+[exp_yrs | son, ITT]  N=9,698
+  T x 2010   +0.4675  (SE 0.2673, p=0.080)
+  T x 2012   +0.3656  (SE 0.2621, p=0.163)
+  T x 2016   +0.0478  (SE 0.2018, p=0.813)
+  T x 2018   -0.1797  (SE 0.1888, p=0.341)
+  T x 2020   -0.4127  (SE 0.1881, p=0.028)
+  T x 2022   -0.2404  (SE 0.2095, p=0.251)
+
+[ihs_exp | daughter, one-child (Layer-4 child-level)]  N=4,000
+  T x 2010   -0.2215  (SE 0.2719, p=0.415)
+  T x 2012   -0.0254  (SE 0.2766, p=0.927)
+  T x 2016   +0.4885  (SE 0.2876, p=0.089)
+  T x 2018   +0.0165  (SE 0.3060, p=0.957)
+  T x 2020   +0.3893  (SE 0.3298, p=0.238)
+  T x 2022   +0.6866  (SE 0.2753, p=0.013)
+
+========================================================================
+Cognition by wave (T x wave, base 2014), firstborn daughters, ITT frame:
+  T x 2010   +0.0232  (SE 0.0898, p=0.796)
+  T x 2018   -0.0385  (SE 0.0970, p=0.692)
+  T x 2022   -0.2329  (SE 0.1814, p=0.199)

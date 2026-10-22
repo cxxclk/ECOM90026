@@ -1,0 +1,83 @@
+==============================================================================
+SATURATED CONTROLS / HETEROGENEITY-ROBUST CHECK OF THE HEADLINE DID
+one-child annual second-birth hazard, Post=2018, city+year FE, cluster city
+==============================================================================
+
+### DAUGHTER arm: rows=17,000 women=3,176 cities=113  age x dur cells=458
+------------------------------------------------------------------------------
+  [0] baseline quadratics                      -0.0238  (SE 0.0106, p=0.024)  N=17,000
+  [1] age FE + dur FE                          -0.0246  (SE 0.0109, p=0.024)  N=17,000
+  [2] age x dur cell FE (saturated)            -0.0250  (SE 0.0113, p=0.028)  N=17,000
+  [2b] cell FE + year x age-bin FE             -0.0215  (SE 0.0111, p=0.052)  N=17,000
+  [3] WCB on [2]: -0.0250 t=-2.24 WCB p=0.0270 (G=113)
+  [4] cell-heterogeneous T:post, ATT-weighted (21 age-bin x dur-bin cells):
+      -0.0251  (SE 0.0113, p=0.027)  weights all >= 0 by construction
+      implicit OLS weights on the same cells: min +0.000 max +0.145 sum 1.000 (negative cells: 0)
+      corr(OLS weight, ATT weight) = 0.997
+      cell detail (tau_c = cell-specific T:post):
+        20-24|1-2     nTP=  53 wATT=0.026 wOLS=+0.027  tau=-0.0672 (p=0.11)
+        20-24|3-4     nTP=  19 wATT=0.009 wOLS=+0.010  tau=+0.0835 (p=0.44)
+        20-24|5-7     nTP=   5 wATT=0.002 wOLS=+0.003  tau=+0.0949 (p=0.58)
+        25-29|1-2     nTP= 186 wATT=0.091 wOLS=+0.094  tau=-0.0276 (p=0.20)
+        25-29|3-4     nTP= 173 wATT=0.085 wOLS=+0.087  tau=-0.0272 (p=0.32)
+        25-29|5-7     nTP= 154 wATT=0.075 wOLS=+0.076  tau=-0.0306 (p=0.36)
+        25-29|8-12    nTP=  48 wATT=0.023 wOLS=+0.022  tau=-0.0536 (p=0.23)
+        30-34|1-2     nTP= 132 wATT=0.065 wOLS=+0.060  tau=-0.0142 (p=0.65)
+        30-34|13+     nTP=  28 wATT=0.014 wOLS=+0.009  tau=-0.0470 (p=0.23)
+        30-34|3-4     nTP= 172 wATT=0.084 wOLS=+0.080  tau=+0.0084 (p=0.77)
+        30-34|5-7     nTP= 254 wATT=0.124 wOLS=+0.120  tau=-0.0539 (p=0.02)
+        30-34|8-12    nTP= 182 wATT=0.089 wOLS=+0.090  tau=-0.0415 (p=0.10)
+        35-39|1-2     nTP=   6 wATT=0.003 wOLS=+0.003  tau=-0.0256 (p=0.68)
+        35-39|13+     nTP=  97 wATT=0.047 wOLS=+0.045  tau=-0.0295 (p=0.06)
+        35-39|3-4     nTP=  13 wATT=0.006 wOLS=+0.006  tau=+0.0424 (p=0.69)
+        35-39|5-7     nTP=  52 wATT=0.025 wOLS=+0.026  tau=-0.0199 (p=0.58)
+        35-39|8-12    nTP= 144 wATT=0.070 wOLS=+0.073  tau=-0.0243 (p=0.21)
+        40-45|13+     nTP= 273 wATT=0.134 wOLS=+0.145  tau=-0.0087 (p=0.49)
+        40-45|3-4     nTP=   1 wATT=0.000 wOLS=+0.000  tau=+0.0136 (p=0.77)
+        40-45|5-7     nTP=  10 wATT=0.005 wOLS=+0.004  tau=+0.0801 (p=0.06)
+        40-45|8-12    nTP=  41 wATT=0.020 wOLS=+0.020  tau=-0.0280 (p=0.12)
+
+### SON (placebo) arm: rows=23,108 women=3,816 cities=113  age x dur cells=437
+------------------------------------------------------------------------------
+  [0] baseline quadratics                      -0.0057  (SE 0.0076, p=0.456)  N=23,108
+  [1] age FE + dur FE                          -0.0057  (SE 0.0076, p=0.455)  N=23,108
+  [2] age x dur cell FE (saturated)            -0.0055  (SE 0.0074, p=0.459)  N=23,108
+  [2b] cell FE + year x age-bin FE             -0.0044  (SE 0.0072, p=0.540)  N=23,108
+  [3] WCB on [2]: -0.0055 t=-0.75 WCB p=0.4680 (G=113)
+  [4] cell-heterogeneous T:post, ATT-weighted (22 age-bin x dur-bin cells):
+      -0.0056  (SE 0.0073, p=0.440)  weights all >= 0 by construction
+      implicit OLS weights on the same cells: min +0.000 max +0.176 sum 1.000 (negative cells: 0)
+      corr(OLS weight, ATT weight) = 0.999
+      cell detail (tau_c = cell-specific T:post):
+        20-24|1-2     nTP=  79 wATT=0.027 wOLS=+0.027  tau=-0.0245 (p=0.50)
+        20-24|3-4     nTP=  43 wATT=0.015 wOLS=+0.014  tau=-0.0503 (p=0.25)
+        20-24|5-7     nTP=  20 wATT=0.007 wOLS=+0.006  tau=-0.1149 (p=0.01)
+        20-24|8-12    nTP=   1 wATT=0.000 wOLS=+0.000  tau=-0.0198 (p=0.35)
+        25-29|1-2     nTP= 228 wATT=0.078 wOLS=+0.079  tau=-0.0245 (p=0.14)
+        25-29|3-4     nTP= 205 wATT=0.070 wOLS=+0.072  tau=+0.0174 (p=0.51)
+        25-29|5-7     nTP= 222 wATT=0.076 wOLS=+0.072  tau=+0.0033 (p=0.89)
+        25-29|8-12    nTP=  73 wATT=0.025 wOLS=+0.024  tau=-0.0074 (p=0.85)
+        30-34|1-2     nTP= 119 wATT=0.041 wOLS=+0.038  tau=-0.0431 (p=0.04)
+        30-34|13+     nTP=  28 wATT=0.010 wOLS=+0.010  tau=+0.0650 (p=0.28)
+        30-34|3-4     nTP= 193 wATT=0.066 wOLS=+0.063  tau=+0.0125 (p=0.66)
+        30-34|5-7     nTP= 334 wATT=0.114 wOLS=+0.113  tau=+0.0017 (p=0.91)
+        30-34|8-12    nTP= 324 wATT=0.111 wOLS=+0.112  tau=-0.0209 (p=0.20)
+        35-39|1-2     nTP=   9 wATT=0.003 wOLS=+0.003  tau=-0.0637 (p=0.12)
+        35-39|13+     nTP= 185 wATT=0.063 wOLS=+0.062  tau=-0.0236 (p=0.05)
+        35-39|3-4     nTP=  15 wATT=0.005 wOLS=+0.005  tau=+0.0946 (p=0.30)
+        35-39|5-7     nTP=  49 wATT=0.017 wOLS=+0.018  tau=-0.0066 (p=0.84)
+        35-39|8-12    nTP= 236 wATT=0.080 wOLS=+0.083  tau=-0.0003 (p=0.99)
+        40-45|13+     nTP= 492 wATT=0.168 wOLS=+0.176  tau=+0.0026 (p=0.77)
+        40-45|3-4     nTP=   4 wATT=0.001 wOLS=+0.001  tau=+0.0162 (p=0.26)
+        40-45|5-7     nTP=  12 wATT=0.004 wOLS=+0.003  tau=+0.0263 (p=0.21)
+        40-45|8-12    nTP=  61 wATT=0.021 wOLS=+0.019  tau=+0.0168 (p=0.40)
+
+------------------------------------------------------------------------------
+[5] CONTAMINATION CHECK (GHK 2024): son differential three ways
+------------------------------------------------------------------------------
+  split-sample difference (son - daughter)      +0.0181
+  pooled DDD, no post:son (misspecified)       +0.0282  (SE 0.0084, p=0.001)  N=40,108
+  pooled DDD, common controls/FE (headline)    +0.0182  (SE 0.0108, p=0.091)  N=40,108
+  pooled DDD, + year x son FE                  +0.0182  (SE 0.0108, p=0.091)  N=40,108
+  pooled DDD, fully interacted (= split)       +0.0181  (SE 0.0110, p=0.100)  N=40,108
+  pooled DDD, year x son + cell x son          +0.0200  (SE 0.0115, p=0.083)  N=40,108

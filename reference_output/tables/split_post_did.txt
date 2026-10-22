@@ -1,0 +1,26 @@
+
+[DAUGHTER | split post: boom 16-17 / 18-19 / 20-22]  N=17,000  mean(y)=0.0844
+  T:boom           +0.0245  (SE 0.0138, p=0.075)
+  T:post_a         -0.0038  (SE 0.0135, p=0.780)
+  T:post_b         -0.0322  (SE 0.0130, p=0.013)
+
+[DAUGHTER | split post only (16-17 in baseline)]  N=17,000  mean(y)=0.0844
+  T:post_a         -0.0091  (SE 0.0126, p=0.471)
+  T:post_b         -0.0375  (SE 0.0126, p=0.003)
+
+[SON placebo | split post: boom 16-17 / 18-19 / 20-22]  N=23,108  mean(y)=0.0570
+  T:boom           +0.0018  (SE 0.0123, p=0.882)
+  T:post_a         -0.0000  (SE 0.0120, p=0.999)
+  T:post_b         -0.0102  (SE 0.0096, p=0.289)
+
+[SON placebo | split post only (16-17 in baseline)]  N=23,108  mean(y)=0.0570
+  T:post_a         -0.0004  (SE 0.0110, p=0.972)
+  T:post_b         -0.0105  (SE 0.0086, p=0.223)
+
+Raw daughter-arm hazard by period:
+T                0       1  gap(T-C)
+period                              
+boom 16-17  0.0876  0.1476    0.0600
+post 18-19  0.0691  0.1003    0.0313
+post 20-22  0.0439  0.0488    0.0049
+pre 09-15   0.0669  0.1059    0.0390

@@ -1,0 +1,232 @@
+Child-file load & harmonization (nonmissing counts per outcome):
+  2010: rows= 8990  nonmiss any_comm=8936 ihs_comm=8936 any_soc=8973 ihs_tot=8803 ihs_oop=8800 doctor1st=8985 sick_lm=8956 hosp=8990
+  2012: rows= 9918  nonmiss any_comm=8419 ihs_comm=8419 any_soc=8442 ihs_tot=8484 ihs_oop=8594 doctor1st=8497 sick_lm=8471 hosp=8618
+  2014: rows= 9872  nonmiss any_comm=8018 ihs_comm=8018 any_soc=8052 ihs_tot=8616 ihs_oop=8593 doctor1st=8603 sick_lm=8604 hosp=8615
+  2016: rows= 8427  nonmiss any_comm=8408 ihs_comm=8393 any_soc=8411 ihs_tot=8427 ihs_oop=8406 doctor1st=8424 sick_lm=8416 hosp=8423
+  2018: rows= 8735  nonmiss any_comm=8428 ihs_comm=8404 any_soc=8394 ihs_tot=8446 ihs_oop=8431 doctor1st=8443 sick_lm=8440 hosp=8446
+  2020: rows= 6985  nonmiss any_comm=6777 ihs_comm=6714 any_soc=6747 ihs_tot=6793 ihs_oop=6774 doctor1st=6790 sick_lm=6790 hosp=6793
+  2022: rows= 6228  nonmiss any_comm=6018 ihs_comm=5985 any_soc=5983 ihs_tot=6037 ihs_oop=6016 doctor1st=6036 sick_lm=6036 hosp=6037
+
+Linked firstborn panel: rows=23,071 kids=7,513 mothers=7,252 cities=113
+  daughter share=0.493  one-child-as-of-2015 share=0.560
+
+Baseline means (one-child-2015 frame, pre-2018):
+  any_comm   C=0.179  T=0.185
+  ihs_comm   C=1.145  T=1.296
+  any_soc    C=0.624  T=0.640
+  ihs_tot    C=5.138  T=5.052
+  ihs_oop    C=4.995  T=4.890
+  doctor1st  C=0.521  T=0.684
+  sick_lm    C=0.306  T=0.325
+  hosp       C=0.104  T=0.108
+
+MULTIPLE-TESTING NOTE: 6 investment outcomes + 2 health outcomes, each in 2 frames x 3 specs. All coefficients reported; a lone p<0.05 with no pattern across margins/frames is noise.
+
+============================================================================
+FRAME: one-child-as-of-end-2015 (primary)   (Post=2018, FE city+year+child-age, cl. city)
+
+--- any_comm: any commercial medical insurance for child ---
+  [daughter]  N=5,368  T:post +0.0347 (SE 0.0305, p=0.255)
+  [son]  N=7,119  T:post +0.0096 (SE 0.0273, p=0.724)
+  [DDD]  N=12,487  T:post +0.0340 (SE 0.0296, p=0.250); T:post:son -0.0228 (SE 0.0358, p=0.525)
+
+--- ihs_comm: ihs commercial insurance premium ---
+  [daughter]  N=5,351  T:post +0.1947 (SE 0.2356, p=0.408)
+  [son]  N=7,105  T:post -0.0229 (SE 0.2234, p=0.919)
+  [DDD]  N=12,456  T:post +0.1987 (SE 0.2225, p=0.372); T:post:son -0.2208 (SE 0.2768, p=0.425)
+
+--- any_soc: any social medical insurance for child ---
+  [daughter]  N=5,366  T:post +0.0046 (SE 0.0309, p=0.882)
+  [son]  N=7,109  T:post -0.0099 (SE 0.0261, p=0.705)
+  [DDD]  N=12,475  T:post +0.0093 (SE 0.0301, p=0.758); T:post:son -0.0221 (SE 0.0310, p=0.476)
+
+--- ihs_tot: ihs total child medical spending ---
+  [daughter]  N=5,456  T:post +0.4962 (SE 0.1907, p=0.009)
+  [son]  N=7,230  T:post +0.0420 (SE 0.2070, p=0.839)
+  [DDD]  N=12,686  T:post +0.5241 (SE 0.1840, p=0.004); T:post:son -0.4622 (SE 0.2196, p=0.035)
+
+--- ihs_oop: ihs out-of-pocket child medical spending ---
+  [daughter]  N=5,455  T:post +0.5290 (SE 0.1903, p=0.005)
+  [son]  N=7,223  T:post +0.0738 (SE 0.2047, p=0.718)
+  [DDD]  N=12,678  T:post +0.5613 (SE 0.1849, p=0.002); T:post:son -0.4742 (SE 0.2098, p=0.024)
+
+--- doctor1st: see doctor right away for minor illness ---
+  [daughter]  N=5,455  T:post -0.0746 (SE 0.0271, p=0.006)
+  [son]  N=7,229  T:post -0.0070 (SE 0.0234, p=0.765)
+  [DDD]  N=12,684  T:post -0.0733 (SE 0.0261, p=0.005); T:post:son +0.0665 (SE 0.0336, p=0.048)
+
+--- sick_lm: child sick last month (HEALTH OUTCOME) ---
+  [daughter]  N=5,455  T:post +0.0328 (SE 0.0260, p=0.208)
+  [son]  N=7,229  T:post +0.0065 (SE 0.0196, p=0.739)
+  [DDD]  N=12,684  T:post +0.0439 (SE 0.0246, p=0.075); T:post:son -0.0383 (SE 0.0305, p=0.209)
+
+--- hosp: child hospitalized last 12m (HEALTH OUTCOME) ---
+  [daughter]  N=5,471  T:post -0.0058 (SE 0.0150, p=0.699)
+  [son]  N=7,253  T:post -0.0103 (SE 0.0157, p=0.510)
+  [DDD]  N=12,724  T:post -0.0007 (SE 0.0141, p=0.958); T:post:son -0.0129 (SE 0.0218, p=0.554)
+
+============================================================================
+FRAME: ALL firstborns (ITT robustness)   (Post=2018, FE city+year+child-age, cl. city)
+
+--- any_comm: any commercial medical insurance for child ---
+  [daughter]  N=11,082  T:post +0.0277 (SE 0.0213, p=0.193)
+  [son]  N=11,360  T:post +0.0226 (SE 0.0234, p=0.334)
+  [DDD]  N=22,442  T:post +0.0277 (SE 0.0211, p=0.189); T:post:son -0.0043 (SE 0.0245, p=0.862)
+
+--- ihs_comm: ihs commercial insurance premium ---
+  [daughter]  N=11,054  T:post +0.1760 (SE 0.1465, p=0.229)
+  [son]  N=11,341  T:post +0.0966 (SE 0.1840, p=0.600)
+  [DDD]  N=22,395  T:post +0.1757 (SE 0.1438, p=0.222); T:post:son -0.0831 (SE 0.1859, p=0.655)
+
+--- any_soc: any social medical insurance for child ---
+  [daughter]  N=11,076  T:post +0.0018 (SE 0.0243, p=0.941)
+  [son]  N=11,357  T:post -0.0331 (SE 0.0254, p=0.192)
+  [DDD]  N=22,433  T:post +0.0017 (SE 0.0242, p=0.944); T:post:son -0.0353 (SE 0.0217, p=0.104)
+
+--- ihs_tot: ihs total child medical spending ---
+  [daughter]  N=11,216  T:post +0.1796 (SE 0.1653, p=0.277)
+  [son]  N=11,506  T:post -0.0483 (SE 0.1887, p=0.798)
+  [DDD]  N=22,722  T:post +0.1900 (SE 0.1649, p=0.249); T:post:son -0.2186 (SE 0.1661, p=0.188)
+
+--- ihs_oop: ihs out-of-pocket child medical spending ---
+  [daughter]  N=11,220  T:post +0.1844 (SE 0.1654, p=0.265)
+  [son]  N=11,514  T:post -0.0299 (SE 0.1864, p=0.873)
+  [DDD]  N=22,734  T:post +0.2009 (SE 0.1651, p=0.224); T:post:son -0.2187 (SE 0.1631, p=0.180)
+
+--- doctor1st: see doctor right away for minor illness ---
+  [daughter]  N=11,239  T:post -0.0637 (SE 0.0212, p=0.003)
+  [son]  N=11,521  T:post -0.0000 (SE 0.0194, p=1.000)
+  [DDD]  N=22,760  T:post -0.0655 (SE 0.0208, p=0.002); T:post:son +0.0658 (SE 0.0264, p=0.013)
+
+--- sick_lm: child sick last month (HEALTH OUTCOME) ---
+  [daughter]  N=11,224  T:post +0.0147 (SE 0.0171, p=0.390)
+  [son]  N=11,512  T:post -0.0050 (SE 0.0169, p=0.768)
+  [DDD]  N=22,736  T:post +0.0174 (SE 0.0168, p=0.301); T:post:son -0.0207 (SE 0.0224, p=0.356)
+
+--- hosp: child hospitalized last 12m (HEALTH OUTCOME) ---
+  [daughter]  N=11,273  T:post +0.0031 (SE 0.0100, p=0.759)
+  [son]  N=11,559  T:post -0.0001 (SE 0.0126, p=0.991)
+  [DDD]  N=22,832  T:post +0.0049 (SE 0.0097, p=0.610); T:post:son -0.0065 (SE 0.0144, p=0.654)
+
+============================================================================
+BENCHMARK: firstborns in 2+ -children-by-2015 families (no quantity margin), pooled DID
+  [any_comm | 2+ kids]  N=9,955  T:post +0.0281 (SE 0.0240, p=0.241)
+  [ihs_comm | 2+ kids]  N=9,939  T:post +0.1913 (SE 0.1486, p=0.198)
+  [any_soc | 2+ kids]  N=9,958  T:post -0.0242 (SE 0.0344, p=0.482)
+  [ihs_tot | 2+ kids]  N=10,036  T:post -0.2669 (SE 0.2034, p=0.189)
+  [ihs_oop | 2+ kids]  N=10,056  T:post -0.2711 (SE 0.2016, p=0.179)
+  [doctor1st | 2+ kids]  N=10,076  T:post -0.0219 (SE 0.0241, p=0.363)
+  [sick_lm | 2+ kids]  N=10,052  T:post -0.0223 (SE 0.0181, p=0.216)
+  [hosp | 2+ kids]  N=10,108  T:post +0.0148 (SE 0.0111, p=0.181)
+
+Cell sizes (one-child-2015 daughters, ihs_tot nonmissing):
+T       0    1
+year          
+2010  321  221
+2012  349  285
+2014  413  344
+2016  459  428
+2018  493  473
+2020  419  427
+2022  390  434
+
+============================================================================
+EVENT STUDIES (one-child-2015 frame, daughter arm, base 2014):
+
+  event study [any_comm | daughter]  N=5,368  (base 2014)
+    T x 2010   -0.0657  (SE 0.0494, p=0.183)
+    T x 2012   -0.0428  (SE 0.0383, p=0.264)
+    T x 2016   +0.0029  (SE 0.0335, p=0.930)
+    T x 2018   +0.0388  (SE 0.0415, p=0.350)
+    T x 2020   -0.0203  (SE 0.0461, p=0.660)
+    T x 2022   +0.0223  (SE 0.0453, p=0.623)
+
+  event study [ihs_comm | daughter]  N=5,351  (base 2014)
+    T x 2010   -0.3104  (SE 0.3165, p=0.327)
+    T x 2012   -0.2057  (SE 0.2645, p=0.437)
+    T x 2016   +0.0000  (SE 0.2282, p=1.000)
+    T x 2018   +0.2659  (SE 0.2932, p=0.364)
+    T x 2020   -0.1538  (SE 0.3352, p=0.646)
+    T x 2022   +0.1457  (SE 0.3290, p=0.658)
+
+  event study [any_soc | daughter]  N=5,366  (base 2014)
+    T x 2010   +0.0540  (SE 0.0498, p=0.278)
+    T x 2012   -0.0353  (SE 0.0571, p=0.536)
+    T x 2016   +0.0846  (SE 0.0441, p=0.055)
+    T x 2018   +0.0367  (SE 0.0473, p=0.438)
+    T x 2020   +0.0262  (SE 0.0476, p=0.582)
+    T x 2022   +0.0450  (SE 0.0476, p=0.344)
+
+  event study [ihs_tot | daughter]  N=5,456  (base 2014)
+    T x 2010   -0.2070  (SE 0.4328, p=0.632)
+    T x 2012   -0.0269  (SE 0.3917, p=0.945)
+    T x 2016   -0.0046  (SE 0.3102, p=0.988)
+    T x 2018   +0.2552  (SE 0.2979, p=0.392)
+    T x 2020   +0.4365  (SE 0.2793, p=0.118)
+    T x 2022   +0.7168  (SE 0.3402, p=0.035)
+
+  event study [ihs_oop | daughter]  N=5,455  (base 2014)
+    T x 2010   -0.1091  (SE 0.4384, p=0.803)
+    T x 2012   +0.0276  (SE 0.3700, p=0.940)
+    T x 2016   +0.0750  (SE 0.3082, p=0.808)
+    T x 2018   +0.3481  (SE 0.2943, p=0.237)
+    T x 2020   +0.5018  (SE 0.2780, p=0.071)
+    T x 2022   +0.8251  (SE 0.3406, p=0.015)
+
+  event study [doctor1st | daughter]  N=5,455  (base 2014)
+    T x 2010   +0.0001  (SE 0.0556, p=0.998)
+    T x 2012   +0.0275  (SE 0.0524, p=0.600)
+    T x 2016   -0.0314  (SE 0.0480, p=0.514)
+    T x 2018   -0.0852  (SE 0.0433, p=0.049)
+    T x 2020   -0.0988  (SE 0.0496, p=0.046)
+    T x 2022   -0.0517  (SE 0.0526, p=0.326)
+
+============================================================================
+ROBUSTNESS on the medical-spending result (one-child-2015 frame):
+
+(a) exclude hospitalized children (is it routine/outpatient care?)
+  [daughter ihs_oop | hosp==0]  N=4,961  T:post +0.5928 (SE 0.1982, p=0.003)
+  [daughter ihs_tot | hosp==0]  N=4,956  T:post +0.5483 (SE 0.1960, p=0.005)
+  [son ihs_oop | hosp==0]  N=6,423  T:post +0.1237 (SE 0.2151, p=0.565)
+
+(b) control illness reporting (mediator check -- does spend rise
+    beyond what higher reported sickness explains?)
+  [daughter ihs_oop + sick_lm ctrl]  N=5,439  T:post +0.4550 (SE 0.1834, p=0.013); sick_lm +1.8937 (SE 0.0910, p=0.000)
+  [daughter ihs_tot + sick_lm ctrl]  N=5,440  T:post +0.4235 (SE 0.1824, p=0.020); sick_lm +1.9454 (SE 0.0923, p=0.000)
+
+(c) Post=2016 timing variant (headline uses Post=2018)
+  [daughter ihs_oop | Post=2016]  N=5,455  T:post +0.4356 (SE 0.2235, p=0.051)
+  [son ihs_oop | Post=2016]  N=7,223  T:post +0.0903 (SE 0.2324, p=0.698)
+
+(d) doctor1st caveat: baseline T-C gap is large (0.68 vs 0.52);
+    son-arm baseline for comparison:
+    daughter: pre C=0.489 T=0.672
+    son: pre C=0.546 T=0.693
+
+============================================================================
+PART B: HOUSEHOLD medical+fitness expenditure ('med', CFPS-constructed,
+label-consistent 2012-2022; avoids the 2012 fp-block collision).
+Design = eduexp_qq_substitution.py (Post=2016, one-child-at-baseline
+married women, city+year FE, controls age/log_income/urban).
+CAVEAT: household med includes the PARENTS' own medical spending --
+weaker one-child interpretability than edu_exp.
+  2012: N=12,987  median=1000  >0 share=0.81
+  2014: N=13,789  median=1500  >0 share=0.81
+  2016: N=14,017  median=2000  >0 share=0.90
+  2018: N=14,068  median=2000  >0 share=0.88
+  2020: N=11,401  median=2000  >0 share=0.83
+  2022: N=10,590  median=2000  >0 share=0.82
+
+One-child sample with med_exp: 6,187 obs, 2,930 women; med>0 share=0.90
+
+--- household ihs_med ---
+  [daughter]  N=2,565  T:post +0.4455 (SE 0.2611, p=0.088)
+  [son]  N=3,622  T:post +0.4435 (SE 0.2552, p=0.082)
+  [DDD]  N=6,187  T:post +0.4822 (SE 0.2544, p=0.058); T:post:son -0.0507 (SE 0.2997, p=0.866)
+
+--- household any_med ---
+  [daughter]  N=2,565  T:post +0.0305 (SE 0.0257, p=0.234)
+  [son]  N=3,622  T:post +0.0512 (SE 0.0280, p=0.068)
+  [DDD]  N=6,187  T:post +0.0324 (SE 0.0250, p=0.194); T:post:son +0.0184 (SE 0.0300, p=0.539)
+  [daughter ES ihs_med (base 2012+2014)]  N=2,565  Ty2016 -0.4553 (SE 0.3530, p=0.197); Ty2018 +0.7112 (SE 0.4402, p=0.106); Ty2020 +0.8491 (SE 0.5334, p=0.111); Ty2022 +0.9280 (SE 0.5527, p=0.093)
+  [2+ kids benchmark]  N=6,695  T:post -0.1674 (SE 0.1601, p=0.296)

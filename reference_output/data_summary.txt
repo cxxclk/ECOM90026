@@ -1,0 +1,71 @@
+CFPS Data Processing Summary
+=======================================================
+Wave 2010: 33,600 obs loaded
+Wave 2012: 36,604 obs loaded
+Wave 2014: 41,412 obs loaded
+Wave 2016: 36,892 obs loaded
+Wave 2018: 37,354 obs loaded
+Wave 2020: 28,530 obs loaded
+Wave 2022: 27,001 obs loaded
+
+Raw stacked panel: 241,393 obs, 59,730 unique individuals
+City geography matched: 87.9% of rows (127 cities)
+
+--- Sample Restriction Log ---
+Drop 2010 baseline:           241,393 →  207,793
+Keep women (gender=0):        207,793 →  102,843
+Keep married (marital=2):     102,843 →   72,616
+Age 20–45:                     72,616 →   32,555
+Non-missing treatment:         32,555 →   32,491
+Non-missing outcome:           32,491 →   32,491
+Drop negative income:          32,491 →   20,528
+
+Final analytic sample: 20,528 obs across 10,098 individuals, 6 waves
+
+--- Key Variable Summary (analytic sample) ---
+  new_birth               N=20,528  mean=0.096  sd=0.295  min=0.00  max=1.00
+  n_new_births            N=20,528  mean=0.098  sd=0.304  min=0.00  max=2.00
+  age                     N=20,528  mean=34.194  sd=6.722  min=20.00  max=45.00
+  eduy                    N=19,230  mean=9.010  sd=4.820  min=0.00  max=22.00
+  log_income              N=19,996  mean=6.459  sd=4.810  min=0.00  max=14.08
+  homeowner_d             N=20,235  mean=0.833  sd=0.373  min=0.00  max=1.00
+  log_house_val           N=16,427  mean=11.887  sd=2.064  min=0.00  max=18.42
+  log_fam_inc_pc          N=19,289  mean=9.382  sd=1.255  min=0.00  max=14.51
+  treated                 N=20,528  mean=0.566  sd=0.496  min=0.00  max=1.00
+  post                    N=20,528  mean=0.409  sd=0.492  min=0.00  max=1.00
+  did                     N=20,528  mean=0.242  sd=0.428  min=0.00  max=1.00
+
+--- Wave × Treatment cell counts ---
+treated   0.0   1.0
+year               
+2012     3283  4025
+2014     2186  2642
+2016      940  1254
+2018      802  1128
+2020      872  1342
+2022      818  1236
+
+--- Birth rate by wave and treatment ---
+treated     0.0     1.0
+year                   
+2012     0.1115  0.1116
+2014     0.0952  0.0806
+2016     0.1064  0.1308
+2018     0.0748  0.0922
+2020     0.0849  0.0782
+2022     0.0697  0.0607
+
+--- City geography coverage (analytic sample) ---
+  Rows with city_code:   17,531 of 20,528 (85.4%)
+  Distinct cities:       127
+  Rows with city price:  8,814 (42.9%)
+
+--- HPR spillover treatment (analytic sample) ---
+  Regulated (source, EXCLUDE): 2,536
+  Unregulated treated (≤250km): 7,581 (60 cities)
+  Unregulated control (>250km): 7,333 (53 cities)
+  Birth rate, unregulated × treat_hpr × post:
+post            0       1
+treat_hpr                
+0.0        0.0910  0.0796
+1.0        0.1148  0.0908

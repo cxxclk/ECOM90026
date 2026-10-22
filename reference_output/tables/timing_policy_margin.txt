@@ -1,0 +1,166 @@
+Reproduce baseline (Post=2018)
+--- BASELINE Post=2018, 2009-2022
+[daughter] N=17,000 women=3,176 cities=113 births=1434 mean=0.0844
+    T:post                     -2.38pp (SE 1.06, p=0.024)
+[son] N=23,108 women=3,816 cities=113 births=1317 mean=0.0570
+    T:post                     -0.57pp (SE 0.76, p=0.456)
+[DDD] N=40,108 women=6,992 cities=113 births=2751 mean=0.0686
+    T:post                     -2.44pp (SE 1.04, p=0.019)
+    T:post:son                 +1.82pp (SE 1.08, p=0.091)
+    T:son                      -2.14pp (SE 0.78, p=0.006)
+
+========================================================================
+1. TIMING
+--- Post=2016
+[daughter] N=17,000 women=3,176 cities=113 births=1434 mean=0.0844
+    T:post                     -0.23pp (SE 1.03, p=0.820)
+[son] N=23,108 women=3,816 cities=113 births=1317 mean=0.0570
+    T:post                     -0.27pp (SE 0.90, p=0.768)
+[DDD] N=40,108 women=6,992 cities=113 births=2751 mean=0.0686
+    T:post                     -0.34pp (SE 1.02, p=0.735)
+    T:post:son                 -0.01pp (SE 1.12, p=0.993)
+    T:son                      -1.67pp (SE 0.82, p=0.042)
+--- Post=2017
+[daughter] N=17,000 women=3,176 cities=113 births=1434 mean=0.0844
+    T:post                     -1.09pp (SE 1.01, p=0.278)
+[son] N=23,108 women=3,816 cities=113 births=1317 mean=0.0570
+    T:post                     -0.22pp (SE 0.85, p=0.794)
+[DDD] N=40,108 women=6,992 cities=113 births=2751 mean=0.0686
+    T:post                     -1.20pp (SE 1.00, p=0.232)
+    T:post:son                 +0.90pp (SE 1.06, p=0.396)
+    T:son                      -1.97pp (SE 0.79, p=0.012)
+--- Post=2018, drop 2016-17 years
+[daughter] N=14,394 women=3,125 cities=113 births=1133 mean=0.0787
+    T:post                     -1.92pp (SE 1.14, p=0.091)
+[son] N=19,637 women=3,777 cities=113 births=1044 mean=0.0532
+    T:post                     -0.59pp (SE 0.88, p=0.507)
+[DDD] N=34,031 women=6,902 cities=113 births=2177 mean=0.0640
+    T:post                     -2.00pp (SE 1.11, p=0.072)
+    T:post:son                 +1.35pp (SE 1.15, p=0.242)
+    T:son                      -1.70pp (SE 0.82, p=0.038)
+
+========================================================================
+2. BASELINE WAVE composition (one-child panel)
+                 women    wy  births
+base_year T son                     
+2010      0 0      893  5473   303.0
+            1     1188  7826   304.0
+          1 0      824  4354   390.0
+            1     1064  6542   347.0
+2012      0 0      323  1825   150.0
+            1      364  2267   125.0
+          1 0      409  1963   245.0
+            1      458  2537   237.0
+2014      0 0      156   818    69.0
+            1      158   986    61.0
+          1 0      178   790    97.0
+            1      170   931    85.0
+2016      0 0      136   677    59.0
+            1      133   740    52.0
+          1 0      121   528    69.0
+            1      150   770    62.0
+2018      0 0       15    78     7.0
+            1        8    19     4.0
+          1 0       24    97     9.0
+            1       22   118     6.0
+2020      0 0       41   145    16.0
+            1       40   150    14.0
+          1 0       37   153    13.0
+            1       40   133    10.0
+2022      0 0        9    45     5.0
+            1        6    29     3.0
+          1 0       10    54     2.0
+            1       15    60     7.0
+
+Baseline >=2016: women=807 of 6,992 (11.5%); woman-years=3,796 (9.5%); births=338 (12.3%)
+Baseline>=2016 by arm x exposure (women / woman-years / births / post-2018 wy):
+       women    wy  births  post_wy
+son T                              
+0   0    201   945    87.0      422
+    1    192   832    93.0      384
+1   0    187   938    73.0      407
+    1    227  1081    85.0      518
+Share of daughter-first POST(>=2018) woman-years from baseline>=2016, by T:
+T
+0    0.178
+1    0.188
+--- Post=2018, women first observed by 2014
+[daughter] N=15,223 women=2,783 cities=113 births=1254 mean=0.0824
+    T:post                     -2.65pp (SE 1.13, p=0.019)
+[son] N=21,089 women=3,402 cities=113 births=1159 mean=0.0550
+    T:post                     +0.07pp (SE 0.76, p=0.927)
+[DDD] N=36,312 women=6,185 cities=113 births=2413 mean=0.0665
+    T:post                     -2.59pp (SE 1.10, p=0.018)
+    T:post:son                 +2.58pp (SE 1.11, p=0.020)
+    T:son                      -2.11pp (SE 0.78, p=0.007)
+
+========================================================================
+3. 1.5-CHILD POLICY MARGIN
+hukou source (women): {'base': 6778, 'none': 132, 'alt': 82}
+Policy class used: one-child {11,12,31,32,50,51}; two-child rural {46,53,63,64,65}; Tibet 54; 1.5-child = all other provcd (Gu et al. 2007 standard = App. C2).
+Women by baseline province class x rural hukou x T:
+T                      0       1
+pol     rural_hk                
+one     0.0         42.0    65.0
+        1.0        176.0   282.0
+onehalf 0.0        914.0   799.0
+        1.0       2046.0  2308.0
+two     0.0         32.0     NaN
+        1.0        195.0     1.0
+
+Pre-shock (2009-2015) raw second-birth rate, daughter minus son, by eligibility x T:
+          mean          size       premium_pp
+son          0       1     0     1           
+elig T                                       
+0    0  0.0324  0.0293  2503  2867     0.3062
+     1  0.0468  0.0301  2050  2327     1.6748
+1    0  0.0983  0.0537  2726  4175     4.4660
+     1  0.1537  0.0864  2564  4062     6.7256
+Pre-shock premium regression (2009-15): y ~ dghtr + dghtr:elig + elig + ctrl + city+year FE
+[premium] N=23,274 women=5,616 cities=113 births=1568 mean=0.0674
+    dghtr                      +1.46pp (SE 0.38, p=0.000)
+    dghtr:elig                 +3.63pp (SE 0.78, p=0.000)
+    elig                       +2.13pp (SE 0.57, p=0.000)
+Pre-shock premium by cell (rural x class), pooled T:
+                 mean          size       premium_pp
+son                 0       1     0     1           
+c                                                   
+rural_one      0.0697  0.0524   760   859     1.7350
+rural_onehalf  0.1251  0.0698  5290  8237     5.5335
+rural_two      0.0941  0.0685   255   394     2.5590
+urban_one      0.0260  0.0391   192   256    -1.3021
+urban_onehalf  0.0289  0.0199  3287  3612     0.8968
+urban_two      0.0000  0.0000    59    73     0.0000
+
+--- Post=2018: split by eligibility
+[elig=1 daughter] N=9,361 women=1,932 cities=99 births=1077 mean=0.1151
+    T:post                     -2.85pp (SE 1.70, p=0.093)
+[elig=1 son] N=14,201 women=2,422 cities=99 births=985 mean=0.0694
+    T:post                     -0.01pp (SE 1.08, p=0.995)
+[elig=0 daughter] N=7,333 women=1,181 cities=107 births=328 mean=0.0447
+    T:post                     -0.39pp (SE 1.29, p=0.766)
+[elig=0 son] N=8,512 women=1,325 cities=107 births=314 mean=0.0369
+    T:post                     -0.81pp (SE 0.90, p=0.367)
+--- interaction within arm (lower-order: T:elig, post:elig, elig)
+[daughter x elig] N=16,694 women=3,113 cities=113 births=1405 mean=0.0842
+    T:post                     -0.90pp (SE 1.29, p=0.483)
+    T:post:elig                -2.10pp (SE 2.06, p=0.309)
+    T:elig                     +1.94pp (SE 1.66, p=0.242)
+[son x elig] N=22,713 women=3,747 cities=113 births=1299 mean=0.0572
+    T:post                     -0.90pp (SE 0.88, p=0.304)
+    T:post:elig                +0.84pp (SE 1.29, p=0.511)
+    T:elig                     +2.50pp (SE 1.10, p=0.024)
+--- 4-way: T x post x daughter x elig (all lower-order)
+[4-way] N=39,407 women=6,860 cities=113 births=2704 mean=0.0686
+    T:post                     -0.36pp (SE 0.81, p=0.662)
+    T:post:dg                  -0.59pp (SE 1.49, p=0.691)
+    T:post:elig                -0.07pp (SE 0.94, p=0.940)
+    T:post:dg:elig             -2.15pp (SE 2.14, p=0.313)
+    T:dg:elig                  +1.93pp (SE 1.43, p=0.176)
+--- variant: drop rural two-child-province women from the non-eligible group
+[daughter x elig (excl rural 2-child)] N=16,158 women=3,022 cities=113 births=1365 mean=0.0845
+    T:post                     -1.57pp (SE 1.40, p=0.263)
+    T:post:elig                -1.45pp (SE 2.15, p=0.498)
+[son x elig (excl rural 2-child)] N=22,038 women=3,642 cities=113 births=1245 mean=0.0565
+    T:post                     -1.20pp (SE 0.92, p=0.193)
+    T:post:elig                +1.13pp (SE 1.31, p=0.389)

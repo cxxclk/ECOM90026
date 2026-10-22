@@ -1,0 +1,107 @@
+HEADLINE x EVER-MARRIED RESTRICTION  (scripts/headline_ever_married.py)
+============================================================================
+
+[1] GAP DECOMPOSITION
+  headline panel (annual_firstborn_gender): 40,108 wy, 6,992 women
+  parity-1 set  (annual_parity_hazard):    38,614 wy, 6,673 women
+  headline panel + marital==2-ever filter:  38,614 wy, 6,673 women
+  rows in filtered headline not in parity-1: 0; rows in parity-1 not in filtered headline: 0
+  alt BROAD flag (marital in 2/3/4/5 any wave): 39,262 wy, 6,778 women
+
+  EXCLUDED WOMEN (no marital==2 in any wave):
+    women 319 (4.6% of headline women), woman-years 1,494 (3.7%)
+    daughter-first share 0.492 (retained 0.452)
+    second births in risk set: 46 (of 2751); hazard 0.0308 vs retained 0.0701
+    daughter-arm woman-years 759, births 24; treated share 0.483 (retained 0.505)
+    birth year median 1990 (retained 1984); age at 1st birth median 24, share <20: 0.078
+    mean age over woman-years 31.5 (retained 33.1)
+    marital status pattern (share of excluded women):
+      ever divorced/widowed (4/5): 0.279
+      ever cohabiting (3):          0.072
+      ever never-married (1):       0.699
+      all waves missing/neg codes:  0.013
+      not in adult panel at all:    0.000
+      famconf lists a spouse pid:   0.724
+    waves observed (adult panel) median 2.0
+    year of first birth distribution (excluded):
+      min    1937.0; 25%    2006.0; 50%    2014.0; 75%    2018.0; max    2021.0
+  alt STRICT-OR-SPOUSE flag: 39,699 wy, 6,904 women
+  raw daughter-arm hazard of EXCLUDED women (births/wy): T0 pre 3/239=0.013, T0 post 5/156=0.032, T1 pre 11/182=0.060, T1 post 5/182=0.027
+  excluded women: first birth >= 2016 share 0.414; no marital 2/3/4/5 AND no famconf spouse: 52 women
+
+[2] HEADLINE BATTERY, side by side (Post=2018, city+year FE, cluster city; WCB Rademacher B=999 null imposed)
+
+----------------------------------------------------------------------------
+BASELINE (headline, no marital filter)
+  all one-child: N=40,108 women=6,992 mean=0.0686
+  daughter arm : N=17,000 women=3,176 mean=0.0844
+  son arm      : N=23,108 women=3,816 mean=0.0570
+  DAUGHTER T:post            -2.38pp  cluster p=0.024  WCB p=0.026  G=113
+  SON T:post                 -0.57pp  cluster p=0.456  WCB p=0.458  G=113
+  POOLED one-child T:post    -1.40pp  cluster p=0.052  WCB p=0.059  G=113
+  DDD T:post:son             +1.82pp  cluster p=0.091  WCB p=0.099   (T:son -2.14pp p=0.006)
+  split DAUGHTER             16-17 +2.45 (p=0.075) | 18-19 -0.38 (p=0.780) | 20-22 -3.22 (p=0.013)
+  split SON                  16-17 +0.18 (p=0.882) | 18-19 -0.00 (p=0.999) | 20-22 -1.02 (p=0.289)
+  event DAUGHTER             joint pre 2010-14 p=0.756; pre: 2010 -0.0, 2011 +1.2, 2012 -0.6, 2013 +0.1, 2014 +1.5
+                             post: 2016 +2.5(p0.21), 2017 +3.1(p0.10), 2018 -0.7(p0.71), 2019 +0.7(p0.76), 2020 -3.1(p0.11), 2021 -3.6(p0.08), 2022 -2.0(p0.33)
+  event SON                  joint pre 2010-14 p=0.376; pre: 2010 -1.1, 2011 -1.1, 2012 -0.9, 2013 -2.4, 2014 -0.2
+                             post: 2016 -1.1(p0.48), 2017 -0.1(p0.95), 2018 -0.6(p0.72), 2019 -1.1(p0.51), 2020 -0.6(p0.69), 2021 -2.3(p0.17), 2022 -3.1(p0.04)
+  son_norm T3 DAUGHTER       -4.91pp  cluster p=0.026  WCB p=0.033  G=37  N=4,423  pre-mean=0.174 rel=-28%  (cut 3.701)
+
+----------------------------------------------------------------------------
+EVER-MARRIED (marital==2 any wave)
+  all one-child: N=38,614 women=6,673 mean=0.0701
+  daughter arm : N=16,241 women=3,019 mean=0.0868
+  son arm      : N=22,373 women=3,654 mean=0.0579
+  DAUGHTER T:post            -1.93pp  cluster p=0.077  WCB p=0.081  G=113
+  SON T:post                 -0.46pp  cluster p=0.549  WCB p=0.545  G=113
+  POOLED one-child T:post    -1.18pp  cluster p=0.104  WCB p=0.105  G=113
+  DDD T:post:son             +1.56pp  cluster p=0.163  WCB p=0.164   (T:son -2.18pp p=0.007)
+  split DAUGHTER             16-17 +2.51 (p=0.054) | 18-19 +0.03 (p=0.982) | 20-22 -2.75 (p=0.035)
+  split SON                  16-17 +0.32 (p=0.797) | 18-19 +0.09 (p=0.941) | 20-22 -0.84 (p=0.386)
+  event DAUGHTER             joint pre 2010-14 p=0.848; pre: 2010 -0.2, 2011 +0.9, 2012 -0.7, 2013 +0.1, 2014 +1.3
+                             post: 2016 +2.0(p0.28), 2017 +3.5(p0.06), 2018 -0.8(p0.69), 2019 +1.4(p0.53), 2020 -2.9(p0.15), 2021 -2.9(p0.18), 2022 -1.7(p0.41)
+  event SON                  joint pre 2010-14 p=0.401; pre: 2010 -1.0, 2011 -1.2, 2012 -1.0, 2013 -2.4, 2014 -0.2
+                             post: 2016 -1.2(p0.45), 2017 +0.3(p0.85), 2018 -0.6(p0.72), 2019 -0.9(p0.59), 2020 -0.5(p0.73), 2021 -2.2(p0.20), 2022 -2.7(p0.07)
+  son_norm T3 DAUGHTER       -3.81pp  cluster p=0.113  WCB p=0.107  G=37  N=4,189  pre-mean=0.177 rel=-21%  (cut 3.701)
+
+----------------------------------------------------------------------------
+BROAD (marital 2/3/4/5 any wave)
+  all one-child: N=39,262 women=6,778 mean=0.0690
+  daughter arm : N=16,567 women=3,068 mean=0.0852
+  son arm      : N=22,695 women=3,710 mean=0.0573
+  DAUGHTER T:post            -1.96pp  cluster p=0.066  WCB p=0.070  G=113
+  SON T:post                 -0.46pp  cluster p=0.542  WCB p=0.541  G=113
+  POOLED one-child T:post    -1.20pp  cluster p=0.097  WCB p=0.098  G=113
+  DDD T:post:son             +1.59pp  cluster p=0.147  WCB p=0.152   (T:son -2.10pp p=0.008)
+  split DAUGHTER             16-17 +2.44 (p=0.057) | 18-19 -0.02 (p=0.989) | 20-22 -2.81 (p=0.028)
+  split SON                  16-17 +0.32 (p=0.796) | 18-19 +0.09 (p=0.941) | 20-22 -0.85 (p=0.379)
+  event DAUGHTER             joint pre 2010-14 p=0.878; pre: 2010 -0.2, 2011 +0.9, 2012 -0.6, 2013 +0.1, 2014 +1.1
+                             post: 2016 +2.0(p0.28), 2017 +3.4(p0.07), 2018 -0.8(p0.67), 2019 +1.4(p0.55), 2020 -2.9(p0.13), 2021 -2.9(p0.16), 2022 -1.9(p0.37)
+  event SON                  joint pre 2010-14 p=0.374; pre: 2010 -1.1, 2011 -1.2, 2012 -1.1, 2013 -2.4, 2014 -0.3
+                             post: 2016 -1.3(p0.43), 2017 +0.3(p0.88), 2018 -0.7(p0.69), 2019 -0.9(p0.57), 2020 -0.5(p0.71), 2021 -2.2(p0.18), 2022 -2.8(p0.06)
+  son_norm T3 DAUGHTER       -3.86pp  cluster p=0.100  WCB p=0.092  G=37  N=4,233  pre-mean=0.176 rel=-22%  (cut 3.701)
+
+----------------------------------------------------------------------------
+STRICT-OR-SPOUSE (marital==2 any wave OR famconf spouse pid)
+  all one-child: N=39,699 women=6,904 mean=0.0690
+  daughter arm : N=16,823 women=3,135 mean=0.0848
+  son arm      : N=22,876 women=3,769 mean=0.0574
+  DAUGHTER T:post            -2.29pp  cluster p=0.036  WCB p=0.033  G=113
+  SON T:post                 -0.52pp  cluster p=0.496  WCB p=0.485  G=113
+  POOLED one-child T:post    -1.34pp  cluster p=0.068  WCB p=0.072  G=113
+  DDD T:post:son             +1.80pp  cluster p=0.101  WCB p=0.104   (T:son -2.16pp p=0.006)
+  split DAUGHTER             16-17 +2.60 (p=0.055) | 18-19 -0.24 (p=0.864) | 20-22 -3.11 (p=0.018)
+  split SON                  16-17 +0.11 (p=0.930) | 18-19 +0.06 (p=0.963) | 20-22 -1.01 (p=0.298)
+  event DAUGHTER             joint pre 2010-14 p=0.810; pre: 2010 -0.1, 2011 +1.2, 2012 -0.5, 2013 +0.2, 2014 +1.4
+                             post: 2016 +2.6(p0.19), 2017 +3.3(p0.08), 2018 -0.6(p0.75), 2019 +0.9(p0.70), 2020 -3.0(p0.13), 2021 -3.5(p0.10), 2022 -1.9(p0.36)
+  event SON                  joint pre 2010-14 p=0.405; pre: 2010 -1.1, 2011 -1.2, 2012 -1.0, 2013 -2.4, 2014 -0.2
+                             post: 2016 -1.3(p0.42), 2017 -0.1(p0.96), 2018 -0.5(p0.76), 2019 -1.1(p0.52), 2020 -0.5(p0.70), 2021 -2.3(p0.17), 2022 -3.1(p0.04)
+  son_norm T3 DAUGHTER       -4.78pp  cluster p=0.036  WCB p=0.038  G=37  N=4,386  pre-mean=0.174 rel=-27%  (cut 3.701)
+
+[3] RECONCILE WITH TABLE 2B (annual_parity_hazard parity-1, Post=2018)
+  parity-1 set as built there: -1.18pp p=0.104  N=38,614 women=6,673
+  BASELINE (headline, no marital filter)     pooled -1.40pp p=0.052 WCB 0.059
+  EVER-MARRIED (marital==2 any wave)         pooled -1.18pp p=0.104 WCB 0.105
+  BROAD (marital 2/3/4/5 any wave)           pooled -1.20pp p=0.097 WCB 0.098
+  STRICT-OR-SPOUSE (marital==2 any wave OR famconf spouse pid) pooled -1.34pp p=0.068 WCB 0.072

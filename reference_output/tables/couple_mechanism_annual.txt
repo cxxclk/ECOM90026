@@ -1,0 +1,41 @@
+========================================================================
+(1) FIRST STAGE -- does the HPR shock raise the wife's income share?
+  couple-waves with income share: 10,529  mean wife share=0.479  wife-works rate=0.570
+
+[wife income share ~ did_hpr]  N=10,529
+  did_hpr            +0.0143  (SE 0.0152, p=0.345)
+
+[wife works (income>0) ~ did_hpr]  N=14,151
+  did_hpr            -0.0341  (SE 0.0240, p=0.155)
+
+========================================================================
+(2) MODERATION (annual hazard) -- wife's weight gain by income share
+  couple-years with income share: 14,274  couples=2,408  median wife share=0.380
+
+[wife OUT-earns (share >= median)]  N=7,137
+  T:ideal_w          -0.0034  (SE 0.0079, p=0.667)
+  T:ideal_h          +0.0120  (SE 0.0075, p=0.111)
+
+[wife earns LESS (share < median)]  N=7,137
+  T:ideal_w          +0.0188  (SE 0.0075, p=0.013)
+  T:ideal_h          -0.0128  (SE 0.0075, p=0.090)
+
+(2b) Triple interaction: T x ideal_w x wife-out-earns (annual)
+
+[y ~ T x ideal_w x hi_w]  N=14,274
+  T:ideal_w          +0.0188  (SE 0.0072, p=0.009)
+  T:ideal_w:hi_w     -0.0224  (SE 0.0104, p=0.032)
+  T:ideal_h          -0.0141  (SE 0.0078, p=0.071)
+  T:ideal_h:hi_w     +0.0242  (SE 0.0100, p=0.016)
+
+(2c) Causal cut: 2014-cohort triple-DID by wife income share
+    does the shock-induced wife-weight gain (T:post:ideal_w) live
+    where she earns LESS? (cost channel) or MORE? (resource channel)
+
+[2014-cohort DID-in-weight, wife earns LESS]  N=5,897
+  T:post:ideal_w     +0.0494  (SE 0.0185, p=0.008)
+  T:post:ideal_h     -0.0464  (SE 0.0245, p=0.058)
+
+[2014-cohort DID-in-weight, wife OUT-earns]  N=5,081
+  T:post:ideal_w     +0.0693  (SE 0.0326, p=0.033)
+  T:post:ideal_h     -0.0210  (SE 0.0304, p=0.491)

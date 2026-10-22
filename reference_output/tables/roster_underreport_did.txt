@@ -1,0 +1,108 @@
+Roster underreporting: profile + treatment-orthogonality DID
+========================================================================
+person-waves with later-roster truth: all women 60,994; married 20-45 22,925
+
+== 1. Underreporting rates by wave (married women 20-45) ==
+      n_births  miss_rate  false_pos_rate
+year                                     
+2012      1029     0.3547          0.0024
+2014      1025     0.2810          0.0014
+2016       874     0.2494          0.0008
+2018       445     0.1955          0.0010
+2020       359     0.2841          0.0033
+
+overall miss rate: 0.284   false-positive rate: 0.0017
+
+== 2. Miss rate by wave x T (conditional on true birth) ==
+       mean        size     
+T         0      1    0    1
+year                        
+2012  0.367  0.344  460  569
+2014  0.255  0.300  431  594
+2016  0.235  0.262  400  474
+2018  0.217  0.180  184  261
+2020  0.250  0.310  156  203
+
+== 3. Orthogonality DID: miss ~ T:post + city+year FE ==
+
+[conditional miss, Post=2016]  N=3,732  mean(y)=0.2840
+  T:post             -0.0053  (SE 0.0312, p=0.866)
+
+[conditional miss, Post=2018]  N=3,732  mean(y)=0.2840
+  T:post             -0.0163  (SE 0.0353, p=0.644)
+
+[event study on conditional miss, omitted 2014]
+  T x 2012   -0.0744  (SE 0.0495, p=0.133)
+  T x 2016   -0.0337  (SE 0.0480, p=0.483)
+  T x 2018   -0.0820  (SE 0.0491, p=0.095)
+  T x 2020   -0.0163  (SE 0.0451, p=0.718)
+
+== 4. Bias decomposition: DID(true_birth) vs DID(new_birth), same sample ==
+
+[TRUE birth DID, Post=2016]  N=22,925  mean(y)=0.1628
+  T:post             -0.0064  (SE 0.0115, p=0.579)
+
+[REPORTED birth DID, Post=2016]  N=22,925  mean(y)=0.1183
+  T:post             -0.0027  (SE 0.0098, p=0.781)
+
+[DIFF (true - reported) DID, Post=2016]  N=22,925  mean(y)=0.0445
+  T:post             -0.0037  (SE 0.0061, p=0.551)
+  -> measurement bias in wave-level DID: -0.0037 (direct diff-outcome p=0.551)
+
+[TRUE birth DID, Post=2018]  N=22,925  mean(y)=0.1628
+  T:post             +0.0001  (SE 0.0119, p=0.995)
+
+[REPORTED birth DID, Post=2018]  N=22,925  mean(y)=0.1183
+  T:post             +0.0043  (SE 0.0101, p=0.673)
+
+[DIFF (true - reported) DID, Post=2018]  N=22,925  mean(y)=0.0445
+  T:post             -0.0042  (SE 0.0062, p=0.500)
+  -> measurement bias in wave-level DID: -0.0042 (direct diff-outcome p=0.500)
+
+== 5. Second-birth margin check (parity_pre==1, the headline risk set) ==
+
+[2nd-birth miss, Post=2016]  N=1,524  mean(y)=0.2795
+  T:post             -0.0300  (SE 0.0641, p=0.640)
+
+[2nd-birth miss, Post=2018]  N=1,524  mean(y)=0.2795
+  T:post             -0.0193  (SE 0.0558, p=0.729)
+
+[2nd-birth miss, daughter-first, Post=2016]  N=793  mean(y)=0.2787
+  T:post             -0.0236  (SE 0.0913, p=0.796)
+
+== 6. Classifier: who gets missed? (HistGBM, city-GroupKFold OOF) ==
+  OOF AUC, covariates only:        0.5869
+  OOF AUC, + T/post/T*post:        0.5837   (gain -0.0032)
+
+  permutation importance (AUC drop, in-sample fit):
+    age              +0.0769
+    log_inc          +0.0712
+    year             +0.0588
+    parity_pre       +0.0531
+    eduy             +0.0368
+    urban            +0.0208
+    homeowner        +0.0112
+    fb_son           +0.0067
+    T                +0.0037
+    Tpost            +0.0007
+    post             +0.0000
+
+  miss profile (means, missed vs reported births):
+         age   eduy  urban  log_inc  parity_pre  fb_son      year      T
+miss                                                                    
+0.0   27.741  9.628  0.148    2.363       0.632   0.478  2015.107  0.559
+1.0   27.392  9.353 -0.110    3.331       0.719   0.468  2014.628  0.574
+
+== 7. Robustness ==
+
+[ALL women 20-45, Post=2016]  N=3,853  mean(y)=0.2992
+  T:post             -0.0246  (SE 0.0320, p=0.441)
+
+[ALL women 20-45, Post=2018]  N=3,853  mean(y)=0.2992
+  T:post             -0.0281  (SE 0.0359, p=0.434)
+
+[truth from 2022 roster only, Post=2016]  N=2,904  mean(y)=0.2772
+  T:post             -0.0005  (SE 0.0332, p=0.989)
+
+[truth from 2022 roster only, Post=2018]  N=2,904  mean(y)=0.2772
+  T:post             -0.0079  (SE 0.0388, p=0.839)

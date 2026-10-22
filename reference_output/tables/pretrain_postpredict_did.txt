@@ -1,0 +1,167 @@
+PRE-TRAIN / POST-PREDICT DID — one-child second-birth hazard
+rows=40,108 women=6,992 cities=113  pre rows=23,591 post rows=16,517  (Post=2018; 2016-17 rows are neither training nor post)
+features (18): son, birthy, age_fb, eduy, urban, log_faminc_pc, log_inc, hv_inc, homeowner, ideal_kids, son_pref, housework, city_son_norm, trad_pc1, city_urban_share, city_linc, age, dur  [2014 baseline + age/dur; no T, no city, no year]
+cross-fit: 5 city folds x 3 seeds, median consensus; training rows = 2009-2015 only
+
+[0] Reference: standard DID on y with linear age/dur controls
+  pooled    -1.40pp (p=0.052)*
+  daughter  -2.38pp (p=0.024)**
+  son       -0.57pp (p=0.456)
+
+[1] Learner menu — trained on pre rows only, OOF by city fold
+    selection metric = PRE-period OOF log-loss (lower is better); post-CONTROL columns = temporal holdout (never used for selection)
+  learner         pre ll  pre auc  pre ece  postC ll postC auc postC ece    resid DID pooled          daughter               son   sec
+  logit_lin      0.20976   0.7980   0.0112   0.18299    0.7146    0.0116   -0.54pp (p=0.374) -1.03pp (p=0.248) -0.27pp (p=0.693)    24
+  logit_spline   0.21992   0.7955   0.0190   0.20162    0.7173    0.0379   -1.22pp (p=0.205) -1.24pp (p=0.319) -1.31pp (p=0.177)    73
+  hgb_default    0.20394   0.8131   0.0054   0.18380    0.7251    0.0190   -0.95pp (p=0.190) -1.43pp (p=0.154) -0.65pp (p=0.395)     2
+  hgb_tuned      0.20377   0.8127   0.0038   0.18201    0.7270    0.0162   -0.96pp (p=0.171) -1.49pp (p=0.130) -0.60pp (p=0.417)     4
+  lightgbm       0.20831   0.8082   0.0143   0.19491    0.7209    0.0349   -1.32pp (p=0.114) -1.50pp (p=0.173) -1.32pp (p=0.127)     7
+  xgboost        0.20364   0.8151   0.0070   0.18364    0.7283    0.0173   -1.07pp (p=0.148) -1.53pp (p=0.130) -0.82pp (p=0.281)     6
+  rf             0.20755   0.8035   0.0087   0.18451    0.7151    0.0218  -1.13pp (p=0.098)*-1.87pp (p=0.057)* -0.53pp (p=0.470)    19
+  extratrees     0.21121   0.7984   0.0155   0.18487    0.7146    0.0203  -1.12pp (p=0.095)*-1.97pp (p=0.045)** -0.46pp (p=0.523)    15
+  mlp            0.20983   0.7945   0.0057   0.18406    0.7072    0.0127   -0.81pp (p=0.219) -1.32pp (p=0.167) -0.46pp (p=0.513)     8
+  ens_top3       0.20313   0.8153   0.0047   0.18249    0.7284    0.0169   -0.99pp (p=0.168) -1.48pp (p=0.137) -0.69pp (p=0.360)
+  ensemble members (top-3 pre log-loss): xgboost, hgb_tuned, hgb_default
+
+  WINNER by pre-period OOF log-loss: ens_top3
+  (linear-logit benchmark: ll 0.20976, resid DID daughter -1.03pp (p=0.248) — should track the reference y-DID)
+
+  mean residual (y - yhat) by cell, ens_top3:
+    C pre   -0.61pp  (n=12,427)
+    T pre   +0.40pp  (n=11,164)
+    C post  -1.19pp  (n=5,465)
+    T post  -1.24pp  (n=4,975)
+  raw DID of cell means: -1.05pp
+  fit on treated-post rows (informational; degradation = effect): ll 0.23572 auc 0.6829 ece 0.0280
+
+[2] Residual DID, winner = ens_top3
+  (a) with vs without linear age/dur controls (ML should have absorbed lifecycle):
+    no controls  pooled -0.99pp (p=0.168)     daughter -1.48pp (p=0.137)     son -0.69pp (p=0.360)
+    + age/dur    pooled -0.97pp (p=0.175)     daughter -1.50pp (p=0.130)     son -0.68pp (p=0.366)
+  (a2) decomposition DID(y) = DID(yhat) + DID(e): the yhat part is the OBSERVABLE-COMPOSITION shift of the post-period risk set
+    learner     arm                   DID(y)         DID(yhat)            DID(e)
+    ens_top3    pooled    -1.40pp (p=0.058)* -0.40pp (p=0.205) -0.99pp (p=0.168)
+    ens_top3    daughter  -2.38pp (p=0.027)**-0.89pp (p=0.031)** -1.48pp (p=0.137)
+    ens_top3    son        -0.55pp (p=0.483) +0.14pp (p=0.649) -0.69pp (p=0.360)
+    logit_lin   pooled    -1.40pp (p=0.058)*-0.86pp (p=0.022)** -0.54pp (p=0.374)
+    logit_lin   daughter  -2.38pp (p=0.027)**-1.35pp (p=0.009)*** -1.03pp (p=0.248)
+    logit_lin   son        -0.55pp (p=0.483) -0.28pp (p=0.389) -0.27pp (p=0.693)
+    hgb_tuned   pooled    -1.40pp (p=0.058)* -0.43pp (p=0.163) -0.96pp (p=0.171)
+    hgb_tuned   daughter  -2.38pp (p=0.027)**-0.89pp (p=0.024)** -1.49pp (p=0.130)
+    hgb_tuned   son        -0.55pp (p=0.483) +0.05pp (p=0.866) -0.60pp (p=0.417)
+  (a4) decomposition restricted to STAYERS (women with a pre-2016 risk-set row; 89% of rows, 73% of post rows)
+    stayers pooled     -1.13pp (p=0.143) -0.54pp (p=0.126) -0.59pp (p=0.426)
+    stayers daughter  -2.36pp (p=0.025)**-1.12pp (p=0.029)** -1.24pp (p=0.205)
+    entrant share T:post, pooled: +6.42pp (p=0.007)*** (composition of the post pool by entry status)
+    entrant share T:post, daughter: +9.63pp (p=0.006)*** (composition of the post pool by entry status)
+  (a3) feature attribution of the composition shift (LPM on pre rows: sum_k beta_k * DID(x_k)), daughter arm and pooled
+    daughter: LPM-implied DID(yhat) = -0.66pp; top contributors [feature: contribution | DID(x) (p)]
+      ideal_kids          -0.208pp | DID(x)=-0.039 (p=0.039)
+      age_fb_miss         +0.164pp | DID(x)=+0.025 (p=0.183)
+      urban_miss          -0.163pp | DID(x)=+0.029 (p=0.133)
+      son_pref_miss       -0.102pp | DID(x)=+0.036 (p=0.279)
+      age_fb              -0.095pp | DID(x)=+0.343 (p=0.070)
+      city_son_norm       -0.083pp | DID(x)=-0.008 (p=0.387)
+      log_inc_miss        -0.058pp | DID(x)=+0.021 (p=0.532)
+      ideal_kids_miss     -0.047pp | DID(x)=+0.036 (p=0.273)
+    pooled: LPM-implied DID(yhat) = -0.33pp; top contributors [feature: contribution | DID(x) (p)]
+      age_fb_miss         +0.130pp | DID(x)=+0.020 (p=0.146)
+      urban_miss          -0.120pp | DID(x)=+0.021 (p=0.123)
+      son_pref_miss       -0.109pp | DID(x)=+0.038 (p=0.132)
+      log_inc_miss        -0.078pp | DID(x)=+0.028 (p=0.256)
+      son                 -0.060pp | DID(x)=+0.020 (p=0.252)
+      log_inc             +0.056pp | DID(x)=-0.243 (p=0.086)
+      ideal_kids_miss     -0.050pp | DID(x)=+0.038 (p=0.132)
+      housework_miss      +0.046pp | DID(x)=+0.027 (p=0.273)
+  (b) DDD T:post:son +0.87pp (p=0.397)  | T:post (daughter) -1.53pp (p=0.127)  | T:son pre-gap -1.29pp (p=0.088)*
+  (c) WCB daughter arm: -1.48pp t=-1.49 WCB p=0.146 (G=113, 999 reps)
+      WCB pooled:       -0.99pp t=-1.38 WCB p=0.178
+
+  (d0) DAUGHTER arm event studies (base 2015): y = raw hazard (linear ctrl), yhat = predicted (composition), e = residual
+    year                  y-ES             yhat-ES                e-ES
+    2009     +1.06pp (p=0.629)   +0.32pp (p=0.551)   +0.74pp (p=0.734)
+    2010     +0.45pp (p=0.817)   +0.67pp (p=0.177)   -0.23pp (p=0.902)
+    2011     +1.58pp (p=0.431)   +0.59pp (p=0.200)   +0.99pp (p=0.594)
+    2012     -0.04pp (p=0.986)   +0.07pp (p=0.856)   -0.10pp (p=0.960)
+    2013     +0.76pp (p=0.718)   +0.36pp (p=0.224)   +0.40pp (p=0.844)
+    2014     +2.26pp (p=0.238)   +0.12pp (p=0.637)   +2.13pp (p=0.253)
+    2016     +3.07pp (p=0.152)   -0.10pp (p=0.663)   +3.17pp (p=0.136)
+    2017     +3.57pp (p=0.109)  -0.60pp (p=0.069)*  +4.16pp (p=0.053)*
+    2018     -0.35pp (p=0.860)  -0.70pp (p=0.061)*   +0.35pp (p=0.855)
+    2019     +1.32pp (p=0.594)   -0.35pp (p=0.439)   +1.66pp (p=0.502)
+    2020     -2.50pp (p=0.236)   -0.67pp (p=0.189)   -1.83pp (p=0.375)
+    2021     -2.96pp (p=0.203)  -1.00pp (p=0.096)*   -1.96pp (p=0.373)
+    2022     -1.28pp (p=0.517)  -1.11pp (p=0.091)*   -0.17pp (p=0.925)
+
+  (d1) residual event study, base = ALL pre-years 2009-15 (T x post-year dummies only; avoids the 2015 base-year anomaly)
+    year                pooled            daughter                 son
+    2016     +0.81pp (p=0.467)   +2.60pp (p=0.148)   -0.37pp (p=0.800)
+    2017     +1.80pp (p=0.163) +3.60pp (p=0.039)**   +0.60pp (p=0.708)
+    2018     -0.15pp (p=0.902)   -0.22pp (p=0.899)   +0.05pp (p=0.972)
+    2019     +0.12pp (p=0.932)   +1.10pp (p=0.585)   -0.58pp (p=0.694)
+    2020     -0.88pp (p=0.398)   -2.40pp (p=0.147)   +0.15pp (p=0.910)
+    2021     -1.89pp (p=0.122)   -2.53pp (p=0.142)   -1.55pp (p=0.291)
+    2022     -1.50pp (p=0.176)   -0.73pp (p=0.631)  -2.18pp (p=0.099)*
+
+  (d) residual event study, T x year (base 2015); pre-years are the placebo (model never saw post rows; pre gaps should be ~0)
+    year                pooled            daughter                 son
+    2009     +0.72pp (p=0.540)   +0.74pp (p=0.734)   +0.53pp (p=0.712)
+    2010     -0.50pp (p=0.702)   -0.23pp (p=0.902)   -0.75pp (p=0.649)
+    2011     +0.01pp (p=0.994)   +0.99pp (p=0.594)   -0.67pp (p=0.629)
+    2012     -0.30pp (p=0.814)   -0.10pp (p=0.960)   -0.45pp (p=0.768)
+    2013     -1.06pp (p=0.344)   +0.40pp (p=0.844)   -2.11pp (p=0.137)
+    2014     +1.03pp (p=0.327)   +2.13pp (p=0.253)   +0.30pp (p=0.823)
+    2016     +0.80pp (p=0.538)   +3.17pp (p=0.136)   -0.82pp (p=0.647)
+    2017     +1.78pp (p=0.211)  +4.16pp (p=0.053)*   +0.15pp (p=0.934)
+    2018     -0.16pp (p=0.912)   +0.35pp (p=0.855)   -0.40pp (p=0.837)
+    2019     +0.11pp (p=0.949)   +1.66pp (p=0.502)   -1.03pp (p=0.572)
+    2020     -0.89pp (p=0.473)   -1.83pp (p=0.375)   -0.30pp (p=0.848)
+    2021     -1.90pp (p=0.198)   -1.96pp (p=0.373)   -2.00pp (p=0.274)
+    2022     -1.51pp (p=0.245)   -0.17pp (p=0.925)   -2.63pp (p=0.133)
+    joint pre-years (2009-14) = 0, pooled: F=1.01 p=0.424
+    joint pre-years (2009-14) = 0, daughter: F=0.52 p=0.790
+    joint pre-years (2009-14) = 0, son: F=1.05 p=0.395
+
+  (e) residual GATES by prognostic-propensity quintile (groups from output/prognostic_scores.csv; n=40,108 rows)
+      G5 = highest predicted propensity; inverted U = G4 most negative
+    grp       y-DID (linear ctrl)            residual DID
+    G1          +0.29pp (p=0.802)       +0.43pp (p=0.708)
+    G2          -0.17pp (p=0.803)       -0.28pp (p=0.694)
+    G3          -0.41pp (p=0.681)       -0.09pp (p=0.933)
+    G4         -2.84pp (p=0.097)*       -2.78pp (p=0.133)
+    G5          -0.69pp (p=0.736)       -0.23pp (p=0.919)
+    daughter arm, residual: G1 +2.20pp (p=0.352)  G2 -0.69pp (p=0.601)  G3 -1.05pp (p=0.513)  G4 -4.63pp (p=0.063)*  G5 +0.06pp (p=0.985)
+
+  (f) support / extrapolation check (post rows vs training range)
+    birthy   train range [1964,1995]  post rows outside: 496 (1.2% of all rows, 3.0% of post rows)
+    age      train range [20,45]  post rows outside: 0 (0.0% of all rows, 0.0% of post rows)
+    dur      train range [1,76]  post rows outside: 6 (0.0% of all rows, 0.0% of post rows)
+    age_fb   train range [-55,42]  post rows outside: 1 (0.0% of all rows, 0.0% of post rows)
+    common-support variant (drop post rows of cohorts unseen in training, n=39,612): pooled -0.82pp (p=0.256)  daughter -1.21pp (p=0.224)  son -0.60pp (p=0.433)
+    ... retrained on the same support: pooled -0.84pp (p=0.242)  daughter -1.28pp (p=0.203)  son -0.60pp (p=0.427)
+
+  (g) FAKE SHOCK placebo: train on 2009-2012 only, pseudo-post = 2013-2015, sample restricted to <=2015
+    ens_top3     pooled +0.08pp (p=0.893)     daughter +0.68pp (p=0.511)     son -0.29pp (p=0.694)
+    logit_lin    pooled +0.25pp (p=0.686)     daughter +0.96pp (p=0.359)     son -0.15pp (p=0.841)
+
+  (h) IMPUTATION variant (BJS-style): train on every row except treated-post, year as a feature; residual DID on the same FE spec
+    ens_top3     pooled -0.64pp (p=0.356)     daughter -1.11pp (p=0.264)     son -0.32pp (p=0.659)     | raw mean(y-yhat) on treated-post -0.34pp
+      post-control OOF fit with year feature: ll 0.17709 auc 0.7483 ece 0.0104
+    hgb_tuned    pooled -0.80pp (p=0.246)     daughter -1.33pp (p=0.179)     son -0.42pp (p=0.566)     | raw mean(y-yhat) on treated-post -0.53pp
+    logit_lin    pooled -0.76pp (p=0.235)     daughter -1.36pp (p=0.143)     son -0.39pp (p=0.575)     | raw mean(y-yhat) on treated-post -0.91pp
+
+[3] Cross-learner summary (residual DID, daughter arm) sorted by pre log-loss
+  learner         pre ll  postC ll            daughter                 son              pooled
+  ens_top3       0.20313   0.18249   -1.48pp (p=0.137)   -0.69pp (p=0.360)   -0.99pp (p=0.168)
+  xgboost        0.20364   0.18364   -1.53pp (p=0.130)   -0.82pp (p=0.281)   -1.07pp (p=0.148)
+  hgb_tuned      0.20377   0.18201   -1.49pp (p=0.130)   -0.60pp (p=0.417)   -0.96pp (p=0.171)
+  hgb_default    0.20394   0.18380   -1.43pp (p=0.154)   -0.65pp (p=0.395)   -0.95pp (p=0.190)
+  rf             0.20755   0.18451  -1.87pp (p=0.057)*   -0.53pp (p=0.470)  -1.13pp (p=0.098)*
+  lightgbm       0.20831   0.19491   -1.50pp (p=0.173)   -1.32pp (p=0.127)   -1.32pp (p=0.114)
+  logit_lin      0.20976   0.18299   -1.03pp (p=0.248)   -0.27pp (p=0.693)   -0.54pp (p=0.374)
+  mlp            0.20983   0.18406   -1.32pp (p=0.167)   -0.46pp (p=0.513)   -0.81pp (p=0.219)
+  extratrees     0.21121   0.18487 -1.97pp (p=0.045)**   -0.46pp (p=0.523)  -1.12pp (p=0.095)*
+  logit_spline   0.21992   0.20162   -1.24pp (p=0.319)   -1.31pp (p=0.177)   -1.22pp (p=0.205)
+  reference y-DID:  daughter -2.38pp (p=0.024)**  son -0.57pp (p=0.456)  pooled -1.40pp (p=0.052)*
+
+runtime 230s

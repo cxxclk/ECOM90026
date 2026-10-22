@@ -1,0 +1,66 @@
+========================================================================
+DIRECT CAREGIVING CHANNEL — pre-shock (2014) housework hours qq9010
+  couple-years with both spouses' housework: 20,457  couples=3,151
+  wife daily hw hrs mean=2.48  husband=1.36  wife caregiving share mean=0.686
+  wife is primary caregiver (hw_w>hw_h): 67.5% of couple-years
+
+========================================================================
+(1) MODERATION (annual hazard) by who is the primary caregiver
+
+[WIFE is primary caregiver (hw_w > hw_h)]  N=13,818
+  T:ideal_w          +0.0059  (SE 0.0049, p=0.225)
+  T:ideal_h          +0.0039  (SE 0.0048, p=0.418)
+
+[wife NOT primary caregiver (hw_w <= hw_h)]  N=6,639
+  T:ideal_w          +0.0139  (SE 0.0068, p=0.040)
+  T:ideal_h          +0.0053  (SE 0.0083, p=0.523)
+
+(1b) Triple: T x ideal_w x wife-primary-caregiver
+
+[T x ideal_w x wife_cg]  N=20,457
+  T:ideal_w          +0.0079  (SE 0.0058, p=0.173)
+  T:ideal_w:wife_cg  -0.0004  (SE 0.0078, p=0.958)
+  T:ideal_h          +0.0020  (SE 0.0071, p=0.775)
+  T:ideal_h:wife_cg  +0.0036  (SE 0.0082, p=0.660)
+
+========================================================================
+(2) CAUSAL cut — 2014-cohort DID-in-weight by caregiver split
+    cost channel => shock-induced T:post:ideal_w lives where SHE cares
+
+[2014-cohort DID-in-weight, WIFE primary caregiver]  N=12,170
+  T:post:ideal_w     +0.0340  (SE 0.0198, p=0.086)
+  T:post:ideal_h     -0.0213  (SE 0.0228, p=0.350)
+
+[2014-cohort DID-in-weight, wife NOT primary caregiver]  N=5,814
+  T:post:ideal_w     +0.0163  (SE 0.0186, p=0.381)
+  T:post:ideal_h     -0.0304  (SE 0.0196, p=0.121)
+
+========================================================================
+(3) HORSE-RACE — caregiving vs income-share moderator (same model)
+    which interaction survives: T:ideal_w:wife_cg or T:ideal_w:hi_w?
+
+[both moderators on wife's weight]  N=13,427
+  T:ideal_w          +0.0094  (SE 0.0081, p=0.247)
+  T:ideal_w:wife_cg  +0.0031  (SE 0.0097, p=0.751)
+  T:ideal_w:hi_w     -0.0127  (SE 0.0105, p=0.226)
+
+========================================================================
+(4) CONTINUOUS caregiving share (cgz = std wife housework share)
+
+[continuous caregiving moderation]  N=20,457
+  T:ideal_w          +0.0083  (SE 0.0040, p=0.039)
+  T:ideal_w:cgz      -0.0015  (SE 0.0040, p=0.697)
+  T:ideal_h          +0.0036  (SE 0.0042, p=0.387)
+  T:ideal_h:cgz      +0.0002  (SE 0.0036, p=0.959)
+
+[2014-cohort: does shock-shift scale with caregiving?]  N=17,984
+  T:post:ideal_w     +0.0152  (SE 0.0127, p=0.231)
+  T:post:ideal_w:cgz +0.0019  (SE 0.0106, p=0.858)
+
+========================================================================
+VERDICT: the DIRECT caregiving proxy does NOT support the cost/
+caregiving-constraint channel — no moderation of the wife-weight gain
+by who does the housework (dummy p=0.96, continuous p=0.70; causal
+cut underpowered). Resource channel already refuted (first stage null).
+=> reduced-form wife-weight shift is robust+causal, but the CHANNEL is
+   not pinned down by either income share or caregiving time.

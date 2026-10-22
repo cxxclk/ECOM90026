@@ -1,0 +1,47 @@
+========================================================================
+SEPARABILITY DID — classifier two-sample test of the shock's
+distributional footprint (pre {2012,2014} vs post {2018,2020,2022})
+features: new_birth, n_children_fam, homeowner_d, log_houseasset, log_house_val, n_other_prop, log_faminc_pc, log_own_inc, eduy, urban
+permutations: 200 (city-level), seed 90026
+========================================================================
+
+[A. main / logit] N=13350  cities T/C = 60/53
+  AUC pre-vs-post: treated 0.8862 | control 0.9060 | dAUC -0.0198
+  control-detrended treated AUC (B): 0.5921
+  permutation (200 draws, city-level): dAUC two-sided p = 0.025 [perm null mean -0.0004, sd 0.0091]
+  detrended-AUC one-sided p = 0.030 [perm null mean 0.5300, sd 0.0297]
+
+--- Direction readout (standardized logistic coefficients) ---
+                coef_T  coef_C  diff_T_minus_C  city_DID_t
+log_own_inc      1.414   1.769          -0.356      -3.320
+eduy             0.580   0.316           0.265      -3.090
+log_houseasset   0.268   0.427          -0.159      -1.783
+log_house_val    0.244   0.115           0.129      -1.146
+n_children_fam   0.778   0.663           0.115       4.653
+homeowner_d     -0.271  -0.371           0.100      -0.225
+urban           -0.004  -0.055           0.051      -0.766
+n_other_prop    -0.098  -0.134           0.036      -0.095
+log_faminc_pc    1.155   1.182          -0.027      -2.440
+new_birth       -0.103  -0.082          -0.021      -0.129
+
+[A'. nonlinear check / HistGBM (dAUC only)] N=13350  cities T/C = 60/53
+  AUC pre-vs-post: treated 0.9086 | control 0.9266 | dAUC -0.0180
+  permutation (100 draws, city-level): dAUC two-sided p = 0.020 [perm null mean -0.0000, sd 0.0091]
+
+[D features] new_birth, homeowner_d, log_houseasset, log_house_val, n_other_prop, log_faminc_pc, log_own_inc
+[D. behavior-only / logit] N=13350  cities T/C = 60/53
+  AUC pre-vs-post: treated 0.8585 | control 0.8927 | dAUC -0.0341
+  control-detrended treated AUC (B): 0.5542
+  permutation (200 draws, city-level): dAUC two-sided p = 0.005 [perm null mean -0.0014, sd 0.0107]
+  detrended-AUC one-sided p = 0.149 [perm null mean 0.5238, sd 0.0406]
+
+[C. balanced panel (same women pre & post) / logit] N=4689  cities T/C = 58/52
+  AUC pre-vs-post: treated 0.7608 | control 0.7519 | dAUC +0.0089
+  control-detrended treated AUC (B): 0.5689
+  permutation (200 draws, city-level): dAUC two-sided p = 0.612 [perm null mean +0.0014, sd 0.0176]
+  detrended-AUC one-sided p = 0.174 [perm null mean 0.5338, sd 0.0299]
+
+Read: dAUC ~ 0 & detrended AUC ~ 0.5 => the joint behavior
+distribution shifted the same way in treated and control =
+distribution-level completeness certificate. Any excess: check the
+direction table for which features carry it.

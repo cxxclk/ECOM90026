@@ -1,0 +1,160 @@
+SEMI-SUPERVISED TYPOLOGY — METHOD SWEEP
+  N=9,230 women; embeddings: oof / behav / leaf; algos: gmm kmeans ward spectral hdbscan
+
+Stage 1 — supervised embedding (HistGBM, 5-fold OOF):
+  births_1015  observed=100%  OOF R2=0.726
+  ideal_kids   observed=61%  OOF R2=0.264
+  son_pref     observed=61%  OOF R2=0.206
+  housework    observed=66%  OOF R2=0.089
+  hv_inc       observed=54%  OOF R2=0.500
+  log_inc      observed=66%  OOF R2=0.181
+
+leaf embedding: 240 trees -> one-hot 13,776 leaves -> SVD(8)
+
+Cluster grid (K by silhouette over 3..8):
+  oof    gmm       K=6  sil=0.113
+  oof    kmeans    K=4  sil=0.237
+  oof    ward      K=5  sil=0.164
+  oof    spectral  K=3  sil=0.220
+  oof    hdbscan   K=0  sil=nan  noise=100%
+  behav  gmm       K=4  sil=0.168
+  behav  kmeans    K=3  sil=0.225
+  behav  ward      K=6  sil=0.196
+  behav  spectral  K=3  sil=0.222
+  behav  hdbscan   K=2  sil=0.217  noise=40%
+  leaf   gmm       K=3  sil=0.099
+  leaf   kmeans    K=6  sil=0.322
+  leaf   ward      K=6  sil=0.275
+  leaf   spectral  K=6  sil=0.192
+  leaf   hdbscan   K=0  sil=nan  noise=100%
+
+Agreement with baseline typology (oof+gmm), adjusted Rand index:
+  oof    gmm       K=6  sil=0.113  ARI=1.000
+  oof    kmeans    K=4  sil=0.237  ARI=0.287
+  oof    ward      K=5  sil=0.164  ARI=0.300
+  oof    spectral  K=3  sil=0.220  ARI=0.252
+  oof    hdbscan   K=0  sil=nan  ARI=0.000
+  behav  gmm       K=4  sil=0.168  ARI=0.166
+  behav  kmeans    K=3  sil=0.225  ARI=0.181
+  behav  ward      K=6  sil=0.196  ARI=0.207
+  behav  spectral  K=3  sil=0.222  ARI=0.176
+  behav  hdbscan   K=2  sil=0.217  ARI=0.099
+  leaf   gmm       K=3  sil=0.099  ARI=0.034
+  leaf   kmeans    K=6  sil=0.322  ARI=0.017
+  leaf   ward      K=6  sil=0.275  ARI=0.023
+  leaf   spectral  K=6  sil=0.192  ARI=0.084
+  leaf   hdbscan   K=0  sil=nan  ARI=0.000
+
+========================================================================
+METHOD oof+kmeans  (K=4, sil=0.237)
+        n  treated  births_1015  ideal_kids  son_pref  hv_inc  log_inc  age14   eduy  urban  parity14  log_faminc_pc  fb_dghtr
+cls                                                                                                                           
+0    1856     0.57         1.30        2.08      3.22    1.40     1.87  26.40   8.33   0.44      1.61           8.86      0.52
+1     465     0.44         0.46        2.03      3.35    3.52     0.83  33.73   6.74   0.45      1.60           6.20      0.53
+2    3451     0.49         0.26        1.75      2.36    1.56     4.55  30.49  11.18   0.78      0.73           9.49      0.47
+3    3458     0.47         0.14        2.08      3.63    1.44     1.90  36.62   4.69   0.39      1.73           8.87      0.49
+
+  top cells (of 25), Post=2018 DID:
+    cls 0 [n=1856,age=26,edu=8,par=1.6,ideal=2.1,son=3.2,hv=1.4] haz_1st         -0.0000 (p=0.000, pre_viol=0, fdr10=True)
+    cls 2 [n=3451,age=30,edu=11,par=0.7,ideal=1.8,son=2.4,hv=1.6] log_housevalue  +0.1857 (p=0.009, pre_viol=2, fdr10=False)
+    cls 1 [n=465,age=34,edu=7,par=1.6,ideal=2.0,son=3.4,hv=3.5] log_faminc_pc   -0.1913 (p=0.086, pre_viol=1, fdr10=False)
+    cls 2 [n=3451,age=30,edu=11,par=0.7,ideal=1.8,son=2.4,hv=1.6] haz_1st         +0.0536 (p=0.113, pre_viol=0, fdr10=False)
+    cls 3 [n=3458,age=37,edu=5,par=1.7,ideal=2.1,son=3.6,hv=1.4] haz_2nd         -0.0171 (p=0.229, pre_viol=1, fdr10=False)
+    cls 0 [n=1856,age=26,edu=8,par=1.6,ideal=2.1,son=3.2,hv=1.4] log_housevalue  -0.0999 (p=0.238, pre_viol=1, fdr10=False)
+
+========================================================================
+METHOD behav+kmeans  (K=3, sil=0.225)
+        n  treated  births_1015  ideal_kids  son_pref  hv_inc  log_inc  age14   eduy  urban  parity14  log_faminc_pc  fb_dghtr
+cls                                                                                                                           
+0    2661     0.52         1.27        2.05      3.12    1.64     0.26  27.66   8.35   0.49      1.52           8.63      0.51
+1    4706     0.46         0.00        1.94      3.21    1.71     0.03  34.46   6.85   0.51      1.29           8.72      0.49
+2    1863     0.55         0.32        1.85      2.67    1.56     9.66  32.64  10.28   0.73      1.14           9.47      0.47
+
+  top cells (of 21), Post=2018 DID:
+    cls 0 [n=2661,age=28,edu=8,par=1.5,ideal=2.0,son=3.1,hv=1.6] haz_1st         -0.0000 (p=0.000, pre_viol=1, fdr10=True)
+    cls 2 [n=1863,age=33,edu=10,par=1.1,ideal=1.9,son=2.7,hv=1.6] haz_3rd         -0.0088 (p=0.035, pre_viol=0, fdr10=False)
+    cls 1 [n=4706,age=34,edu=7,par=1.3,ideal=1.9,son=3.2,hv=1.7] haz_2nd         -0.0137 (p=0.071, pre_viol=5, fdr10=False)
+    cls 2 [n=1863,age=33,edu=10,par=1.1,ideal=1.9,son=2.7,hv=1.6] haz_any         -0.0125 (p=0.081, pre_viol=0, fdr10=False)
+    cls 1 [n=4706,age=34,edu=7,par=1.3,ideal=1.9,son=3.2,hv=1.7] log_faminc_pc   -0.0868 (p=0.100, pre_viol=1, fdr10=False)
+    cls 2 [n=1863,age=33,edu=10,par=1.1,ideal=1.9,son=2.7,hv=1.6] log_housevalue  +0.1119 (p=0.132, pre_viol=1, fdr10=False)
+
+========================================================================
+METHOD behav+hdbscan  (K=2, sil=0.217)
+        n  treated  births_1015  ideal_kids  son_pref  hv_inc  log_inc  age14  eduy  urban  parity14  log_faminc_pc  fb_dghtr
+cls                                                                                                                          
+0    1388     0.51          1.0        2.00      3.04    1.25     0.02  27.53  8.67   0.49      1.22           8.99      0.48
+1    4125     0.49          0.0        1.94      2.90    1.42     2.18  33.86  7.95   0.56      1.16           9.17      0.49
+
+  top cells (of 14), Post=2018 DID:
+    cls 0 [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2] haz_1st         +0.0000 (p=0.000, pre_viol=1, fdr10=True)
+    cls 1 [n=4125,age=34,edu=8,par=1.2,ideal=1.9,son=2.9,hv=1.4] log_housevalue  +0.0948 (p=0.114, pre_viol=2, fdr10=False)
+    cls 0 [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2] homeowner       -0.0476 (p=0.123, pre_viol=1, fdr10=False)
+    cls 0 [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2] log_faminc_pc   +0.0858 (p=0.236, pre_viol=1, fdr10=False)
+    cls 1 [n=4125,age=34,edu=8,par=1.2,ideal=1.9,son=2.9,hv=1.4] haz_1st         +0.0335 (p=0.312, pre_viol=0, fdr10=False)
+    cls 1 [n=4125,age=34,edu=8,par=1.2,ideal=1.9,son=2.9,hv=1.4] haz_2nd         -0.0070 (p=0.377, pre_viol=5, fdr10=False)
+
+========================================================================
+METHOD leaf+kmeans  (K=6, sil=0.322)
+        n  treated  births_1015  ideal_kids  son_pref  hv_inc  log_inc  age14  eduy  urban  parity14  log_faminc_pc  fb_dghtr
+cls                                                                                                                          
+0     916     0.42         0.00        1.66      2.61    1.69     4.34  41.55  8.81   0.75      0.98           9.45      0.38
+1    4892     0.49         0.46        2.00      3.10    1.69     2.85  32.38  7.89   0.54      1.55           8.82      0.52
+2     714     0.63         0.64        2.02      3.66    1.25     1.63  28.05  8.72  -0.04      1.24           9.06      0.48
+3     964     0.53         0.53        1.90      2.92    1.38     2.18  28.91  9.91   1.00      1.06           9.20      0.47
+4     886     0.34         0.50        1.81      2.73    1.13     1.89  29.26  8.96  -0.05      1.13           9.04      0.49
+5     858     0.63         0.39        1.77      2.36    1.83     2.68  30.64  9.54   1.00      1.02           9.10      0.52
+
+  top cells (of 37), Post=2018 DID:
+    cls 2 [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2] haz_any         -0.0498 (p=0.000, pre_viol=0, fdr10=True)
+    cls 2 [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2] haz_3rd         -0.0505 (p=0.014, pre_viol=0, fdr10=False)
+    cls 2 [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2] log_faminc_pc   -0.2655 (p=0.021, pre_viol=1, fdr10=False)
+    cls 5 [n=858,age=31,edu=10,par=1.0,ideal=1.8,son=2.4,hv=1.8] log_housevalue  +0.2527 (p=0.025, pre_viol=1, fdr10=False)
+    cls 0 [n=916,age=42,edu=9,par=1.0,ideal=1.7,son=2.6,hv=1.7] haz_any         +0.0130 (p=0.026, pre_viol=0, fdr10=False)
+    cls 0 [n=916,age=42,edu=9,par=1.0,ideal=1.7,son=2.6,hv=1.7] haz_2nd         +0.0141 (p=0.028, pre_viol=0, fdr10=False)
+
+========================================================================
+ANCHOR TYPES ACROSS METHODS (matched by profile, not label)
+
+  [traditional]
+    oof+kmeans       cls 0 log_faminc_pc   +0.0034 (p=0.962, pre_viol=1)  [n=1856,age=26,edu=8,par=1.6,ideal=2.1,son=3.2,hv=1.4]
+    oof+kmeans       cls 0 haz_any         -0.0009 (p=0.912, pre_viol=2)  [n=1856,age=26,edu=8,par=1.6,ideal=2.1,son=3.2,hv=1.4]
+    behav+kmeans     cls 0 log_faminc_pc   +0.0222 (p=0.719, pre_viol=1)  [n=2661,age=28,edu=8,par=1.5,ideal=2.0,son=3.1,hv=1.6]
+    behav+kmeans     cls 0 haz_any         -0.0046 (p=0.484, pre_viol=1)  [n=2661,age=28,edu=8,par=1.5,ideal=2.0,son=3.1,hv=1.6]
+    behav+hdbscan    cls 0 log_faminc_pc   +0.0858 (p=0.236, pre_viol=1)  [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2]
+    behav+hdbscan    cls 0 haz_any         -0.0025 (p=0.702, pre_viol=1)  [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2]
+    leaf+kmeans      cls 2 log_faminc_pc   -0.2655 (p=0.021, pre_viol=1)  [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2]
+    leaf+kmeans      cls 2 haz_any         -0.0498 (p=0.000, pre_viol=0)  [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2]
+
+  [squeezed]
+    oof+kmeans       cls 1 haz_any         -0.0084 (p=0.465, pre_viol=1)  [n=465,age=34,edu=7,par=1.6,ideal=2.0,son=3.4,hv=3.5]
+    behav+kmeans     cls 1 haz_2nd         -0.0137 (p=0.071, pre_viol=5)  [n=4706,age=34,edu=7,par=1.3,ideal=1.9,son=3.2,hv=1.7]
+    behav+kmeans     cls 1 haz_any         +0.0018 (p=0.752, pre_viol=5)  [n=4706,age=34,edu=7,par=1.3,ideal=1.9,son=3.2,hv=1.7]
+    behav+hdbscan    cls 1 haz_2nd         -0.0070 (p=0.377, pre_viol=5)  [n=4125,age=34,edu=8,par=1.2,ideal=1.9,son=2.9,hv=1.4]
+    behav+hdbscan    cls 1 haz_any         +0.0005 (p=0.935, pre_viol=5)  [n=4125,age=34,edu=8,par=1.2,ideal=1.9,son=2.9,hv=1.4]
+    leaf+kmeans      cls 5 haz_2nd         -0.0318 (p=0.082, pre_viol=1)  [n=858,age=31,edu=10,par=1.0,ideal=1.8,son=2.4,hv=1.8]
+    leaf+kmeans      cls 5 haz_any         -0.0197 (p=0.111, pre_viol=0)  [n=858,age=31,edu=10,par=1.0,ideal=1.8,son=2.4,hv=1.8]
+
+  [young-active]
+    oof+kmeans       cls 0 haz_2nd         -0.0023 (p=0.914, pre_viol=1)  [n=1856,age=26,edu=8,par=1.6,ideal=2.1,son=3.2,hv=1.4]
+    oof+kmeans       cls 0 haz_any         -0.0009 (p=0.912, pre_viol=2)  [n=1856,age=26,edu=8,par=1.6,ideal=2.1,son=3.2,hv=1.4]
+    behav+kmeans     cls 0 haz_2nd         +0.0047 (p=0.749, pre_viol=0)  [n=2661,age=28,edu=8,par=1.5,ideal=2.0,son=3.1,hv=1.6]
+    behav+kmeans     cls 0 haz_any         -0.0046 (p=0.484, pre_viol=1)  [n=2661,age=28,edu=8,par=1.5,ideal=2.0,son=3.1,hv=1.6]
+    behav+hdbscan    cls 0 haz_2nd         +0.0058 (p=0.699, pre_viol=1)  [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2]
+    behav+hdbscan    cls 0 haz_any         -0.0025 (p=0.702, pre_viol=1)  [n=1388,age=28,edu=9,par=1.2,ideal=2.0,son=3.0,hv=1.2]
+    leaf+kmeans      cls 2 haz_2nd         -0.0125 (p=0.577, pre_viol=0)  [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2]
+    leaf+kmeans      cls 2 haz_any         -0.0498 (p=0.000, pre_viol=0)  [n=714,age=28,edu=9,par=1.2,ideal=2.0,son=3.7,hv=1.2]
+
+========================================================================
+RECURRENCE POOL — all cells with p<0.05 across methods
+  behav+hdbscan    cls 0 haz_1st         +0.0000 (p=0.000, pre_viol=1, N=3345)
+  oof+kmeans       cls 0 haz_1st         -0.0000 (p=0.000, pre_viol=0, N=4123)
+  behav+kmeans     cls 0 haz_1st         -0.0000 (p=0.000, pre_viol=1, N=5859)
+  leaf+kmeans      cls 0 haz_2nd         +0.0141 (p=0.028, pre_viol=0, N=7827)
+  leaf+kmeans      cls 1 haz_2nd         -0.0241 (p=0.049, pre_viol=0, N=15070)
+  leaf+kmeans      cls 2 haz_3rd         -0.0505 (p=0.014, pre_viol=0, N=2255)
+  behav+kmeans     cls 2 haz_3rd         -0.0088 (p=0.035, pre_viol=0, N=5757)
+  leaf+kmeans      cls 2 haz_any         -0.0498 (p=0.000, pre_viol=0, N=5886)
+  leaf+kmeans      cls 0 haz_any         +0.0130 (p=0.026, pre_viol=0, N=7856)
+  leaf+kmeans      cls 2 log_faminc_pc   -0.2655 (p=0.021, pre_viol=1, N=1572)
+  oof+kmeans       cls 2 log_housevalue  +0.1857 (p=0.009, pre_viol=2, N=9424)
+  leaf+kmeans      cls 5 log_housevalue  +0.2527 (p=0.025, pre_viol=1, N=1398)

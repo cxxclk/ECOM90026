@@ -1,0 +1,13 @@
+WCB wrap-up for child_health_investment.py (999 reps, Rademacher,
+null imposed, cluster=city). Reuses the ticket's panel verbatim.
+
+Headline (one-child-as-of-2015 frame, Post=2018):
+  daughter ihs_oop                             +0.5290  cluster p=0.005  WCB p=0.0080  (N=5,455, G=113)
+  daughter ihs_tot                             +0.4962  cluster p=0.009  WCB p=0.0100  (N=5,456, G=113)
+  DDD ihs_oop  T:post:son                      -0.4742  cluster p=0.024  WCB p=0.0350  (N=12,678, G=113)
+  DDD ihs_tot  T:post:son                      -0.4622  cluster p=0.035  WCB p=0.0350  (N=12,686, G=113)
+  son ihs_oop (placebo)                        +0.0738  cluster p=0.718  WCB p=0.7100  (N=7,223, G=113)
+
+Variants:
+  daughter ihs_oop, Post=2016                  +0.4356  cluster p=0.051  WCB p=0.0580  (N=5,455, G=113)
+  daughter ihs_oop, excl. hosp                 +0.5928  cluster p=0.003  WCB p=0.0030  (N=4,961, G=113)

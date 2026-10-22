@@ -1,0 +1,87 @@
+PROGNOSTIC-SCORE GATES — DID gradient along PREDICTED pre-shock second-birth propensity
+one-child risk set, Post=2018, city+year FE, cluster city; propensity: HistGBM on 2009-2015 rows only, 5 city folds x 10 splits, median consensus
+  rows=40,108  women=6,992  cities=113
+OOF R2 on pre rows: median 0.0802
+validation: corr(consensus propensity, actual 2009-15 hazard) = 0.400  (women with pre rows: 5,698)
+
+GATES by propensity quintile (G5 = highest predicted propensity):
+  grp     gamma       p  base pre-haz  relative  post wy lost births
+  G1    +0.0030   0.792         0.006    +53.5%      385        -1.2
+  G2    -0.0047   0.500         0.026    -18.0%    1,243         5.9
+  G3    -0.0036   0.729         0.071     -5.0%    1,352         4.8
+  G4    -0.0290   0.092         0.129    -22.4%    1,095        31.8
+  G5    -0.0075   0.719         0.193     -3.9%      900         6.7
+  G5 - G1 difference: -0.0105 (p=0.665)
+  concentration: share of implied lost births (treated post woman-years x -gamma, negatives floored): G1:0%  G2:12%  G3:10%  G4:66%  G5:14%
+
+per-split stability (gamma_5, gamma_1, G5-G1 p):
+  seed  0: G5 -0.0197  G1 +0.0030  diff -0.0227 (p=0.293)
+  seed  1: G5 -0.0060  G1 +0.0127  diff -0.0187 (p=0.383)
+  seed  2: G5 +0.0023  G1 +0.0113  diff -0.0090 (p=0.702)
+  seed  3: G5 +0.0103  G1 -0.0030  diff +0.0133 (p=0.573)
+  seed  4: G5 -0.0125  G1 +0.0004  diff -0.0129 (p=0.577)
+  seed  5: G5 -0.0168  G1 +0.0064  diff -0.0232 (p=0.294)
+  seed  6: G5 -0.0134  G1 -0.0099  diff -0.0035 (p=0.879)
+  seed  7: G5 -0.0116  G1 +0.0016  diff -0.0133 (p=0.626)
+  seed  8: G5 -0.0041  G1 +0.0097  diff -0.0138 (p=0.560)
+  seed  9: G5 -0.0068  G1 +0.0036  diff -0.0103 (p=0.638)
+
+pre-trend gate (# of 2010-14 T x year p<.10):
+  G1:3  G2:0  G3:1  G4:0  G5:0
+
+[event study G5]  N=6,009  women=1,399  mean(y)=0.1731
+  T x 2010   -0.0097  (SE 0.0481, p=0.841) (pre)
+  T x 2011   +0.0557  (SE 0.0468, p=0.233) (pre)
+  T x 2012   -0.0040  (SE 0.0419, p=0.924) (pre)
+  T x 2013   -0.0033  (SE 0.0364, p=0.928) (pre)
+  T x 2014   +0.0152  (SE 0.0448, p=0.734) (pre)
+  T x 2016   +0.0053  (SE 0.0410, p=0.898)
+  T x 2017   -0.0091  (SE 0.0439, p=0.835)
+  T x 2018   +0.0284  (SE 0.0412, p=0.490)
+  T x 2019   -0.0021  (SE 0.0553, p=0.970)
+  T x 2020   -0.0057  (SE 0.0511, p=0.911)
+  T x 2021   -0.0313  (SE 0.0503, p=0.533)
+  T x 2022   -0.0062  (SE 0.0422, p=0.883)
+
+[event study G4]  N=7,210  women=1,398  mean(y)=0.1132
+  T x 2010   -0.0175  (SE 0.0431, p=0.685) (pre)
+  T x 2011   -0.0102  (SE 0.0313, p=0.744) (pre)
+  T x 2012   +0.0222  (SE 0.0436, p=0.610) (pre)
+  T x 2013   -0.0333  (SE 0.0331, p=0.315) (pre)
+  T x 2014   +0.0152  (SE 0.0290, p=0.599) (pre)
+  T x 2016   -0.0016  (SE 0.0327, p=0.962)
+  T x 2017   +0.0384  (SE 0.0410, p=0.349)
+  T x 2018   -0.0318  (SE 0.0337, p=0.346)
+  T x 2019   -0.0144  (SE 0.0371, p=0.698)
+  T x 2020   +0.0053  (SE 0.0296, p=0.859)
+  T x 2021   -0.0571  (SE 0.0349, p=0.101)
+  T x 2022   -0.0096  (SE 0.0318, p=0.763)
+
+CLAN — highest-propensity G5 (n=1,399) vs lowest G1 (n=1,399):
+  covariate            G5 mean   G1 mean     diff       p
+  son                    0.400     0.713   -0.313   0.000
+  birthy              1987.577  1971.438  +16.139   0.000
+  age_fb                22.526    25.987   -3.461   0.000
+  eduy                   7.880    10.736   -2.856   0.000
+  urban                  0.468     0.816   -0.348   0.000
+  log_faminc_pc          8.488     9.699   -1.211   0.000
+  log_inc                1.770     5.695   -3.925   0.000
+  hv_inc                 1.645     1.654   -0.008   0.913
+  homeowner              0.881     0.830   +0.051   0.064
+  ideal_kids             2.125     1.450   +0.675   0.000
+  son_pref               3.372     2.333   +1.039   0.000
+  housework              2.518     1.899   +0.618   0.000
+  city_son_norm          3.928     2.921   +1.006   0.000
+  trad_pc1               0.442    -0.292   +0.734   0.000
+  city_urban_share       0.307     0.663   -0.356   0.000
+  city_linc              8.650     9.224   -0.574   0.000
+  T                      0.599     0.412   +0.187   0.049
+  pre_haz                0.323     0.013   +0.310   0.000
+
+Unification checks (top-2 propensity quintiles = 'active margin' vs bottom-3):
+  [TOP (G4+G5)] daughter DID (T:post) -0.0244 (p=0.215); DDD T:post:son +0.0165 (p=0.509)  N=13,219
+  [BOTTOM (G1-G3)] daughter DID (T:post) -0.0068 (p=0.435); DDD T:post:son +0.0072 (p=0.464)  N=26,889
+  [daughter arm] T:post -0.0146 (p=0.110);  T:post:propz +0.0090 (p=0.502)
+  [son arm]      T:post -0.0016 (p=0.849);  T:post:propz +0.0025 (p=0.823)
+
+scores saved -> output/prognostic_scores.csv

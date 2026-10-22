@@ -1,0 +1,56 @@
+Annual couple-year hazard panel (intention waves 2014+2018)
+  couples=3,383  couple-years=21,336  cities=111  treated=0.48
+  next-birth hazard mean=0.0223  (wave-level any-birth rate was 0.140)
+  mean ideal_w=1.96  ideal_h=1.96
+
+========================================================================
+(A1) Decision-weight test, ANNUAL hazard (binary T) + year FE
+
+[y ~ T x (ideal_w, ideal_h)]  N=21,336
+  ideal_w            -0.0014  (SE 0.0028, p=0.611)
+  ideal_h            +0.0100  (SE 0.0024, p=0.000)
+  T:ideal_w          +0.0085  (SE 0.0040, p=0.032)
+  T:ideal_h          +0.0037  (SE 0.0041, p=0.363)
+  T                  -0.0271  (SE 0.0131, p=0.039)
+
+(A2) Same, CONTINUOUS dose (hpr_exposure, std)
+
+[y ~ exposure x (ideal_w, ideal_h)]  N=21,336
+  ideal_w            +0.0022  (SE 0.0024, p=0.354)
+  ideal_h            +0.0115  (SE 0.0023, p=0.000)
+  expz:ideal_w       +0.0035  (SE 0.0020, p=0.084)
+  expz:ideal_h       +0.0032  (SE 0.0022, p=0.145)
+  expz               -0.0191  (SE 0.0054, p=0.000)
+
+(A3) Implied marginal effect of each spouse's ideal on annual hazard
+   d hazard / d ideal_w:  control=-0.0014   treated=+0.0071
+   d hazard / d ideal_h:  control=+0.0100   treated=+0.0137
+
+(A4) Robustness: cluster by COUPLE instead of city (within-couple serial correlation from the annual expansion)
+  T:ideal_w      +0.0085  (SE 0.0041, p=0.036)
+  T:ideal_h      +0.0037  (SE 0.0040, p=0.357)
+
+(A5) Timing: does the wife-weight shift switch on AFTER the shock?
+    post = year>=2018; T:ideal_w:post is the diff-in-diff-in-ideal
+
+[triple: T x ideal x post]  N=21,336
+  T:ideal_w          +0.0049  (SE 0.0078, p=0.533)
+  T:ideal_w:post     +0.0053  (SE 0.0083, p=0.519)
+  T:ideal_h          +0.0048  (SE 0.0089, p=0.589)
+  T:ideal_h:post     -0.0019  (SE 0.0094, p=0.840)
+
+========================================================================
+(A6) CAUSAL DID-in-weight — 2014 cohort only, post=year>=2016
+    T:ideal_w      = pre-shock treated-vs-control level diff (placebo)
+    T:post:ideal_w = shock-induced shift in the wife's decision weight
+
+[2014-cohort triple DID]  N=18,024
+  T:ideal_w          -0.0152  (SE 0.0131, p=0.247)
+  T:post:ideal_w     +0.0271  (SE 0.0142, p=0.056)
+  T:ideal_h          +0.0273  (SE 0.0157, p=0.082)
+  T:post:ideal_h     -0.0259  (SE 0.0168, p=0.121)
+  T:post             -0.0072  (SE 0.0287, p=0.802)
+
+  Split-sample read of the same contrast:
+  [PRE  (yr==2015)] N=2,523 births=107  T:ideal_w=-0.0184 (p=0.156)  T:ideal_h=+0.0265 (p=0.091)
+  [POST (yr>=2016)] N=15,501 births=304  T:ideal_w=+0.0128 (p=0.004)  T:ideal_h=+0.0014 (p=0.782)

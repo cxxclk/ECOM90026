@@ -1,0 +1,64 @@
+========================================================================
+(0) Baseline reproduce: causal DID-in-weight, 2014 cohort
+  [full cohort] N=18,024 cities=110
+    T:post:diff              +0.0265  (SE 0.0138, p=0.055)
+    T:post:avg               +0.0011  (SE 0.0141, p=0.938)
+
+========================================================================
+(1) T:post:diff by NORM split (trad_pc1, city-level cuts)
+  [LOW-norm half] N=8,255 cities=55
+    T:post:diff              +0.0126  (SE 0.0101, p=0.213)
+  [HIGH-norm half] N=9,769 cities=55
+    T:post:diff              +0.0343  (SE 0.0198, p=0.083)
+  [tercile 0] N=5,486 cities=37
+    T:post:diff              +0.0067  (SE 0.0129, p=0.604)
+  [tercile 1] N=6,342 cities=36
+    T:post:diff              +0.0229  (SE 0.0178, p=0.198)
+  [tercile 2] N=6,196 cities=37
+    T:post:diff              +0.0365  (SE 0.0233, p=0.117)
+
+  4-way interactions (linear z + half dummy):
+  [continuous tradz] N=18,024 cities=110
+    T:post:diff              +0.0249  (SE 0.0131, p=0.058)
+    T:post:diff:tradz        +0.0062  (SE 0.0087, p=0.475)
+  [hi_norm dummy] N=18,024 cities=110
+    T:post:diff              +0.0123  (SE 0.0102, p=0.225)
+    T:post:diff:hi_norm      +0.0219  (SE 0.0227, p=0.334)
+
+========================================================================
+(2) GEOGRAPHY TENSION: norm vs the SES composite (urban/owner/edu_h)
+  couple-level corr(hi_norm, sesz) = -0.122
+  P(hi_ses | low-norm)=0.46   P(hi_ses | high-norm)=0.35
+
+  horse-race (both 4-ways in one model):
+  [joint] N=18,024 cities=110
+    T:post:diff              +0.0142  (SE 0.0106, p=0.180)
+    T:post:diff:sesz         +0.0820  (SE 0.0220, p=0.000)
+    T:post:diff:hi_norm      +0.0255  (SE 0.0199, p=0.200)
+
+  redistribution within the 2x2 (norm half x SES half):
+  [norm=0 ses=0 (couples=627)] N=4,538 cities=55
+    T:post:diff              -0.0179  (SE 0.0103, p=0.081)
+  [norm=0 ses=1 (couples=532)] N=3,717 cities=54
+    T:post:diff              +0.0503  (SE 0.0184, p=0.006)
+  [norm=1 ses=0 (couples=888)] N=6,440 cities=55
+    T:post:diff              -0.0115  (SE 0.0126, p=0.362)
+  [norm=1 ses=1 (couples=476)] N=3,329 cities=53
+    T:post:diff              +0.1263  (SE 0.0346, p=0.000)
+
+========================================================================
+(3) D-K outcome side: FACT 2 (T:post:wife_fewer) by norm half
+  [full cohort (Fact 2 reproduce)] N=18,024 cities=110
+    T:post                   -0.0003  (SE 0.0098, p=0.976)
+    T:post:wife_fewer        -0.0479  (SE 0.0225, p=0.033)
+  [LOW-norm half] N=8,255 cities=55
+    T:post                   +0.0033  (SE 0.0127, p=0.794)
+    T:post:wife_fewer        -0.0241  (SE 0.0246, p=0.328)
+  [HIGH-norm half] N=9,769 cities=55
+    T:post                   -0.0016  (SE 0.0140, p=0.909)
+    T:post:wife_fewer        -0.0624  (SE 0.0347, p=0.072)
+
+  5-way check (interaction of Fact 2 with hi_norm):
+  [hi_norm grading] N=18,024 cities=110
+    T:post:wife_fewer        -0.0232  (SE 0.0244, p=0.342)
+    T:post:wife_fewer:hi_norm -0.0393  (SE 0.0421, p=0.351)

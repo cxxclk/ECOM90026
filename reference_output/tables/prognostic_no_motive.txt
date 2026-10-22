@@ -1,0 +1,209 @@
+PROGNOSTIC SCORE WITHOUT THE MOTIVE — does the inverted U / density test
+depend on the model seeing firstborn sex or son-preference/norm inputs?
+one-child annual 2nd-birth panel, unregulated prefectures, 2009-2022, Post=2018, city+year FE, age/dur quadratics, cluster city.
+score: HistGBM regressor (depth 3, 200 iter, msl 50) on 2009-15 rows only, 5 city folds (stratified by T) x 10 seeds, median; same seeds/folds across variants. WCB reps=4999.
+
+SUMMARY
+  variant                  R2    AUC  logloss corr FULL     GATES G4 (p)           G5 (p)       dens pooled WCB        dens dghtr WCB        dens son WCB    coh dens crude     coh dens surv
+  FULL                 0.0803 0.8124  0.20406     1.000  -0.0264 (0.131)  -0.0065 (0.757)    -0.260 (0.060)       -0.480 (0.018)      -0.067 (0.688)    -1.975 (0.024)    -2.568 (0.021)
+  NO-MOTIVE            0.0611 0.7810  0.21262     0.815  -0.0331 (0.035)  +0.0027 (0.890)    -0.412 (0.007)       -0.908 (0.002)      -0.001 (0.994)    -2.841 (0.102)    -3.680 (0.029)
+  NO-MOTIVE-NO-IDEAL   0.0473 0.7593  0.21821     0.747  -0.0245 (0.100)  -0.0046 (0.803)    -0.240 (0.199)       -0.749 (0.026)      +0.144 (0.469)    -1.918 (0.273)    -3.024 (0.058)
+  NO-MOTIVE-NO-CITY    0.0690 0.7852  0.21092     0.801  -0.0289 (0.086)  +0.0021 (0.909)    -0.336 (0.035)       -0.732 (0.016)      -0.003 (0.988)    -2.694 (0.206)    -5.009 (0.030)
+  (dens columns: coefficient (WCB p); cohort columns: coef (cluster p))
+
+  reproduction: corr(FULL rerun, cached prognostic_scores.csv) = 0.9986; same quintile for 95.6% of 6,992 women
+
+  cohort K=4 DID by quintile, T:postc (p):
+  FULL                  G1 thin  G2 +0.008 (0.947)  G3 -0.027 (0.839)  G4 -0.247 (0.017)  G5 -0.123 (0.212)
+  NO-MOTIVE             G1 thin  G2 -0.028 (0.830)  G3 -0.158 (0.201)  G4 -0.175 (0.128)  G5 -0.051 (0.657)
+  NO-MOTIVE-NO-IDEAL    G1 thin  G2 -0.008 (0.947)  G3 -0.149 (0.125)  G4 -0.068 (0.506)  G5 -0.075 (0.575)
+  NO-MOTIVE-NO-CITY     G1 thin  G2 -0.069 (0.674)  G3 -0.173 (0.077)  G4 -0.219 (0.075)  G5 -0.018 (0.878)
+
+==============================================================================
+VARIANT FULL: 16 baseline vars + age, dur
+  inputs: son, birthy, age_fb, eduy, urban, log_faminc_pc, log_inc, hv_inc, homeowner, ideal_kids, son_pref, housework, city_son_norm, trad_pc1, city_urban_share, city_linc
+  dropped vs FULL: (none)
+
+[1] OOF fit on pre-2016 rows: regressor R2 median 0.0803; raw-GBM classifier AUC 0.8124, log-loss 0.20406
+
+[2] annual quintile GATES (gamma = T:post within quintile; quintiles on the pooled woman distribution)
+  sample                   G1               G2               G3               G4               G5            G5-G1
+  pooled      -0.0031 (0.771)  +0.0001 (0.986)  -0.0085 (0.426)  -0.0264 (0.131)  -0.0065 (0.757)  -0.0033 (0.888)
+  daughter    +0.0018 (0.914)  -0.0001 (0.997)  -0.0283 (0.071)  -0.0410 (0.082)  -0.0023 (0.939)  -0.0040 (0.905)
+  son         -0.0048 (0.676)  -0.0020 (0.848)  +0.0067 (0.612)  -0.0110 (0.631)  -0.0044 (0.849)  +0.0004 (0.987)
+  pooled base pre-hazard: G1 0.006  G2 0.026  G3 0.071  G4 0.128  G5 0.194
+  share of implied lost births: G1 3%  G2 0%  G3 23%  G4 62%  G5 12%
+
+[3] composition by quintile of THIS score (woman level)
+          n  daughter_first  city_son_norm  trad_pc1  son_pref  urban    eduy  ideal_kids      T
+  grp                                                                                           
+  1    1399           0.289          2.926    -0.290     2.349  0.826  10.711       1.448  0.410
+  2    1398           0.432          3.098    -0.212     2.295  0.699  10.409       1.687  0.477
+  3    1398           0.474          3.394     0.006     2.524  0.639   9.827       1.800  0.500
+  4    1398           0.469          3.682     0.218     2.844  0.536   9.323       1.880  0.535
+  5    1399           0.607          3.928     0.442     3.379  0.464   7.864       2.125  0.597
+
+[4] annual threshold-density test, crude Pc=1-(1-p)^5 (mean Pc 0.311, share>0.5 0.25, corr(Pc,dens) 0.75)
+  pooled    T:post:dens -0.2597 (cluster p=0.027, WCB p=0.0604)   T:post:Pc +0.0577 (p=0.278)
+  daughter  T:post:dens -0.4796 (cluster p=0.010, WCB p=0.0178)   T:post:Pc +0.1066 (p=0.167)
+  son       T:post:dens -0.0674 (cluster p=0.666, WCB p=0.6884)   T:post:Pc +0.0099 (p=0.885)
+  linear-only benchmark T:post:Pc -0.0149 (p=0.664)
+  [4b] same test + T:post:city_son_norm(z) horse-race (does density survive controlling the motive gradient directly?)
+  pooled    T:post:dens -0.2610 (p=0.033)   T:post:normz -0.0038 (p=0.681)  N=35,958
+  daughter  T:post:dens -0.4804 (p=0.012)   T:post:normz -0.0146 (p=0.418)  N=15,257
+
+[5] cohort K=4 (2nd birth within 4 yrs; cohorts 2009-13 vs 2016-18): women=2,266, mean Y=0.381
+  overall T:postc -0.1055 (p=0.035)
+  G1: n=93 too thin
+  G2: n=  351  base=0.169  T:postc=+0.0078 (p=0.947)
+  G3: n=  507  base=0.333  T:postc=-0.0266 (p=0.839)
+  G4: n=  677  base=0.413  T:postc=-0.2468 (p=0.017)
+  G5: n=  638  base=0.540  T:postc=-0.1230 (p=0.212)
+  cohort structural (crude Pc4): T:postc:dens -1.9754 (p=0.024);  T:postc:Pc +0.3015 (p=0.299)
+     daughter  T:postc:dens -3.4932 (p=0.075)  n=1,074
+     son       T:postc:dens -0.7251 (p=0.575)  n=1,192
+  cohort structural (raw survival-curve Pc4): T:postc:dens -2.5678 (p=0.021);  T:postc:Pc +0.7517 (p=0.070)
+     daughter  T:postc:dens -4.0756 (p=0.036)  n=1,074
+     son       T:postc:dens -2.5852 (p=0.059)  n=1,192
+
+==============================================================================
+VARIANT NO-MOTIVE: 12 baseline vars + age, dur
+  inputs: birthy, age_fb, eduy, urban, log_faminc_pc, log_inc, hv_inc, homeowner, ideal_kids, housework, city_urban_share, city_linc
+  dropped vs FULL: son, son_pref, city_son_norm, trad_pc1
+
+[1] OOF fit on pre-2016 rows: regressor R2 median 0.0611; raw-GBM classifier AUC 0.7810, log-loss 0.21262
+
+[2] annual quintile GATES (gamma = T:post within quintile; quintiles on the pooled woman distribution)
+  sample                   G1               G2               G3               G4               G5            G5-G1
+  pooled      +0.0067 (0.553)  -0.0212 (0.003)  -0.0234 (0.099)  -0.0331 (0.035)  +0.0027 (0.890)  -0.0040 (0.862)
+  daughter    +0.0154 (0.452)  -0.0389 (0.002)  -0.0370 (0.057)  -0.0552 (0.009)  +0.0318 (0.350)  +0.0164 (0.680)
+  son         +0.0002 (0.989)  -0.0137 (0.169)  -0.0094 (0.531)  -0.0143 (0.474)  -0.0090 (0.711)  -0.0092 (0.735)
+  pooled base pre-hazard: G1 0.007  G2 0.030  G3 0.082  G4 0.119  G5 0.178
+  share of implied lost births: G1 0%  G2 29%  G3 34%  G4 38%  G5 0%
+
+[3] composition by quintile of THIS score (woman level)
+          n  daughter_first  city_son_norm  trad_pc1  son_pref  urban    eduy  ideal_kids      T
+  grp                                                                                           
+  1    1399           0.407          3.038    -0.261     2.387  0.854  10.668       1.445  0.487
+  2    1398           0.423          3.231    -0.127     2.458  0.741  10.344       1.677  0.504
+  3    1398           0.467          3.518     0.101     2.624  0.605  10.144       1.774  0.551
+  4    1398           0.474          3.650     0.212     2.977  0.536   9.251       1.882  0.506
+  5    1399           0.500          3.673     0.244     3.090  0.444   7.878       2.121  0.470
+
+[4] annual threshold-density test, crude Pc=1-(1-p)^5 (mean Pc 0.310, share>0.5 0.21, corr(Pc,dens) 0.82)
+  pooled    T:post:dens -0.4116 (cluster p=0.008, WCB p=0.0070)   T:post:Pc +0.1331 (p=0.053)
+  daughter  T:post:dens -0.9082 (cluster p=0.000, WCB p=0.0016)   T:post:Pc +0.3344 (p=0.004)
+  son       T:post:dens -0.0012 (cluster p=0.996, WCB p=0.9944)   T:post:Pc -0.0082 (p=0.929)
+  linear-only benchmark T:post:Pc -0.0115 (p=0.736)
+  [4b] same test + T:post:city_son_norm(z) horse-race (does density survive controlling the motive gradient directly?)
+  pooled    T:post:dens -0.4192 (p=0.006)   T:post:normz -0.0077 (p=0.297)  N=35,958
+  daughter  T:post:dens -0.9003 (p=0.001)   T:post:normz -0.0114 (p=0.419)  N=15,257
+
+[5] cohort K=4 (2nd birth within 4 yrs; cohorts 2009-13 vs 2016-18): women=2,266, mean Y=0.381
+  overall T:postc -0.1055 (p=0.035)
+  G1: n=73 too thin
+  G2: n=  321  base=0.235  T:postc=-0.0277 (p=0.830)
+  G3: n=  564  base=0.373  T:postc=-0.1577 (p=0.201)
+  G4: n=  680  base=0.428  T:postc=-0.1752 (p=0.128)
+  G5: n=  628  base=0.435  T:postc=-0.0513 (p=0.657)
+  cohort structural (crude Pc4): T:postc:dens -2.8413 (p=0.102);  T:postc:Pc +0.7798 (p=0.258)
+     daughter  T:postc:dens -7.1087 (p=0.003)  n=1,074
+     son       T:postc:dens +0.7698 (p=0.748)  n=1,192
+  cohort structural (raw survival-curve Pc4): T:postc:dens -3.6802 (p=0.029);  T:postc:Pc +1.2869 (p=0.059)
+     daughter  T:postc:dens -5.6285 (p=0.009)  n=1,074
+     son       T:postc:dens -2.6260 (p=0.321)  n=1,192
+
+==============================================================================
+VARIANT NO-MOTIVE-NO-IDEAL: 11 baseline vars + age, dur
+  inputs: birthy, age_fb, eduy, urban, log_faminc_pc, log_inc, hv_inc, homeowner, housework, city_urban_share, city_linc
+  dropped vs FULL: son, ideal_kids, son_pref, city_son_norm, trad_pc1
+
+[1] OOF fit on pre-2016 rows: regressor R2 median 0.0473; raw-GBM classifier AUC 0.7593, log-loss 0.21821
+
+[2] annual quintile GATES (gamma = T:post within quintile; quintiles on the pooled woman distribution)
+  sample                   G1               G2               G3               G4               G5            G5-G1
+  pooled      -0.0080 (0.373)  -0.0241 (0.014)  -0.0260 (0.070)  -0.0245 (0.100)  -0.0046 (0.803)  +0.0034 (0.867)
+  daughter    +0.0035 (0.811)  -0.0408 (0.007)  -0.0540 (0.017)  -0.0262 (0.200)  +0.0069 (0.829)  +0.0034 (0.923)
+  son         -0.0169 (0.210)  -0.0168 (0.161)  -0.0035 (0.807)  -0.0178 (0.336)  -0.0038 (0.864)  +0.0131 (0.615)
+  pooled base pre-hazard: G1 0.007  G2 0.036  G3 0.081  G4 0.121  G5 0.162
+  share of implied lost births: G1 4%  G2 31%  G3 36%  G4 25%  G5 3%
+
+[3] composition by quintile of THIS score (woman level)
+          n  daughter_first  city_son_norm  trad_pc1  son_pref  urban    eduy  ideal_kids      T
+  grp                                                                                           
+  1    1399           0.408          3.036    -0.269     2.434  0.863  10.691       1.721  0.498
+  2    1398           0.431          3.266    -0.101     2.417  0.728  10.533       1.741  0.521
+  3    1398           0.465          3.495     0.087     2.761  0.615  10.028       1.796  0.550
+  4    1398           0.474          3.627     0.190     2.917  0.543   9.221       1.862  0.501
+  5    1399           0.494          3.679     0.262     3.061  0.437   7.824       1.956  0.448
+
+[4] annual threshold-density test, crude Pc=1-(1-p)^5 (mean Pc 0.307, share>0.5 0.21, corr(Pc,dens) 0.86)
+  pooled    T:post:dens -0.2397 (cluster p=0.192, WCB p=0.1992)   T:post:Pc +0.0847 (p=0.301)
+  daughter  T:post:dens -0.7494 (cluster p=0.019, WCB p=0.0262)   T:post:Pc +0.2985 (p=0.033)
+  son       T:post:dens +0.1437 (cluster p=0.460, WCB p=0.4690)   T:post:Pc -0.0498 (p=0.549)
+  linear-only benchmark T:post:Pc -0.0071 (p=0.846)
+  [4b] same test + T:post:city_son_norm(z) horse-race (does density survive controlling the motive gradient directly?)
+  pooled    T:post:dens -0.2425 (p=0.179)   T:post:normz -0.0115 (p=0.136)  N=35,958
+  daughter  T:post:dens -0.7428 (p=0.024)   T:post:normz -0.0169 (p=0.236)  N=15,257
+
+[5] cohort K=4 (2nd birth within 4 yrs; cohorts 2009-13 vs 2016-18): women=2,266, mean Y=0.381
+  overall T:postc -0.1055 (p=0.035)
+  G1: n=64 too thin
+  G2: n=  333  base=0.296  T:postc=-0.0077 (p=0.947)
+  G3: n=  535  base=0.424  T:postc=-0.1492 (p=0.125)
+  G4: n=  672  base=0.428  T:postc=-0.0679 (p=0.506)
+  G5: n=  662  base=0.377  T:postc=-0.0751 (p=0.575)
+  cohort structural (crude Pc4): T:postc:dens -1.9181 (p=0.273);  T:postc:Pc +0.6336 (p=0.386)
+     daughter  T:postc:dens -5.7423 (p=0.010)  n=1,074
+     son       T:postc:dens +0.7703 (p=0.770)  n=1,192
+  cohort structural (raw survival-curve Pc4): T:postc:dens -3.0242 (p=0.058);  T:postc:Pc +0.9963 (p=0.117)
+     daughter  T:postc:dens -4.9787 (p=0.007)  n=1,074
+     son       T:postc:dens -1.1169 (p=0.685)  n=1,192
+
+==============================================================================
+VARIANT NO-MOTIVE-NO-CITY: 10 baseline vars + age, dur
+  inputs: birthy, age_fb, eduy, urban, log_faminc_pc, log_inc, hv_inc, homeowner, ideal_kids, housework
+  dropped vs FULL: son, son_pref, city_son_norm, trad_pc1, city_urban_share, city_linc
+
+[1] OOF fit on pre-2016 rows: regressor R2 median 0.0690; raw-GBM classifier AUC 0.7852, log-loss 0.21092
+
+[2] annual quintile GATES (gamma = T:post within quintile; quintiles on the pooled woman distribution)
+  sample                   G1               G2               G3               G4               G5            G5-G1
+  pooled      -0.0028 (0.675)  -0.0032 (0.721)  -0.0260 (0.022)  -0.0289 (0.086)  +0.0021 (0.909)  +0.0049 (0.809)
+  daughter    -0.0020 (0.870)  -0.0181 (0.211)  -0.0326 (0.054)  -0.0449 (0.054)  +0.0128 (0.721)  +0.0148 (0.705)
+  son         -0.0042 (0.636)  +0.0022 (0.827)  -0.0195 (0.149)  -0.0097 (0.635)  +0.0001 (0.996)  +0.0043 (0.856)
+  pooled base pre-hazard: G1 0.004  G2 0.032  G3 0.080  G4 0.114  G5 0.192
+  share of implied lost births: G1 1%  G2 5%  G3 49%  G4 45%  G5 0%
+
+[3] composition by quintile of THIS score (woman level)
+          n  daughter_first  city_son_norm  trad_pc1  son_pref  urban    eduy  ideal_kids      T
+  grp                                                                                           
+  1    1399           0.388          3.113    -0.191     2.464  0.825  10.078       1.433  0.448
+  2    1398           0.430          3.302    -0.092     2.406  0.730  10.526       1.678  0.489
+  3    1398           0.481          3.485     0.081     2.683  0.654  10.365       1.728  0.531
+  4    1398           0.470          3.601     0.152     2.852  0.508   9.501       1.944  0.531
+  5    1399           0.502          3.661     0.223     3.117  0.446   7.877       2.127  0.518
+
+[4] annual threshold-density test, crude Pc=1-(1-p)^5 (mean Pc 0.302, share>0.5 0.19, corr(Pc,dens) 0.82)
+  pooled    T:post:dens -0.3355 (cluster p=0.036, WCB p=0.0350)   T:post:Pc +0.0931 (p=0.191)
+  daughter  T:post:dens -0.7324 (cluster p=0.011, WCB p=0.0162)   T:post:Pc +0.2663 (p=0.056)
+  son       T:post:dens -0.0031 (cluster p=0.990, WCB p=0.9884)   T:post:Pc -0.0281 (p=0.788)
+  linear-only benchmark T:post:Pc -0.0283 (p=0.396)
+  [4b] same test + T:post:city_son_norm(z) horse-race (does density survive controlling the motive gradient directly?)
+  pooled    T:post:dens -0.3366 (p=0.039)   T:post:normz -0.0067 (p=0.345)  N=35,958
+  daughter  T:post:dens -0.7220 (p=0.018)   T:post:normz -0.0094 (p=0.481)  N=15,257
+
+[5] cohort K=4 (2nd birth within 4 yrs; cohorts 2009-13 vs 2016-18): women=2,266, mean Y=0.381
+  overall T:postc -0.1055 (p=0.035)
+  G1: n=50 too thin
+  G2: n=  320  base=0.214  T:postc=-0.0688 (p=0.674)
+  G3: n=  564  base=0.377  T:postc=-0.1730 (p=0.077)
+  G4: n=  673  base=0.357  T:postc=-0.2190 (p=0.075)
+  G5: n=  659  base=0.505  T:postc=-0.0181 (p=0.878)
+  cohort structural (crude Pc4): T:postc:dens -2.6940 (p=0.206);  T:postc:Pc +0.9020 (p=0.290)
+     daughter  T:postc:dens -7.4819 (p=0.047)  n=1,074
+     son       T:postc:dens +0.7266 (p=0.795)  n=1,192
+  cohort structural (raw survival-curve Pc4): T:postc:dens -5.0090 (p=0.030);  T:postc:Pc +1.8865 (p=0.046)
+     daughter  T:postc:dens -8.1491 (p=0.025)  n=1,074
+     son       T:postc:dens -2.2901 (p=0.508)  n=1,192
+

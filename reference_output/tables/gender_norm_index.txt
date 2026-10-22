@@ -1,0 +1,155 @@
+PC1 loadings (10-item traditional battery, 2014 adults):
+  qm1001   +0.173
+  qm1002   +0.339
+  qm1003   +0.325
+  qm1004   +0.383
+  qm1005   +0.356
+  qm1006   +0.210
+  qm1101   +0.375
+  qm1102   +0.353
+  qm1103   +0.342
+  qm1104r  -0.222
+  PC1 explained variance share: 0.329
+
+City norm index: 124 cities; respondents/city median=210
+  kept 124 cities with >= 25 respondents
+  son_norm mean=3.402 sd=0.513  range=[2.09, 4.66]
+  corr(son_norm, trad_pc1) across cities: 0.836
+
+========================================================================
+Hazard panel x norm index
+  rows=39,241  women=6,853  cities=110
+
+Norm balance across treatment (city-level means):
+   son_norm  trad_pc1  gap_mf
+T                            
+0     3.300    -0.068   0.149
+1     3.588     0.107   0.149
+
+========================================================================
+MODERATOR = son_normz  (Post=2018; city FE absorbs norm & T levels)
+
+[firstborn DAUGHTER | continuous interaction]  N=16,690  women=3,121  mean(y)=0.0841
+  T:post                 -0.0108  (SE 0.0106, p=0.309)
+  T:post:son_normz       -0.0168  (SE 0.0123, p=0.170)
+  post:son_normz         -0.0230  (SE 0.0058, p=0.000)
+
+[firstborn SON (placebo) | continuous interaction]  N=22,551  women=3,732  mean(y)=0.0570
+  T:post                 +0.0016  (SE 0.0072, p=0.824)
+  T:post:son_normz       -0.0083  (SE 0.0079, p=0.290)
+  post:son_normz         -0.0153  (SE 0.0040, p=0.000)
+
+[DAUGHTER | LOW-norm cities]  N=9,892  women=1,572  mean(y)=0.0452
+  T:post                 -0.0124  (SE 0.0092, p=0.178)
+
+[DAUGHTER | HIGH-norm cities]  N=6,798  women=1,549  mean(y)=0.1406
+  T:post                 -0.0237  (SE 0.0191, p=0.215)
+
+========================================================================
+MODERATOR = trad_pc1z  (Post=2018; city FE absorbs norm & T levels)
+
+[firstborn DAUGHTER | continuous interaction]  N=16,690  women=3,121  mean(y)=0.0841
+  T:post                 -0.0197  (SE 0.0104, p=0.057)
+  T:post:trad_pc1z       -0.0147  (SE 0.0127, p=0.247)
+  post:trad_pc1z         -0.0133  (SE 0.0059, p=0.025)
+
+[firstborn SON (placebo) | continuous interaction]  N=22,551  women=3,732  mean(y)=0.0570
+  T:post                 -0.0036  (SE 0.0072, p=0.618)
+  T:post:trad_pc1z       -0.0059  (SE 0.0075, p=0.431)
+  post:trad_pc1z         -0.0123  (SE 0.0044, p=0.005)
+
+[DAUGHTER | LOW-norm cities]  N=9,405  women=1,568  mean(y)=0.0558
+  T:post                 -0.0070  (SE 0.0118, p=0.554)
+
+[DAUGHTER | HIGH-norm cities]  N=7,285  women=1,553  mean(y)=0.1205
+  T:post                 -0.0354  (SE 0.0177, p=0.046)
+
+========================================================================
+MODERATOR = gap_mfz (male minus female son-norm)  daughter arm
+
+[DAUGHTER | m-f norm gap]  N=16,690  women=3,121  mean(y)=0.0841
+  T:post                 -0.0238  (SE 0.0108, p=0.028)
+  T:post:gap_mfz         -0.0019  (SE 0.0114, p=0.869)
+  post:gap_mfz           +0.0086  (SE 0.0089, p=0.334)
+
+========================================================================
+Gender-pooled one-child risk set (layer-2 margin)
+
+[POOLED | son_normz interaction]  N=39,241  women=6,853  mean(y)=0.0685
+  T:post                 -0.0050  (SE 0.0068, p=0.457)
+  T:post:son_normz       -0.0127  (SE 0.0071, p=0.075)
+  post:son_normz         -0.0172  (SE 0.0037, p=0.000)
+
+========================================================================
+VALIDATION: pre-2018 second-birth hazard by norm tercile x firstborn sex
+           mean         count       premium
+son           0       1     0     1        
+tercile                                    
+low      0.0336  0.0184  4349  5375  0.0152
+mid      0.0785  0.0475  4138  5476  0.0311
+high     0.1701  0.1083  3838  5781  0.0619
+
+========================================================================
+DDD x norm (4-way): is the daughter-specific suppression norm-graded?
+
+[DDD 4-way | son_normz]  N=39,241  women=6,853  mean(y)=0.0685
+  T:post                 -0.0127  (SE 0.0106, p=0.230)
+  T:post:son_normz       -0.0183  (SE 0.0119, p=0.125)
+  T:post:son             +0.0144  (SE 0.0114, p=0.206)
+  T:post:son:son_normz   +0.0099  (SE 0.0131, p=0.451)
+
+[DDD 4-way | trad_pc1z]  N=39,241  women=6,853  mean(y)=0.0685
+  T:post                 -0.0212  (SE 0.0103, p=0.040)
+  T:post:trad_pc1z       -0.0151  (SE 0.0122, p=0.213)
+  T:post:son             +0.0174  (SE 0.0107, p=0.103)
+  T:post:son:trad_pc1z   +0.0091  (SE 0.0126, p=0.471)
+
+========================================================================
+HORSE-RACE: T:post:norm vs city urban share & city log income (2014 baseline)
+  corr across cities: son_norm x urban_share -0.198; son_norm x city_linc -0.473
+
+[DAUGHTER | norm vs urban vs income]  N=16,690  women=3,121  mean(y)=0.0841
+  T:post                 -0.0080  (SE 0.0121, p=0.509)
+  T:post:son_normz       -0.0258  (SE 0.0143, p=0.071)
+  T:post:urban_sharez    -0.0000  (SE 0.0128, p=0.997)
+  T:post:city_lincz      -0.0144  (SE 0.0161, p=0.373)
+
+========================================================================
+Tercile gradient, daughter arm T:post (absolute and % of pre hazard)
+  son_norm  T1 low:  -0.0005 (SE 0.0120, p=0.965)  pre-hazard=0.035  rel=-2%  N=7,163
+  son_norm  T2 mid:  -0.0065 (SE 0.0216, p=0.765)  pre-hazard=0.100  rel=-6%  N=5,104
+  son_norm  T3 high:  -0.0491 (SE 0.0221, p=0.026)  pre-hazard=0.174  rel=-28%  N=4,423
+  trad_pc1  T1 low:  +0.0051 (SE 0.0136, p=0.709)  pre-hazard=0.047  rel=+11%  N=6,334
+  trad_pc1  T2 mid:  -0.0179 (SE 0.0167, p=0.282)  pre-hazard=0.105  rel=-17%  N=5,568
+  trad_pc1  T3 high:  -0.0556 (SE 0.0234, p=0.018)  pre-hazard=0.136  rel=-41%  N=4,788
+
+========================================================================
+Event study by trad_pc1 half, daughter arm (T x year, omitted 2015)
+
+[DAUGHTER | LOW-norm]  N=9,405
+  T x 2010   +0.0052  (SE 0.0180, p=0.774)
+  T x 2011   +0.0102  (SE 0.0167, p=0.541)
+  T x 2012   +0.0051  (SE 0.0168, p=0.763)
+  T x 2013   +0.0230  (SE 0.0181, p=0.203)
+  T x 2014   +0.0237  (SE 0.0165, p=0.149)
+  T x 2016   +0.0299  (SE 0.0222, p=0.179)
+  T x 2017   +0.0398  (SE 0.0211, p=0.059)
+  T x 2018   +0.0106  (SE 0.0240, p=0.659)
+  T x 2019   +0.0457  (SE 0.0253, p=0.071)
+  T x 2020   -0.0098  (SE 0.0196, p=0.619)
+  T x 2021   -0.0102  (SE 0.0201, p=0.612)
+  T x 2022   -0.0131  (SE 0.0191, p=0.493)
+
+[DAUGHTER | HIGH-norm]  N=7,285
+  T x 2010   -0.0020  (SE 0.0339, p=0.953)
+  T x 2011   +0.0185  (SE 0.0354, p=0.601)
+  T x 2012   -0.0224  (SE 0.0342, p=0.511)
+  T x 2013   -0.0303  (SE 0.0338, p=0.371)
+  T x 2014   +0.0028  (SE 0.0327, p=0.933)
+  T x 2016   +0.0036  (SE 0.0329, p=0.914)
+  T x 2017   +0.0095  (SE 0.0315, p=0.763)
+  T x 2018   -0.0194  (SE 0.0292, p=0.506)
+  T x 2019   -0.0338  (SE 0.0403, p=0.402)
+  T x 2020   -0.0514  (SE 0.0348, p=0.140)
+  T x 2021   -0.0732  (SE 0.0384, p=0.057)
+  T x 2022   -0.0207  (SE 0.0324, p=0.523)

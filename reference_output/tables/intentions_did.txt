@@ -1,0 +1,129 @@
+Analysis C: intentions vs realizations -- stated ideal #kids DID
+Married women 20-45, unregulated prefectures, baseline-city T,
+city+year FE, age+age^2, cluster by city. 2014 pre | 2018+2022 post.
+Ideal kept in [0,6]; >6 dropped (reported above); negatives = NA.
+
+Ideal-kids sources (label-verified):
+  2014: qm501 = 'Ideally, number of kids (person)'  valid N=31,374  (dropped 80 answers >6)
+  2018: qka202 = 'Ideally, number of kids (person)'  valid N=32,383  (dropped 99 answers >6)
+  2022: qka202 = 'Ideal number of child'  valid N=23,296  (dropped 26 answers >6)
+  2022: qka205 = 'Want to have a child in the following two years'  valid N=8,059  (skip-pattern -8 excluded)
+
+Analytic sample: 11,469 obs, 6,843 women, 113 cities, treated share 0.508
+Parity distribution: {0: 618, 1: 4457, 2: 5116, 3: 1278}  (3 = 3+)
+
+==========================================================================
+GROUP: (a) ALL married women 20-45
+  N by wave: 2014: 5,253, 2018: 3,335, 2022: 2,881   (total 11,469, women 6,843, cities 113)
+  N by wave x arm (C/T):
+    T        0     1
+    year            
+    2014  2585  2668
+    2018  1695  1640
+    2022  1363  1518
+  mean ideal by year x T:
+    T         0      1
+    year              
+    2014  1.907  1.975
+    2018  1.893  1.963
+    2022  1.852  1.954
+  outcome                         T:post       SE       p        N
+  ideal #kids (pooled post)      +0.0234   0.0232   0.311   11,469
+  ideal #kids (2014 vs 2018)     +0.0255   0.0235   0.278    8,588
+  ideal #kids (2014 vs 2022)     +0.0240   0.0293   0.413    8,134
+  P(ideal>=2) (pooled post)      +0.0079   0.0160   0.621   11,469
+  P(ideal>=2) (2014 vs 2018)     +0.0073   0.0174   0.674    8,588
+  P(ideal>=2) (2014 vs 2022)     +0.0106   0.0199   0.593    8,134
+
+==========================================================================
+GROUP: (b) ONE-CHILD mothers (parity=1 as of wave)
+  N by wave: 2014: 2,269, 2018: 1,213, 2022: 975   (total 4,457, women 3,066, cities 113)
+  N by wave x arm (C/T):
+    T        0     1
+    year            
+    2014  1170  1099
+    2018   656   557
+    2022   523   452
+  mean ideal by year x T:
+    T         0      1
+    year              
+    2014  1.705  1.792
+    2018  1.579  1.645
+    2022  1.493  1.582
+  outcome                         T:post       SE       p        N
+  ideal #kids (pooled post)      -0.0073   0.0366   0.841    4,457
+  ideal #kids (2014 vs 2018)     -0.0054   0.0381   0.887    3,482
+  ideal #kids (2014 vs 2022)     -0.0002   0.0458   0.996    3,244
+  P(ideal>=2) (pooled post)      +0.0054   0.0339   0.873    4,457
+  P(ideal>=2) (2014 vs 2018)     -0.0076   0.0354   0.829    3,482
+  P(ideal>=2) (2014 vs 2022)     +0.0278   0.0422   0.510    3,244
+
+==========================================================================
+GROUP: (c) firstborn-DAUGHTER one-child mothers  [headline margin]
+  N by wave: 2014: 944, 2018: 488, 2022: 390   (total 1,822, women 1,291, cities 112)
+  N by wave x arm (C/T):
+    T       0    1
+    year          
+    2014  501  443
+    2018  271  217
+    2022  217  173
+  mean ideal by year x T:
+    T         0      1
+    year              
+    2014  1.719  1.817
+    2018  1.568  1.682
+    2022  1.535  1.578
+  [WCB] ideal #kids: b=-0.0134  t=-0.27  WCB p=0.7960  (G=112)
+  [WCB] P(ideal>=2): b=+0.0007  t=+0.02  WCB p=0.9880  (G=112)
+  outcome                         T:post       SE       p        N
+  ideal #kids (pooled post)      -0.0134   0.0518   0.795    1,822
+  ideal #kids (2014 vs 2018)     +0.0069   0.0599   0.909    1,432
+  ideal #kids (2014 vs 2022)     -0.0376   0.0627   0.548    1,334
+  P(ideal>=2) (pooled post)      +0.0007   0.0458   0.987    1,822
+  P(ideal>=2) (2014 vs 2018)     +0.0033   0.0530   0.950    1,432
+  P(ideal>=2) (2014 vs 2022)     -0.0025   0.0562   0.964    1,334
+
+==========================================================================
+GROUP: (d) firstborn-SON one-child mothers  [comparison]
+  N by wave: 2014: 1,325, 2018: 725, 2022: 585   (total 2,635, women 1,775, cities 113)
+  N by wave x arm (C/T):
+    T       0    1
+    year          
+    2014  669  656
+    2018  385  340
+    2022  306  279
+  mean ideal by year x T:
+    T         0      1
+    year              
+    2014  1.695  1.774
+    2018  1.587  1.621
+    2022  1.464  1.584
+  outcome                         T:post       SE       p        N
+  ideal #kids (pooled post)      +0.0008   0.0506   0.988    2,635
+  ideal #kids (2014 vs 2018)     -0.0122   0.0521   0.815    2,050
+  ideal #kids (2014 vs 2022)     +0.0320   0.0646   0.621    1,910
+  P(ideal>=2) (pooled post)      +0.0159   0.0472   0.736    2,635
+  P(ideal>=2) (2014 vs 2018)     -0.0114   0.0486   0.814    2,050
+  P(ideal>=2) (2014 vs 2022)     +0.0589   0.0611   0.335    1,910
+
+==========================================================================
+DDD (one-child sample): T:post + T:post:son + full interactions
+  ideal #kids: T:post -0.0118 (p=0.813)   T:post:son +0.0069 (p=0.916)   N=4,457
+  P(ideal>=2): T:post +0.0015 (p=0.974)   T:post:son +0.0056 (p=0.926)   N=4,457
+
+==========================================================================
+SUPPLEMENTARY: qka205 (2022 only) 'want a child in next 2 years'
+2022 T-vs-C cross-section (no pre-period): age+age^2 + C(provcd),
+cluster by city. Treatment coef = T level gap in 2022.
+  qka205 valid in analytic 2022 sample: 2,836 of 2,881 (skip pattern: asked conditionally)
+  group                               T coef       SE       p       N  mean(y)
+  (a) all married women              +0.0138   0.0296   0.643   2,836    0.113
+  (b) one-child mothers              +0.0207   0.0550   0.707     948    0.160
+  (c) daughter-first one-child       +0.0603   0.0923   0.514     380    0.197
+  (d) son-first one-child            -0.0380   0.0999   0.703     568    0.136
+
+==========================================================================
+CONTEXT: established realized-birth effect on the same margin:
+  daughter-first one-child annual 2nd-birth hazard T:post = -2.4pp
+  on 8.4% base (p=0.024), son placebo null (annual_firstborn_gender.py).
+Prediction was T:post ~ 0 on stated ideals in all groups, esp (c).

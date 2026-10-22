@@ -1,0 +1,39 @@
+========================================================================
+FACT 1 — spousal ideal-SON gap (husband - wife), qka203 2018 cohort
+  'trying for a son' as a within-couple disagreement
+
+  [ALL parities]
+    DAUGHTER-first: n= 286  wife=0.91 husband=0.97  gap=+0.059  paired t=2.23 (p=0.027)  husb wants more sons in 13%
+    SON-first: n= 401  wife=1.10 husband=1.15  gap=+0.045  paired t=1.93 (p=0.055)  husb wants more sons in 11%
+    interaction (gap larger in daughter-first?): dghtr=+0.015 (p=0.681), N=687
+
+  [ONE-child only]
+    DAUGHTER-first: n=  85  wife=0.60 husband=0.79  gap=+0.188  paired t=3.06 (p=0.003)  husb wants more sons in 27%
+    SON-first: n= 189  wife=0.99 husband=1.04  gap=+0.042  paired t=1.47 (p=0.145)  husb wants more sons in 7%
+    interaction (gap larger in daughter-first?): dghtr=+0.146 (p=0.031), N=274
+
+========================================================================
+FACT 2 — the shock suppresses births where the WIFE wants FEWER than
+  the husband (the redistribution biting; 2014 cohort, full power)
+  wife wants FEWER (diff<0): N=2,357 couples=340  T:post=-0.0491 (p=0.021)
+  agree (diff=0): N=13,298 couples=1866  T:post=-0.0030 (p=0.782)
+  wife wants MORE (diff>0): N=2,369 couples=317  T:post=+0.0208 (p=0.132)
+  INTERACTION T:post:wife_fewer = -0.0479 (p=0.033); T:post(agree)≈-0.0003
+
+========================================================================
+BRIDGE — 'wife wants fewer' by firstborn gender (one-child couples):
+  daughter-first: wants-fewer-SONS=27% (n=85)
+  son-first: wants-fewer-SONS=7% (n=189)
+  (total-kids 'wife fewer' is ~17-18% in BOTH groups — NOT daughter-
+   specific; only the SON dimension is, which is what channels the
+   general redistribution into the daughter-first 2nd-birth margin.)
+
+========================================================================
+UNIFICATION (precise): the shock redistributes the fertility decision
+to the wife and so SUPPRESSES births where she wants fewer than the
+husband (Fact 2, causal, total kids, p=0.02). The wife is the 'fewer'
+party on SONS specifically in daughter-first one-child families (Fact 1,
+p=0.003). => the son-chasing 2nd birth of daughter-first families is
+suppressed = the locked headline. One mechanism, two preference
+dimensions. Seam: son-disagreement is 2018-only (qka203), so the SON
+causal suppression itself can't be pre/post-estimated.

@@ -1,0 +1,41 @@
+AVG vs DIFF decomposition of the couple decision-weight effect
+  couple-years=21,336  couples=3,383  couples agreeing on ideal kids=73.1%
+  avg=(w+h)/2 = joint intentionality;  diff=w-h = wife relative weight
+
+========================================================================
+(1) CROSS-SECTIONAL (pooled, binary T) — what differs treated vs control
+
+[pooled annual]  N=21,336
+  avg              +0.0085  (SE 0.0039, p=0.030)
+  diff             -0.0057  (SE 0.0017, p=0.001)
+  T:avg            +0.0122  (SE 0.0053, p=0.021)
+  T:diff           +0.0024  (SE 0.0030, p=0.430)
+
+(2) CROSS-SECTIONAL (continuous dose)
+
+[exposure dose]  N=21,336
+  expz:avg         +0.0068  (SE 0.0025, p=0.007)
+  expz:diff        +0.0002  (SE 0.0017, p=0.927)
+
+========================================================================
+(3) CAUSAL — 2014-cohort pre(2015)/post(2016+) triple DID
+    T:post:avg = shock raises joint intentionality?
+    T:post:diff = shock redistributes weight toward the wife?
+
+[2014-cohort triple]  N=18,024
+  T:avg            +0.0121  (SE 0.0140, p=0.387)
+  T:post:avg       +0.0011  (SE 0.0141, p=0.938)
+  T:diff           -0.0213  (SE 0.0127, p=0.093)
+  T:post:diff      +0.0265  (SE 0.0138, p=0.055)
+  T:post           -0.0072  (SE 0.0287, p=0.802)
+
+  Robustness: cluster by couple
+
+[2014-cohort triple (cluster=couple)]  N=18,024
+  T:post:avg       +0.0011  (SE 0.0131, p=0.933)
+  T:post:diff      +0.0265  (SE 0.0119, p=0.025)
+
+========================================================================
+(4) Consistency: implied T:post:ideal_w/h from the avg/diff causal fit
+  T:post:ideal_w = avg/2 + diff = +0.0271   T:post:ideal_h = avg/2 - diff = -0.0259
+  (compare A6: T:post:ideal_w +0.027, T:post:ideal_h -0.026)

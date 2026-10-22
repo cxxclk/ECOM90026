@@ -1,0 +1,108 @@
+Synthetic DID + matrix completion, city x year second-birth hazard
+Post=2018; 200 city-label permutations; floor=3
+
+========================================================================
+ARM: POOLED one-child (layer 2)
+  cities kept 112/113 (balanced 2009-2022, cell floor >= 3 woman-years); treated 60; woman-years retained 39,980/40,108 (100%)
+  mean hazard pre: T 0.1047  C 0.0660
+
+  estimator        tau  perm p   (perm sd)
+  DID        -0.0201   0.030    (0.0092)
+  SC         -0.0004   0.935    (0.0062)
+  SDID       -0.0194   0.040    (0.0085)
+  MC         -0.0093   0.517    (0.0081)
+  MCu        -0.0203   0.030    (0.0091)
+  MC: lambda=1.1257, residual rank=0 (MC=woman-year-weighted, MCu=unweighted city cells)
+  SC pre-fit RMSE 0.0000 vs treated-control pre level gap +0.0386  (SC has no intercept -> judges level fit)
+  micro FE-DiD same cities: -0.0139 (cluster p=0.054)
+
+  SDID unit weights: effective N controls 51.7 of 52; top-5 141100:0.026, 513400:0.022, 530800:0.022, 450300:0.022, 522700:0.021
+  SDID time weights (pre): 2010:0.19, 2011:0.14, 2012:0.02, 2013:0.13, 2014:0.44, 2016:0.08
+  yearly gap (treated - synthetic, pre aligned by lambda):
+    2009  +0.0098
+    2010  -0.0081
+    2011  +0.0045
+    2012  +0.0005
+    2013  -0.0105
+    2014  +0.0056
+    2015  -0.0005
+    2016  -0.0030
+    2017  +0.0029
+    2018  -0.0136 <- post
+    2019  +0.0037
+    2020  -0.0196
+    2021  -0.0287
+    2022  -0.0388
+
+========================================================================
+ARM: DAUGHTER-first (layer 3)
+  cities kept 90/113 (balanced 2009-2022, cell floor >= 3 woman-years); treated 45; woman-years retained 15,059/17,000 (89%)
+  mean hazard pre: T 0.1178  C 0.0774
+
+  estimator        tau  perm p   (perm sd)
+  DID        -0.0211   0.104    (0.0130)
+  SC         -0.0027   0.786    (0.0116)
+  SDID       -0.0248   0.114    (0.0143)
+  MC         -0.0091   0.502    (0.0115)
+  MCu        -0.0214   0.104    (0.0130)
+  MC: lambda=1.1638, residual rank=0 (MC=woman-year-weighted, MCu=unweighted city cells)
+  SC pre-fit RMSE 0.0000 vs treated-control pre level gap +0.0404  (SC has no intercept -> judges level fit)
+  micro FE-DiD same cities: -0.0159 (cluster p=0.136)
+
+  SDID unit weights: effective N controls 44.6 of 45; top-5 621100:0.026, 522600:0.026, 513400:0.026, 620600:0.025, 620800:0.025
+  SDID time weights (pre): 2009:0.22, 2010:0.08, 2012:0.07, 2014:0.58, 2016:0.04
+  yearly gap (treated - synthetic, pre aligned by lambda):
+    2009  +0.0091
+    2010  -0.0199
+    2011  -0.0053
+    2012  -0.0153
+    2013  -0.0020
+    2014  +0.0006
+    2015  -0.0339
+    2016  +0.0103
+    2017  +0.0166
+    2018  -0.0173 <- post
+    2019  +0.0077
+    2020  -0.0457
+    2021  -0.0331
+    2022  -0.0354
+
+========================================================================
+ARM: SON-first (placebo)
+  cities kept 105/113 (balanced 2009-2022, cell floor >= 3 woman-years); treated 56; woman-years retained 22,225/23,108 (96%)
+  mean hazard pre: T 0.0785  C 0.0510
+
+  estimator        tau  perm p   (perm sd)
+  DID        -0.0109   0.244    (0.0090)
+  SC         -0.0035   0.672    (0.0080)
+  SDID       -0.0116   0.174    (0.0085)
+  MC         -0.0018   0.816    (0.0074)
+  MCu        -0.0112   0.164    (0.0081)
+  MC: lambda=0.1918, residual rank=13 (MC=woman-year-weighted, MCu=unweighted city cells)
+  SC pre-fit RMSE 0.0000 vs treated-control pre level gap +0.0275  (SC has no intercept -> judges level fit)
+  micro FE-DiD same cities: -0.0043 (cluster p=0.568)
+
+  SDID unit weights: effective N controls 48.8 of 49; top-5 513400:0.024, 510800:0.024, 513300:0.023, 450300:0.023, 522700:0.022
+  SDID time weights (pre): 2009:0.05, 2010:0.15, 2011:0.19, 2012:0.06, 2013:0.06, 2014:0.23, 2016:0.27
+  yearly gap (treated - synthetic, pre aligned by lambda):
+    2009  +0.0083
+    2010  -0.0043
+    2011  -0.0039
+    2012  +0.0043
+    2013  -0.0153
+    2014  -0.0022
+    2015  +0.0069
+    2016  +0.0079
+    2017  -0.0070
+    2018  +0.0032 <- post
+    2019  +0.0023
+    2020  -0.0032
+    2021  -0.0258
+    2022  -0.0345
+
+========================================================================
+SUMMARY (tau, percentage points of annual hazard)
+arm                       DID       SC     SDID       MC
+pooled one-child       -2.01p   -0.04p   -1.94p   -0.93p
+daughter-first         -2.11p   -0.27p   -2.48p   -0.91p
+son-first              -1.09p   -0.35p   -1.16p   -0.18p

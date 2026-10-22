@@ -1,0 +1,57 @@
+==============================================================================
+HEADLINE ROBUSTNESS BATTERY
+Annual second-birth hazard DID (one-child risk set, 2009-2022)
+Daughter-first arm = headline; son-first arm = placebo
+Conventions: baseline-city treatment, regulated cities dropped,
+city + year FE, age/dur quadratics, cluster by city, Post=2018
+==============================================================================
+rows=40,108  women=6,992  cities=113  treated share=0.474
+
+------------------------------------------------------------------------------
+[0] BASELINE: T x post, Post=2018 (must reproduce -2.4pp p=.024)
+------------------------------------------------------------------------------
+  DAUGHTER (headline)                -0.0238  (SE 0.0106, cluster p=0.024)   N=17,000  women=3,176
+  SON (placebo)                      -0.0057  (SE 0.0076, cluster p=0.456)   N=23,108  women=3,816
+  -> baseline reproduces the headline; proceeding.
+
+------------------------------------------------------------------------------
+[1] WILD CLUSTER BOOTSTRAP (Rademacher, null imposed, B=999,
+    cluster=city) on T:post, Post=2018
+------------------------------------------------------------------------------
+  DAUGHTER (headline)                -0.0238  t=-2.26  cluster p=0.024  WCB p=0.0260  (G=113)
+  SON (placebo)                      -0.0057  t=-0.75  cluster p=0.456  WCB p=0.4580  (G=113)
+
+------------------------------------------------------------------------------
+[2] PLACEBO SHOCK YEARS: pre-period only (2009-2015),
+    fake Post=2012 / Post=2013. Expect null.
+------------------------------------------------------------------------------
+  fake Post = 2012:
+    DAUGHTER (headline)              -0.0032  (SE 0.0107, cluster p=0.763)   N=9,977  women=2,550
+    SON (placebo)                    -0.0045  (SE 0.0081, cluster p=0.573)   N=13,614  women=3,148
+  fake Post = 2013:
+    DAUGHTER (headline)              +0.0016  (SE 0.0109, cluster p=0.882)   N=9,977  women=2,550
+    SON (placebo)                    -0.0041  (SE 0.0071, cluster p=0.565)   N=13,614  women=3,148
+
+------------------------------------------------------------------------------
+[3] CONTINUOUS DOSE: hpr_exposure = max(0, 1 - dist/250),
+    z-scored on estimation sample; exposure x post, Post=2018.
+    Prediction: negative (more exposure -> more suppression).
+------------------------------------------------------------------------------
+  hpr_exposure: mean=0.204 sd=0.262 >0 share=0.474
+  DAUGHTER (headline)                -0.0069  (SE 0.0054, cluster p=0.201)   N=17,000  women=3,176
+  SON (placebo)                      +0.0034  (SE 0.0034, cluster p=0.322)   N=23,108  women=3,816
+
+------------------------------------------------------------------------------
+[4] ALTERNATIVE DISTANCE CUTOFFS: binary treatment rebuilt at
+    200 km and 300 km from dist_to_hpr_km (regulated already
+    dropped in the risk set); T x post, Post=2018.
+------------------------------------------------------------------------------
+  cutoff = 200 km  (treated share=0.370):
+    DAUGHTER (headline)              -0.0118  (SE 0.0113, cluster p=0.295)   N=17,000  women=3,176
+    SON (placebo)                    +0.0087  (SE 0.0082, cluster p=0.286)   N=23,108  women=3,816
+  cutoff = 300 km  (treated share=0.529):
+    DAUGHTER (headline)              -0.0208  (SE 0.0105, cluster p=0.049)   N=17,000  women=3,176
+    SON (placebo)                    -0.0042  (SE 0.0073, cluster p=0.562)   N=23,108  women=3,816
+
+==============================================================================
+Done.

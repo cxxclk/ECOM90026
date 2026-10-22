@@ -1,0 +1,91 @@
+HIGH-DIMENSIONAL LASSO HTE SELECTION + WIDE-MENU CERTIFICATE
+raw 2014 feature pool after cleaning: 882 vars
+risk-set women with 2014 baseline: 4,335 of 6,992  ->  woman-years 25,938
+feature menu: 150 vars (must-include hits: ['qn6017', 'qn8011', 'qn8012', 'finance_asset', 'nonhousing_debts', 'house_debts', 'total_asset', 'durables_asset', 'land_asset', 'fixed_asset', 'pce', 'food', 'dress', 'daily', 'expense', 'houseasset_gross', 'savings', 'ftransfer_1', 'ft4', 'ft6', 'ft7', 'qq9010', 'qp201', 'urban14'])
+partialled average DID (check vs -0.014): -0.0100
+dictionary: 600 columns x 25,938 rows
+
+LASSO (city-GroupKFold CV, alpha=0.00214): 82 of 600 columns selected, 15 are T x post x X targets:
+  TPx_fp518                  lasso-coef -0.00218   [Other expenditure in past 12 months (yuan)]
+  TPx_cmstart_best           lasso-coef +0.00213   [Marriage began in ehc time intervals and lasted until n]
+  TPx_fa8                    lasso-coef +0.00175   [Type of restroom]
+  TPx_pce                    lasso-coef +0.00175   [Residents' consumption expenditure: Sum]
+  TPx_fn1_s_1                lasso-coef +0.00115   [Government subsidy your family received: choice 1]
+  TPx_finance_asset          lasso-coef -0.00068   [Constructed variable: financial asset (yuan)]
+  TPx_fp510                  lasso-coef -0.00045   [Expenditure on education/trainings in past 12 months (y]
+  TPx_fp515                  lasso-coef -0.00026   [Financial support given to relatives in past 12 months ]
+  TPx_fp508                  lasso-coef -0.00024   [Payment for transportation/communication tools (yuan)]
+  TPx_fa4                    lasso-coef -0.00020   [Fuel for cooking]
+  TPx_fp506                  lasso-coef +0.00017   [Payment for house repairmen (yuan)]
+  TPx_subpopulation10        lasso-coef +0.00014   [Sampling subpopulation 2010]
+  TPx_cfps2014edu            lasso-coef +0.00013   [Highest educational degree in CFPS2014]
+  TPx_ft9                    lasso-coef -0.00010   [Loan(s) needing to be paid back]
+  TPx_company                lasso-coef -0.00007   [Constructed variable: business asset (yuan)]
+
+Post-selection OLS (full sample — OPTIMISTIC p-values):
+  T:post           -0.0230 (p=0.162)
+  TP_finance_asset         -0.0115  (SE 0.0080, p=0.151)
+  TP_pce                   +0.0249  (SE 0.0092, p=0.007)
+  TP_subpopulation10       +0.0267  (SE 0.0082, p=0.001)
+  TP_fa8                   +0.0240  (SE 0.0139, p=0.084)
+  TP_fn1_s_1               +0.0161  (SE 0.0069, p=0.020)
+  TP_ft9                   -0.0026  (SE 0.0078, p=0.738)
+  TP_cfps2014edu           +0.0151  (SE 0.0079, p=0.058)
+  TP_fa4                   -0.0121  (SE 0.0059, p=0.040)
+  TP_cmstart_best          +0.0073  (SE 0.0076, p=0.338)
+  TP_fp515                 -0.0114  (SE 0.0060, p=0.056)
+  TP_fp506                 +0.0067  (SE 0.0076, p=0.377)
+  TP_fp518                 -0.0213  (SE 0.0066, p=0.001)
+  TP_fp510                 -0.0156  (SE 0.0072, p=0.031)
+  TP_fp508                 -0.0123  (SE 0.0061, p=0.045)
+  TP_company               -0.0088  (SE 0.0066, p=0.183)
+
+HONEST check: 10 random 50/50 city splits (select on A, estimate on B):
+  target                     sel.freq  held-out coef (med)  held-out p (med)
+  TPx_fa8                   7/10                +0.0126             0.309
+  TPx_cmstart_best          5/10                +0.0057             0.622
+  TPx_fp518                 5/10                -0.0161             0.094
+  TPx_finance_asset         3/10                -0.0086             0.422
+  TPx_fp510                 3/10                -0.0113             0.272
+  TPx_fn1_s_1               2/10                +0.0088             0.428
+  TPx_qz209                 2/10                +0.0116             0.232
+  TPx_cfps2014edu           2/10                +0.0026             0.644
+  TPx_fproperty_1           2/10                -0.0007             0.918
+  TPx_fhz5                  2/10                -0.0026             0.695
+  TPx_fp506                 1/10                +0.0067             0.520
+  TPx_qn6017                1/10                -0.0211             0.071
+  TPx_fp2                   1/10                -0.0035             0.773
+  TPx_fz102_s_1             1/10                +0.0125             0.339
+  TPx_fixed_asset           1/10                -0.0011             0.920
+  TPx_pce                   1/10                +0.0024             0.807
+  TPx_qea0                  1/10                +0.0028             0.806
+  TPx_fresp1pid             1/10                +0.0082             0.411
+  TPx_fp515                 1/10                +0.0010             0.910
+  TPx_fp508                 1/10                -0.0161             0.098
+  TPx_expense               1/10                -0.0036             0.738
+  TPx_fz209                 1/10                +0.0172             0.098
+  TPx_qz207                 1/10                +0.0123             0.174
+  TPx_land_asset            1/10                -0.0065             0.587
+  TPx_fhz1                  1/10                -0.0240             0.009
+  TPx_fproperty_2           1/10                -0.0010             0.877
+  TPx_qp202                 1/10                -0.0008             0.929
+  TPx_fhz3                  1/10                +0.0244             0.029
+  TPx_fhz2                  1/10                +0.0347             0.004
+  (a real moderator should be selected in most splits AND keep a small held-out p)
+
+==========================================================================
+CDDF-B-WIDE: generic-ML certificate on the wide menu MINUS known moderator families
+  148 features (excluded 2 known-family vars)
+
+==========================================================================
+VERSION B-WIDE: features = qn6017_r, qn8011_r, qn8012_r, finance_asset_r, nonhousing_debts_r, house_debts_r, total_asset_r, durables_asset_r, land_asset_r, fixed_asset_r, pce_r, food_r, dress_r, daily_r, expense_r, savings_r, ftransfer_1_r, ft4_r, ft6_r, ft7_r, qq9010_r, qp201_r, urban14_r, code_b_1_r, subpopulation10_r, selfrpt_r, cfps2012_interv_r, p_wage_r, tape_r, cfps_birthy_r, cfps2014_age_r, qea0_r, cfps_gender_r, fz1pid_r, fr6_r, fu1_s_1_r, cfps2012_finterv_r, fml2014num_r, fn2_r, fr5_r, fz207_r, fz209_r, mortage_r, fr1_r, fz201_r, fz211_r, fswt_natcs14_r, fa1_r, fm1_r, fresp1pid_r, fk1l_r, familysize_r, otherhousevalue_r, agrimachine_r, resivalue_r, iwmode_r, felse_2_r, felse_1_r, fwage_2_r, fwage_1_r, cfps2014eduy_im_r, fv4_r, fv5_r, fz203_r, fz5_r, cfps2014sch_r, fz204_r, fz206_r, fz212_r, fz202_r, fa9_r, fa8_r, fn5_r, fp2_r, fn3_r, fn1_s_1_r, fo1_r, fa5_r, fa7_s_1_r, fq2_r, ft9_r, fv1_s_1_r, fs6_s_1_r, cfps2014edu_r, fswt_natpn1014_r, fz102_s_1_r, fz103_r, fz210_r, fv3_r, fz208_r, ft5_r, fa4_r, fa3_r, ft2_s_1_r, fp407_r, fp1_r, fproperty_1_r, fhz1_r, fproperty_2_r, interrupt_sf_r, fp516_r, qz209_r, qz5_r, cfps2012_marriage_update_r, self_iwmode_r, cmstart_best_r, qp202_r, qz207_r, qz201_r, qq1101_r, qz211_r, fp512_r, qp701_r, fn4_r, fu2_s_1_r, fz205_r, fp515_r, fp504_r, fp509_r, fp503_r, fp506_r, fp502_r, fp517_r, fa6_r, fp505_r, financial_product_r, qq1001_r, debit_other_r, fp518_r, fp403_r, fp510_r, fhz3_r, fhz2_r, fp508_r, fhz4_r, fhz5_r, fs8_r, fp513_r, ehc_timespan_startyear_r, ehc_timespan_endyear_r, ehc_timespan_endmonth_r, fp401_r, ehc_timespan_startmonth_r, fp514_r, epwelf_r, qp102_r, company_r, qi301_s_1_r
+
+--- B-WIDE: median over 10 city-fold splits (CDDF adjusted p = min(1, 2 x median p)) ---
+BLP  T:post:sz      -0.0001   median p=0.828   adj p=1.000
+GATES group-specific DID (G1 = ML-most-suppressed):
+  G1  gamma=-0.0191   median p=0.340
+  G2  gamma=-0.0133   median p=0.404
+  G3  gamma=-0.0019   median p=0.630
+  G4  gamma=-0.0089   median p=0.419
+  G5  gamma=-0.0185   median p=0.309
+G1 - G5 difference  -0.0023   median p=0.797   adj p=1.000

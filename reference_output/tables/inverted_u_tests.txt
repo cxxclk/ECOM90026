@@ -1,0 +1,79 @@
+TEST 1 — COHORT CUMULATIVE DID (dynamic-selection-proof design)
+
+window K=4: cohorts 2009-13 (pre) vs 2016-18 (post); women=2,266  (pre 1,762 / post 504)  mean Y=0.381
+
+[overall cohort DID, 2nd birth within 4 yrs]  N=2,266
+  T:postc            -0.1055  (SE 0.0500, p=0.035)
+
+[cohort DID, daughter-first]  N=1,074
+  T:postc            -0.1894  (SE 0.0921, p=0.040)
+
+[cohort DID, son-first]  N=1,192
+  T:postc            -0.0822  (SE 0.0615, p=0.181)
+
+K=4 — cohort DID by propensity quintile (U real -> G4 most negative; depletion artifact -> monotone):
+  G1: n=92 too thin
+  G2: n=  344  base=0.170  T:postc=-0.0188 (p=0.853)
+  G3: n=  515  base=0.322  T:postc=+0.0203 (p=0.869)
+  G4: n=  679  base=0.425  T:postc=-0.2429 (p=0.035)
+  G5: n=  636  base=0.536  T:postc=-0.1163 (p=0.230)
+
+K=3 — cohort DID by propensity quintile (U real -> G4 most negative; depletion artifact -> monotone):
+  G1: n=98 too thin
+  G2: n=  354  base=0.135  T:postc=-0.0593 (p=0.574)
+  G3: n=  530  base=0.219  T:postc=+0.0700 (p=0.534)
+  G4: n=  691  base=0.335  T:postc=-0.1527 (p=0.209)
+  G5: n=  648  base=0.395  T:postc=-0.1665 (p=0.092)
+
+K=5 — cohort DID by propensity quintile (U real -> G4 most negative; depletion artifact -> monotone):
+  G1: n=86 too thin
+  G2: n=  308  base=0.215  T:postc=+0.0549 (p=0.631)
+  G3: n=  470  base=0.394  T:postc=+0.0998 (p=0.508)
+  G4: n=  612  base=0.531  T:postc=-0.2130 (p=0.094)
+  G5: n=  590  base=0.639  T:postc=-0.1415 (p=0.290)
+
+[cohort structural: linear vs density (prediction: dens<0, Pc~0)]  N=2,266
+  T:postc            +0.1664  (SE 0.1248, p=0.182)
+  T:postc:Pc         +0.2565  (SE 0.2892, p=0.375)
+  T:postc:dens       -1.8829  (SE 0.8933, p=0.035)
+
+==========================================================================
+TEST 2 — THRESHOLD-MODEL STRUCTURAL TEST (annual hazard)
+woman-years=40,108  women=6,992  Pc: mean=0.311  share>0.5=0.25  corr(Pc,dens)=0.75
+
+[MAIN structural test (prediction: T:post:dens < 0, T:post:Pc ~ 0)]  N=40,108
+  T:post             +0.0171  (SE 0.0107, p=0.111)
+  T:post:Pc          +0.0566  (SE 0.0509, p=0.266)
+  T:post:dens        -0.2607  (SE 0.1145, p=0.023)
+
+[linear-only benchmark]  N=40,108
+  T:post             -0.0030  (SE 0.0087, p=0.730)
+  T:post:Pc          -0.0156  (SE 0.0337, p=0.644)
+
+[structural, daughter arm]  N=17,000
+  T:post:Pc          +0.1044  (SE 0.0752, p=0.165)
+  T:post:dens        -0.4853  (SE 0.1823, p=0.008)
+
+[structural, son arm]  N=23,108
+  T:post:Pc          +0.0122  (SE 0.0670, p=0.856)
+  T:post:dens        -0.0717  (SE 0.1548, p=0.643)
+
+Wild cluster bootstrap on T:post:dens (4999 reps):
+  T:post:dens = -0.2607  t=-2.28  WCB p=0.0524  (G=113)
+
+[tempo corollary (prediction: T:boom:dens > 0, T:post18:dens < 0)]  N=40,108
+  T:boom             +0.0138  (SE 0.0120, p=0.251)
+  T:boom:dens        -0.0425  (SE 0.1021, p=0.678)
+  T:post18           +0.0108  (SE 0.0107, p=0.312)
+  T:post18:dens      -0.1359  (SE 0.0783, p=0.083)
+
+boom & bust by propensity quintile (T:boom / T:post18):
+  G1: boom +0.0160 (p=0.155)   post18 +0.0042 (p=0.711)
+  G2: boom +0.0159 (p=0.219)   post18 +0.0001 (p=0.990)
+  G3: boom +0.0153 (p=0.463)   post18 +0.0017 (p=0.901)
+  G4: boom +0.0206 (p=0.418)   post18 -0.0183 (p=0.349)
+  G5: boom -0.0088 (p=0.754)   post18 -0.0063 (p=0.790)
+
+Addendum — WCB (4999 reps) on T:post:dens by firstborn-gender arm:
+  DAUGHTER arm: -0.4853  t=-2.67  WCB p=0.0148  (G=113)
+  SON arm:      -0.0717  t=-0.46  WCB p=0.6712  (G=113)
